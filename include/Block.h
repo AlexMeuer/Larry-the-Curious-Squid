@@ -3,7 +3,7 @@
 
 #include "GameEntity.h"
 
-class Block: GameEntity {
+class Block: public GameEntity {
 
 };
 #endif
