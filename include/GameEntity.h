@@ -6,12 +6,14 @@
 using namespace sf;
 
 class GameEntity {
-private:
+protected:
 	Vector2f m_position, m_velocity, m_scale;
 
 	float m_angular_velocity, m_rotation_radians, m_mass;
 
 	Sprite m_sprite;
+
+	Texture loadFromFile(String path);
 
 public:
 	GameEntity(Vector2f position, Vector2f velocity = Vector2f(0,0), Vector2f scale = Vector2f(0,0),
@@ -35,8 +37,8 @@ public:
 	float setMass(float const newMass);
 	
 
-	void Update();
-	void Draw(RenderWindow &w);
+	virtual void Update();
+	virtual void Draw(RenderWindow &w);
 
 }; //end GameEntity class
 #endif

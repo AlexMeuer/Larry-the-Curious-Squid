@@ -1,26 +1,30 @@
 #ifndef _LEVEL_
 #define _LEVEL_
 
-#import sfml_stuff
-#import tiny_xml_stuff
-#import <vector>
-using namespace sf;
+#include <vector>
+#include "SFML\Graphics.hpp"
+#include "GameEntity.h"
+#include "Force.h"
 
 class Level {
 private:
 
 	std::vector<GameEntity> m_entities;
+
 	Force m_gravity;
+
 	int id;
-	
-	void LoadFromXML(string path);
 	
 public:
 
-	Level(string xml_path);
-	~Level;
+	Level(String xml_path);
+	~Level();
+
+	int getID() const;
 	
 	void Update();
 	void Draw(RenderWindow &w);
+
+	static Level LoadFromXML(String path);
 };
 #endif
