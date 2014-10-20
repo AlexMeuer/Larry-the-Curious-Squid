@@ -9,15 +9,13 @@ class GameEntity {
 protected:
 	Vector2f m_position, m_velocity, m_scale;
 
-	float m_angular_velocity, m_rotation_radians, m_mass;
+	float m_angular_velocity, m_rotation_degrees, m_mass;
 
 	Sprite m_sprite;
 
-	Texture loadFromFile(String path);
-
 public:
-	GameEntity(Vector2f position, Vector2f velocity = Vector2f(0,0), Vector2f scale = Vector2f(0,0),
-				float angularVel = 0, float rotation_radians = 0, float mass = 0);
+	GameEntity(Texture *texture, Vector2f position, Vector2f velocity = Vector2f(0,0), Vector2f scale = Vector2f(0,0),
+		float angularVel = 0, float rotation_degrees = 0, float mass = 0);
 	~GameEntity();
 	
 	//-- GET -------------------------
@@ -25,16 +23,16 @@ public:
 	Vector2f getVelocity() const;	//linear velocity
 	Vector2f getScale() const;
 	float getVelocityAngular() const;	//angular velocity
-	float getRotation() const;	//radians
+	float getRotation() const;	//degrees
 	float getMass() const;
 	
 	//-- SET -------------------------
-	//void setPosition(Vector2f const &newPos);
+	void setPosition(Vector2f const &newPos);
 	void setVelocity(Vector2f const &newVel);
 	void setScale(Vector2f const &newScale);
 	void setVelocityAngular(float const newVel);
-	//float setRotation(float const radians);
-	float setMass(float const newMass);
+	void setRotation(float const degrees);
+	void setMass(float const newMass);
 	
 
 	virtual void Update();

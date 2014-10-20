@@ -9,7 +9,7 @@
 class Level {
 private:
 
-	std::vector<GameEntity> m_entities;
+	std::vector<GameEntity*> m_entities;
 
 	Force m_gravity;
 
@@ -17,8 +17,8 @@ private:
 	
 public:
 
-	Level(String xml_path);
-	~Level();
+	Level() : id(-1) {}
+	~Level() {}
 
 	int getID() const;
 	
