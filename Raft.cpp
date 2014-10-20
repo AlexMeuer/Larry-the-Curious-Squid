@@ -7,5 +7,6 @@
 int _tmain(int argc, _TCHAR* argv[])
 {
 	return 0;
+	//crazy insain code
 }
 // This comment is False
