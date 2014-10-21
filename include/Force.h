@@ -10,7 +10,7 @@ private:
 	float m_power;
 	//fall-off implementation?
 public:
-	Force(Vector2f position, float power);
+	Force(Vector2f position = Vector2f(0,0), float power = 0);
 	~Force();
 	
 	void Apply(GameEntity * e) const;
