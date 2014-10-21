@@ -30,4 +30,5 @@ void Level::Draw(RenderWindow &w) {
 
 Level Level::LoadFromXML(String path) {
 	//TODO: Tiny-XML-2
+	return Level();
 }
