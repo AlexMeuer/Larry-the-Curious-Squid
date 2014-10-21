@@ -5,6 +5,7 @@
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="src\GameEntity.cpp" />
     <ClCompile Include="src\Level.cpp" />
+    <ClCompile Include="src\Ball.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Ball.h" />
@@ -14,6 +15,9 @@
     <ClInclude Include="include\PowerUp.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="include\BlackHole.h" />
+    <ClInclude Include="include\Block.h" />
+    <ClInclude Include="include\Player.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
