@@ -61,7 +61,8 @@
       <AdditionalDependencies>sfml-main-d.lib;sfml-system-d.lib;sfml-window-d.lib;sfml-graphics-d.lib;sfml-audio-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /d /y "$(ProjectDir)dlls\$(ConfigurationName)\*.*" "$(OutDir)"</Command>
+      <Command>xcopy /d /y "$(SFML_SDK)\bin\*.*" "$(OutDir)"</Command>
+      <Message>Copy SFML dll files to output dir. Copies both Debug and Release versions regardless.</Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -95,7 +96,6 @@
     <ClInclude Include="include\Level.h" />
     <ClInclude Include="include\Player.h" />
     <ClInclude Include="include\PowerUp.h" />
-    <ClInclude Include="resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
