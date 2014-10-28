@@ -9,7 +9,7 @@
 
 
 
-#pragma region Ken's Includes
+//Ken's Includes
 #include "stdafx.h"
 #ifdef _DEBUG
 #pragma comment(lib,"sfml-graphics-d.lib")
@@ -30,13 +30,12 @@
 #include "SFML/OpenGL.hpp"
 #include <iostream>
 #define _USE_MATH_DEFINES
-#include <math.h>  
-#pragma endregion
+#include <math.h> 
+
 
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	return 0;
 	
 	 // Create the main window
 	sf::RenderWindow window(sf::VideoMode(800, 600, 32), "Test Senario"); 
@@ -65,7 +64,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		window.display();
 	} //loop back for next frame
 
-
+	return EXIT_SUCCESS;
 
 }
 // This comment is False
