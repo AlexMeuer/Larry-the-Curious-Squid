@@ -16,7 +16,13 @@ protected:
 	sf::ConvexShape shape;
 
 public:
+<<<<<<< HEAD
 	GameEntity(Texture *texture, Vector2f position,
+=======
+	GameEntity(); //**
+
+	GameEntity(Texture *texture, Vector2f position, Vector2f scale = Vector2f(0,0),
+>>>>>>> 437a3b48b3814e0bc27b93595eef20f2983696b0
 		float angularVel = 0, float rotation_degrees = 0, float mass = 0);
 	~GameEntity();
 	
@@ -36,7 +42,7 @@ public:
 	
 
 	virtual void Update();
-	virtual void Draw(RenderWindow &w);
+	virtual void Draw( sf::RenderWindow &w);
 
 }; //end GameEntity class
 #endif

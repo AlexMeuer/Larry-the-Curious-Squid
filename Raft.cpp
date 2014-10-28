@@ -44,7 +44,12 @@ int _tmain(int argc, _TCHAR* argv[])
 	sf::RenderWindow window(sf::VideoMode(800, 600, 32), "Test Senario"); 
 	DWORD time;
 
+<<<<<<< HEAD
 	//Ball ball(NULL, Vector2f(100,0), 1,
+=======
+
+	Ball ball; //**
+>>>>>>> 437a3b48b3814e0bc27b93595eef20f2983696b0
 	
 	 // Start game loop
 	while (window.isOpen()){
@@ -58,10 +63,18 @@ int _tmain(int argc, _TCHAR* argv[])
 			if ((Event.type == sf::Event::KeyPressed) && (Event.key.code == sf::Keyboard::Escape))
 			window.close();
 		}
+
+		//ball.Update();
+
 		//prepare frame
 		window.clear();
+<<<<<<< HEAD
 		time = GetTickCount();
 		//ball::update(
+=======
+		
+		ball.Draw(window);
+>>>>>>> 437a3b48b3814e0bc27b93595eef20f2983696b0
 		
 		// Finally, display rendered frame on screen
 		window.display();
