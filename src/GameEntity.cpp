@@ -1,8 +1,7 @@
 #include "..\include\GameEntity.h"
 
-GameEntity::GameEntity(Texture* texture, Vector2f position, Vector2f velocity, Vector2f scale, float angularVel, float rotation_degrees, float mass)
+GameEntity::GameEntity(Texture* texture, Vector2f position, Vector2f scale, float angularVel, float rotation_degrees, float mass)
 	: m_position(position),
-	m_velocity(velocity),
 	m_scale(scale),
 	m_angular_velocity(angularVel),
 	m_rotation_degrees(rotation_degrees),
@@ -17,6 +16,7 @@ GameEntity::~GameEntity(){
 
 
 void GameEntity::Update() {
+
 	m_position += m_velocity;
 	m_rotation_degrees += m_angular_velocity;
 

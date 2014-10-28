@@ -5,10 +5,67 @@
 
 #include "include\Force.h"
 #include "include\Level.h"
-#include "include\GameEntity.h"
+#include "include\Ball.h"
+
+
+
+#pragma region Ken's Includes
+#include "stdafx.h"
+#ifdef _DEBUG
+#pragma comment(lib,"sfml-graphics-d.lib")
+#pragma comment(lib,"sfml-audio-d.lib")
+#pragma comment(lib,"sfml-system-d.lib")
+#pragma comment(lib,"sfml-window-d.lib")
+#pragma comment(lib,"sfml-network-d.lib")
+#else
+#pragma comment(lib,"sfml-graphics.lib")
+#pragma comment(lib,"sfml-audio.lib")
+#pragma comment(lib,"sfml-system.lib")
+#pragma comment(lib,"sfml-window.lib")
+#pragma comment(lib,"sfml-network.lib")
+#endif
+#pragma comment(lib,"opengl32.lib")
+#pragma comment(lib,"glu32.lib")
+#include "SFML/Graphics.hpp"
+#include "SFML/OpenGL.hpp"
+#include <iostream>
+#define _USE_MATH_DEFINES
+#include <math.h>  
+#pragma endregion
+
 
 int _tmain(int argc, _TCHAR* argv[])
 {
 	return 0;
+	
+	 // Create the main window
+	sf::RenderWindow window(sf::VideoMode(800, 600, 32), "Test Senario"); 
+
+
+	Ball ball();
+	
+	 // Start game loop
+	while (window.isOpen()){
+		// Process events
+		sf::Event Event;
+		while (window.pollEvent(Event)){
+			// Close window : exit
+			if (Event.type == sf::Event::Closed)
+			window.close();
+			// Escape key : exit
+			if ((Event.type == sf::Event::KeyPressed) && (Event.key.code == sf::Keyboard::Escape))
+			window.close();
+		}
+		//prepare frame
+		window.clear();
+		
+		
+		
+		// Finally, display rendered frame on screen
+		window.display();
+	} //loop back for next frame
+
+
+
 }
 // This comment is False
