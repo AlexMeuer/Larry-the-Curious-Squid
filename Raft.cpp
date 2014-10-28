@@ -44,12 +44,9 @@ int _tmain(int argc, _TCHAR* argv[])
 	sf::RenderWindow window(sf::VideoMode(800, 600, 32), "Test Senario"); 
 	DWORD time;
 
-<<<<<<< HEAD
-	//Ball ball(NULL, Vector2f(100,0), 1,
-=======
 
-	Ball ball; //**
->>>>>>> 437a3b48b3814e0bc27b93595eef20f2983696b0
+
+	Ball ball;
 	
 	 // Start game loop
 	while (window.isOpen()){
