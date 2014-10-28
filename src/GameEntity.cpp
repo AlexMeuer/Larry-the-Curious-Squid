@@ -1,14 +1,6 @@
 #include "..\include\GameEntity.h"
 
-<<<<<<< HEAD
 GameEntity::GameEntity(Texture* texture, Vector2f position, float angularVel, float rotation_degrees, float mass)
-=======
-GameEntity::GameEntity() {
-
-}
-
-GameEntity::GameEntity(Texture* texture, Vector2f position, Vector2f scale, float angularVel, float rotation_degrees, float mass)
->>>>>>> 437a3b48b3814e0bc27b93595eef20f2983696b0
 	: m_position(position),
 	m_angular_velocity(angularVel),
 	m_rotation_degrees(rotation_degrees),

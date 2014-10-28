@@ -19,7 +19,7 @@ public:
 
 	GameEntity(); //**
 
-	GameEntity(Texture *texture, Vector2f position, Vector2f scale = Vector2f(0,0),
+	GameEntity(Texture *texture, Vector2f position,
 
 		float angularVel = 0, float rotation_degrees = 0, float mass = 0);
 	~GameEntity();

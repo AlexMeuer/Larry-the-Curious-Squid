@@ -46,7 +46,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 
 
-	Ball ball;
+	//Ball ball;
 	
 	 // Start game loop
 	while (window.isOpen()){
@@ -65,13 +65,11 @@ int _tmain(int argc, _TCHAR* argv[])
 
 		//prepare frame
 		window.clear();
-<<<<<<< HEAD
+
 		time = GetTickCount();
-		//ball::update(
-=======
 		
-		ball.Draw(window);
->>>>>>> 437a3b48b3814e0bc27b93595eef20f2983696b0
+		//ball.Draw(window);
+
 		
 		// Finally, display rendered frame on screen
 		window.display();
