@@ -1,8 +1,7 @@
 #include "..\include\GameEntity.h"
 
-GameEntity::GameEntity(Texture* texture, Vector2f position, Vector2f scale, float angularVel, float rotation_degrees, float mass)
+GameEntity::GameEntity(Texture* texture, Vector2f position, float angularVel, float rotation_degrees, float mass)
 	: m_position(position),
-	m_scale(scale),
 	m_angular_velocity(angularVel),
 	m_rotation_degrees(rotation_degrees),
 	m_mass(mass)
@@ -39,9 +38,7 @@ Vector2f GameEntity::getVelocity() const {
 	return m_velocity;
 }
 
-Vector2f GameEntity::getScale() const {
-	return m_scale;
-}
+
 
 float GameEntity::getVelocityAngular() const {
 	return m_angular_velocity;
@@ -66,10 +63,10 @@ void GameEntity::setVelocity(Vector2f const &newVel) {
 	m_velocity = newVel;
 }
 
-void GameEntity::setScale(Vector2f const &newScale) {
-	m_scale = newScale;
-	m_sprite.setScale(m_scale.x, m_scale.y);
-}
+//void GameEntity::setScale(Vector2f const &newScale) {
+//	m_scale = newScale;
+//	m_sprite.setScale(m_scale.x, m_scale.y);
+//}
 
 void GameEntity::setVelocityAngular(float const newVel) {
 	m_angular_velocity = newVel;

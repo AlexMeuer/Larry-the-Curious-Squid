@@ -32,6 +32,9 @@
 #define _USE_MATH_DEFINES
 #include <math.h> 
 
+//get game time
+#include <windows.h>
+
 
 
 int _tmain(int argc, _TCHAR* argv[])
@@ -39,9 +42,9 @@ int _tmain(int argc, _TCHAR* argv[])
 	
 	 // Create the main window
 	sf::RenderWindow window(sf::VideoMode(800, 600, 32), "Test Senario"); 
+	DWORD time;
 
-
-	Ball ball();
+	//Ball ball(NULL, Vector2f(100,0), 1,
 	
 	 // Start game loop
 	while (window.isOpen()){
@@ -57,8 +60,8 @@ int _tmain(int argc, _TCHAR* argv[])
 		}
 		//prepare frame
 		window.clear();
-		
-		
+		time = GetTickCount();
+		//ball::update(
 		
 		// Finally, display rendered frame on screen
 		window.display();

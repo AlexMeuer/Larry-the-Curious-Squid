@@ -7,9 +7,10 @@
 class Ball : public GameEntity {
 private:
 	const float coefficentOfRestitution;
+	float m_scale;
 	
 public:
-	Ball(Texture* texture, Vector2f position, Vector2f velocity, Vector2f scale, float angularVel, float rotation_degrees, float mass);
+	Ball(Texture* texture, Vector2f position, float scale, float angularVel, float rotation_degrees, float mass);
 	~Ball();
 	void Update();
 };
