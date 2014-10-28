@@ -1,5 +1,9 @@
 #include "..\include\GameEntity.h"
 
+GameEntity::GameEntity() {
+
+}
+
 GameEntity::GameEntity(Texture* texture, Vector2f position, Vector2f scale, float angularVel, float rotation_degrees, float mass)
 	: m_position(position),
 	m_scale(scale),

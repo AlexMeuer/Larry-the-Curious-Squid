@@ -1,10 +1,17 @@
 #include "..\include\Ball.h"
 
+Ball::Ball() : coefficentOfRestitution(1), circle(20) {
+	circle.setPosition(400, 10);
+	circle.setFillColor(sf::Color::White);
+}
+
 Ball::Ball(Texture* texture, Vector2f position, Vector2f velocity, Vector2f scale, float angularVel, float rotation_degrees, float mass)
 : GameEntity( texture,  position,  scale,  angularVel,  rotation_degrees,  mass), coefficentOfRestitution(1) {
 	//create a circle
-	sf::CircleShape circle(20);
+	
+	circle.setRadius(20);
 	circle.setPosition(position);
+	circle.setFillColor(sf::Color::White);
 }
 
 Ball::~Ball(){
@@ -13,6 +20,10 @@ Ball::~Ball(){
 
 void Ball::Update() {
 	
+}
+
+void Ball::Draw(sf::RenderWindow &w) {
+	w.draw(circle);
 }
 
 //
