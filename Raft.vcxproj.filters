@@ -6,6 +6,8 @@
     <ClCompile Include="src\GameEntity.cpp" />
     <ClCompile Include="src\Level.cpp" />
     <ClCompile Include="src\Ball.cpp" />
+    <ClCompile Include="src\Force.cpp" />
+    <ClCompile Include="src\PowerUp.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Ball.h" />

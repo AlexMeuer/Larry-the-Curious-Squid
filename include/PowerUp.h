@@ -6,9 +6,9 @@
 
 class PowerUp {
 private:
-	const enum Effect = "Grow";//value decided later
+	//const enum Effect = "Grow";//value decided later
 
 public:
-	void Apply(GameEntity);
-}
+	void Apply(GameEntity * e);
+};
 #endif
