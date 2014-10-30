@@ -10,7 +10,7 @@
 
 
 //Ken's Includes
-#include "stdafx.h"
+//#include "stdafx.h"
 //#ifdef _DEBUG
 //#pragma comment(lib,"sfml-graphics-d.lib")
 //#pragma comment(lib,"sfml-audio-d.lib")
@@ -32,7 +32,6 @@
 //#define _USE_MATH_DEFINES
 //#include <math.h> 
 
-//get game time
 #include <windows.h>
 
 
@@ -42,7 +41,8 @@ int _tmain(int argc, _TCHAR* argv[])
 	
 	 // Create the main window
 	sf::RenderWindow window(sf::VideoMode(800, 600, 32), "Test Scenario"); 
-	DWORD time;
+	sf::Clock clock = Clock();
+	sf::Time elapsedTime;
 
 
 
@@ -61,18 +61,20 @@ int _tmain(int argc, _TCHAR* argv[])
 			window.close();
 		}
 
+		elapsedTime = clock.getElapsedTime();
+
 		//ball.Update();
+
 
 		//prepare frame
 		window.clear();
-
-		time = GetTickCount();
 		
 		//ball.Draw(window);
 
 		
 		// Finally, display rendered frame on screen
 		window.display();
+		clock.restart();
 	} //loop back for next frame
 
 	return EXIT_SUCCESS;
