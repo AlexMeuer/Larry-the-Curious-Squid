@@ -7,14 +7,12 @@
 class Ball : public GameEntity {
 private:
 	const float coefficentOfRestitution;
-
-	float m_scale;
 	
 public:
-	Ball(Texture* texture, Vector2f position, float scale, float angularVel, float rotation_degrees, float mass);
+	Ball(Texture* texture, Vector2f position, Vector2f velocity = Vector2f(0,0), Vector2f scale = Vector2f(1,1), float angularVel = 0, float rotation_degrees = 0, float mass = 1);
 
 	~Ball();
-	void Update();
-	void Draw(sf::RenderWindow &w); //**
+	//void Update();
+	//void Draw(sf::RenderWindow &w);
 };
 #endif

@@ -27,4 +27,7 @@
   <ItemGroup>
     <None Include=".gitignore" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\img\ball.png" />
+  </ItemGroup>
 </Project>

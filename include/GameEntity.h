@@ -19,14 +19,14 @@ public:
 
 	GameEntity(); //**
 
-	GameEntity(Texture *texture, Vector2f position,
-
-		float angularVel = 0, float rotation_degrees = 0, float mass = 0);
+	GameEntity(Texture *texture, Vector2f position, Vector2f velocity = Vector2f(0,0), Vector2f scale = Vector2f(1,1),
+		float angularVel = 0, float rotation_degrees = 0, float mass = 1);
 	~GameEntity();
 	
 	//-- GET -------------------------
 	Vector2f getPosition() const;
 	Vector2f getVelocity() const;	//linear velocity
+	Vector2f getScale() const;
 	float getVelocityAngular() const;	//angular velocity
 	float getRotation() const;	//degrees
 	float getMass() const;
@@ -34,6 +34,7 @@ public:
 	//-- SET -------------------------
 	void setPosition(Vector2f const &newPos);
 	void setVelocity(Vector2f const &newVel);
+	void setScale(Vector2f const &newScale);
 	void setVelocityAngular(float const newVel);
 	void setRotation(float const degrees);
 	void setMass(float const newMass);
