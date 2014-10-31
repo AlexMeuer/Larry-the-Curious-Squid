@@ -25,6 +25,6 @@ public:
 	void Update();
 	void Draw(RenderWindow &w);
 
-	static Level LoadFromXML(String path);
+	static Level LoadFromXML(const char *path);
 };
 #endif
