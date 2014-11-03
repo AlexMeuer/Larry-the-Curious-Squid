@@ -31,12 +31,41 @@ void Level::Draw(RenderWindow &w) {
 	}
 }
 
+
 Level Level::LoadFromXML(const char *path) {
 	XMLDocument doc;
 	doc.LoadFile(path);
+	Level tmp_lvl = Level();
 
-	//TODO:
-	//	read values from xml and and create objects with them
+	//query the level id and assign it to the temporary level
+	XMLText* node = doc.FirstChildElement( "LEVEL" )->FirstChildElement( "ID" )->FirstChild()->ToText();
+	tmp_lvl.id = atoi(node->Value());	//atoi converts c string to integer
 
-	return Level();
+	//query the gravity force and assign it to the temporary level
+	node = doc.FirstChildElement( "LEVEL" )->FirstChildElement( "GRAVITY" )->FirstChild()->ToText();
+	Force f = Force( Vector2f(0,0), atof(node->Value()) );	//atof converts c string to float
+	tmp_lvl.m_gravity = Force(f);
+
+	//iterate through all ENTITY elements, creating and adding objects as necessary
+	for(XMLText* node = doc.FirstChildElement( "LEVEL" )->FirstChildElement("ENTITY")->ToText();
+		node;
+		node=node->NextSiblingElement("ENTITY")->ToText()){
+
+			const char * string = node->Value();
+
+			if (string == "BLOCK") {
+				//make a block
+			}
+			else if (string == "BAll") {
+				//make a ball
+			}
+			else if (string == "BLACKHOLE") {
+				//make a black hole
+			}
+			else if (string == "POWERUP") {
+				//make a power up
+			}
+	}//end for loop
+
+	return Level(tmp_lvl);	//return a copy of tmp_lvl (tmp_lvl goes out of scope after this)
 }
