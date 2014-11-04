@@ -12,7 +12,7 @@ void Level::Update(Time elapsedTime) {
 		itr != m_entities.end();
 		itr++)
 	{
-		(*itr)->Update(elapsedTime);
+		(*itr)->Update(elapsedTime, m_gravity);
 	}
 }
 

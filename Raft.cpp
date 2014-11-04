@@ -53,7 +53,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	Ball ball(&ballTex, Vector2f(0, 1), Vector2f(300, 0), Vector2f(0,0.01), Vector2f(0.1,0.1));
 
 	//create an instance of force
-	Force force(Vector2f(250, 250), 80);
+	Force force(Vector2f(250, 250), 1);
 	
 	 // Start game loop
 	while (window.isOpen()){

@@ -11,13 +11,13 @@ private:
 
 	std::vector<GameEntity*> m_entities;
 
-	Force m_gravity;
+	Vector2f m_gravity;
 
 	int id;
 	
 public:
 
-	Level() : id(-1), m_gravity(Vector2f(0,0), 0) {}
+	Level() : id(-1), m_gravity(Vector2f(0,0)) {}
 	~Level() {}
 
 	int getID() const;

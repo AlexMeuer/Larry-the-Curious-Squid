@@ -16,11 +16,11 @@ void Force::Apply(GameEntity * e) const {
 	float distance = getLength( displacement );
 
 	//if the distance between the two vectors is less than the force... (force is made positive to allow for black holes/pulling forces with negative power)
-	if ( distance < sqrtf(m_power * m_power) ) {
+	//if ( distance < sqrtf(m_power * m_power) ) {
 		Vector2f direction = displacement / distance;
 
 		//...apply velocity to the entity in the appropriate direction and accounting for linear falloff
-		e->setVelocity( e->getVelocity() + direction * (m_power - distance) );
-	}
+		e->setVelocity( e->getVelocity() + direction * (m_power ));//- distance) );
+	//}
 
 }
