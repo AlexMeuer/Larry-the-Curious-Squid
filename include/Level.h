@@ -22,7 +22,7 @@ public:
 
 	int getID() const;
 	
-	void Update();
+	void Update(Time elapsedTime);
 	void Draw(RenderWindow &w);
 
 	static Level LoadFromXML(String path);

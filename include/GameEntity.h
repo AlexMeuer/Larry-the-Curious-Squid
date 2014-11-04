@@ -40,8 +40,8 @@ public:
 	void setMass(float const newMass);
 	
 
-	virtual void Update();
-	virtual void Draw( sf::RenderWindow &w);
+	virtual void Update( Time elapsedTime );
+	virtual void Draw( sf::RenderWindow &w );
 
 }; //end GameEntity class
 #endif

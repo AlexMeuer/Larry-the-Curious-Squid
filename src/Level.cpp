@@ -4,7 +4,7 @@ int Level::getID() const {
 	return id;
 }
 
-void Level::Update() {
+void Level::Update(Time elapsedTime) {
 	std::vector<GameEntity*>::iterator itr;
 
 	//update all entities in vector
@@ -12,7 +12,7 @@ void Level::Update() {
 		itr != m_entities.end();
 		itr++)
 	{
-		(*itr)->Update();
+		(*itr)->Update(elapsedTime);
 	}
 }
 

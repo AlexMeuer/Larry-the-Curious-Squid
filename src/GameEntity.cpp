@@ -16,7 +16,7 @@ GameEntity::~GameEntity(){
 };
 
 
-void GameEntity::Update() {
+void GameEntity::Update(Time elapsedTime) {
 
 	m_position += m_velocity;
 	m_rotation_degrees += m_angular_velocity;

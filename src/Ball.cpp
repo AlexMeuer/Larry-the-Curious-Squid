@@ -9,14 +9,14 @@ Ball::Ball(Texture* texture, Vector2f gravity, Vector2f position, Vector2f veloc
 	circle.setPosition(position);
 	circle.setFillColor(sf::Color::White);*/
 
-		m_gravity = gravity;
+	m_gravity = gravity;
 }
 
 Ball::~Ball(){
 
 }
 
-//void Ball::Update() {
-//	GameEntity::Update();	//call base class update method
-//}
+void Ball::Update(Time elapsedTime) {
+	GameEntity::Update(elapsedTime);	//call base class update method
+}
 

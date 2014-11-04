@@ -50,10 +50,10 @@ int _tmain(int argc, _TCHAR* argv[])
 	ballTex.loadFromFile("res/img/ball.png");
 	
 	//create an instance of ball
-	Ball ball(&ballTex, Vector2f(0, 1), Vector2f(300, 0), Vector2f(0,0), Vector2f(0.1,0.1));
+	Ball ball(&ballTex, Vector2f(0, 1), Vector2f(300, 0), Vector2f(0,0.01), Vector2f(0.1,0.1));
 
 	//create an instance of force
-	Force force(Vector2f(250, 250), 100);
+	Force force(Vector2f(250, 250), 80);
 	
 	 // Start game loop
 	while (window.isOpen()){
@@ -70,7 +70,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 		elapsedTime = clock.getElapsedTime();
 
-		ball.Update();
+		ball.Update(elapsedTime);
 
 		force.Apply(&ball);
 
