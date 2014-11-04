@@ -16,9 +16,9 @@ GameEntity::~GameEntity(){
 };
 
 
-void GameEntity::Update(Time elapsedTime) {
+void GameEntity::Update(const Time elapsedTime, const Vector2f &gravity) {
 
-	m_velocity = (m_velocity * (t.asSeconds)) + (0.5 *  g * (t.asSeconds * t.asSeconds));
+	m_velocity = (m_velocity * (elapsedTime.asSeconds)) + (0.5f *  gravity * (elapsedTime.asSeconds * elapsedTime.asSeconds));
 
 	m_position += m_velocity;
 	m_rotation_degrees += m_angular_velocity;
