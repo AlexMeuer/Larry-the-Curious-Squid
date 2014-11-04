@@ -14,7 +14,7 @@ Ball::~Ball(){
 
 }
 
-//void Ball::Update() {
-//	GameEntity::Update();	//call base class update method
-//}
+void Ball::Update() {
+	GameEntity::Update();	//call base class update method
+}
 

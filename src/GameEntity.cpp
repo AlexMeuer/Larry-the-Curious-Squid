@@ -16,7 +16,10 @@ GameEntity::~GameEntity(){
 };
 
 
-void GameEntity::Update() {
+void GameEntity::Update(sf::Time t, float g) {
+	
+
+	m_velocity = (m_velocity * (t.asSeconds)) + (0.5 *  g * (t.asSeconds * t.asSeconds));
 
 	m_position += m_velocity;
 	m_rotation_degrees += m_angular_velocity;
