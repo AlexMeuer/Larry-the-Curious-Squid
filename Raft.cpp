@@ -55,7 +55,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 
 	//create an instance of force
-	Force force(Vector2f(250, 400), 100);
+	Force force(Vector2f(250, 400), 200);
 	
 	 // Start game loop
 	while (window.isOpen()){
@@ -74,14 +74,17 @@ int _tmain(int argc, _TCHAR* argv[])
 
 		ball.Update(elapsedTime, Vector2f(0,9.81));
 
-#ifdef _DEBUG
-		force.Apply(&ball, window);
-#else
-		force.Apply(&ball);
-#endif
+		force.Apply(&ball, elapsedTime);
 
 		//prepare frame
 		window.clear();
+
+		//draw the area affected by the test force
+		CircleShape shape = CircleShape(force.getPower());
+		shape.setPosition(force.getPosition().x - force.getPower(), force.getPosition().y - force.getPower());
+		shape.setFillColor(Color::Red);
+		window.draw(shape);
+
 		
 		ball.Draw(window);
 

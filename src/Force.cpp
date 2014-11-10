@@ -1,4 +1,5 @@
 #include "../include//Force.h"
+#include <thread>
 
 // Returns a vector that represents the euclidean distance from one vector to another
 //Vector2f getVectorDistance(Vector2f const &A, Vector2f const &B) {
@@ -9,14 +10,8 @@ float getLength(Vector2f const &V) {
 	return sqrtf((V.x * V.x) + (V.y * V.y));
 }
 
-#ifdef _DEBUG
-//Applies the force to a GameEntity (assuming linear falloff)
-void Force::Apply(GameEntity * e, RenderWindow &w) const {
-	CircleShape debug_circle = CircleShape(m_power);
-	debug_circle.setPosition(m_position.x - m_power, m_position.y - m_power);
-	debug_circle.setFillColor(Color::Red);
-	w.draw(debug_circle);
-	w.display();
+//Applies the force to a GameEntity
+void Force::Apply(GameEntity * e, Time elapsedTime) const {
 
 	Vector2f displacement =  e->getPosition() - m_position;
 	float distance = getLength( displacement );
@@ -25,25 +20,31 @@ void Force::Apply(GameEntity * e, RenderWindow &w) const {
 	if ( distance < sqrtf(m_power * m_power) ) {
 		Vector2f direction = displacement / distance;
 
-		//...apply velocity to the entity in the appropriate direction and accounting for linear falloff
-		e->setVelocity( e->getVelocity() + direction * (m_power/distance ));//- distance) );
+		//...apply velocity to the entity in the appropriate direction
+		float powerApplied = (m_power - distance) * elapsedTime.asSeconds();
+		e->setVelocity( e->getVelocity() + (direction * powerApplied) );
 	}
 
 }
-#else
-//Applies the force to a GameEntity (assuming linear falloff)
-void Force::Apply(GameEntity * e) const {
 
-	Vector2f displacement =  e->getPosition() - m_position;
-	float distance = getLength( displacement );
+//------------------
+// GET -------------
 
-	//if the distance between the two vectors is less than the force... (force is made positive to allow for black holes/pulling forces with negative power)
-	if ( distance < sqrtf(m_power * m_power) ) {
-		Vector2f direction = displacement / distance;
-
-		//...apply velocity to the entity in the appropriate direction and accounting for linear falloff
-		e->setVelocity( e->getVelocity() + direction * (m_power/distance ));//- distance) );
-	}
-
+float Force::getPower() const {
+	return m_power;
 }
-#endif
+
+Vector2f Force::getPosition() const {
+	return m_position;
+}
+
+//------------------
+// SET -------------
+
+void Force::setPower(float const newPower) {
+	m_power = newPower;
+}
+
+void Force::setPosition(Vector2f const &newPos) {
+	m_position = newPos;
+}

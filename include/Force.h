@@ -12,11 +12,13 @@ private:
 public:
 	Force(Vector2f position, float power) : m_position(position), m_power(power) {}
 	~Force() {}
-	
-#ifdef _DEBUG
-	void Apply(GameEntity * e, RenderWindow &w) const;
-#else
-	void Apply(GameEntity * e) const;
-#endif
+
+	void Apply(GameEntity * e, Time elapsedTime) const;
+
+	float getPower() const;
+	Vector2f getPosition() const;
+
+	void setPower(float const newPower);
+	void setPosition(Vector2f const &newPos);
 };
 #endif
