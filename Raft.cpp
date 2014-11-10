@@ -74,6 +74,14 @@ int _tmain(int argc, _TCHAR* argv[])
 
 		ball.Update(elapsedTime, Vector2f(0,9.81));
 
+		if ( Mouse::isButtonPressed(Mouse::Button::Left) ) {
+			force.setPower( 200 );
+			force.setPosition( Vector2f(Mouse::getPosition().x - window.getPosition().x, Mouse::getPosition().y  - window.getPosition().y) );
+		}
+		else {
+			force.setPower( 10 );
+		}
+
 		force.Apply(&ball, elapsedTime);
 
 		//prepare frame
