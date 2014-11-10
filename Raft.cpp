@@ -50,7 +50,9 @@ int _tmain(int argc, _TCHAR* argv[])
 	ballTex.loadFromFile("res/img/ball.png");
 	
 	//create an instance of ball
+
 	Ball ball(&ballTex, Vector2f(300, 0), Vector2f(0,0), Vector2f(0.1,0.1));
+
 
 	//create an instance of force
 	Force force(Vector2f(200, 400), 100);
@@ -70,7 +72,11 @@ int _tmain(int argc, _TCHAR* argv[])
 
 		elapsedTime = clock.getElapsedTime();
 
+<<<<<<< HEAD
 		ball.Update(elapsedTime, Vector2f(0,9.81));
+=======
+		ball.Update(elapsedTime, Vector2f(0,9));
+>>>>>>> dde47a0ff7984b514f0ee53cc2921d4cb477e296
 
 		force.Apply(&ball);
 
