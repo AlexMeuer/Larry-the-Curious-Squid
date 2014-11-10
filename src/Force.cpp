@@ -9,6 +9,28 @@ float getLength(Vector2f const &V) {
 	return sqrtf((V.x * V.x) + (V.y * V.y));
 }
 
+#ifdef _DEBUG
+//Applies the force to a GameEntity (assuming linear falloff)
+void Force::Apply(GameEntity * e, RenderWindow &w) const {
+	CircleShape debug_circle = CircleShape(m_power);
+	debug_circle.setPosition(m_position.x - m_power, m_position.y - m_power);
+	debug_circle.setFillColor(Color::Red);
+	w.draw(debug_circle);
+	w.display();
+
+	Vector2f displacement =  e->getPosition() - m_position;
+	float distance = getLength( displacement );
+
+	//if the distance between the two vectors is less than the force... (force is made positive to allow for black holes/pulling forces with negative power)
+	if ( distance < sqrtf(m_power * m_power) ) {
+		Vector2f direction = displacement / distance;
+
+		//...apply velocity to the entity in the appropriate direction and accounting for linear falloff
+		e->setVelocity( e->getVelocity() + direction * (m_power/distance ));//- distance) );
+	}
+
+}
+#else
 //Applies the force to a GameEntity (assuming linear falloff)
 void Force::Apply(GameEntity * e) const {
 
@@ -24,3 +46,4 @@ void Force::Apply(GameEntity * e) const {
 	}
 
 }
+#endif

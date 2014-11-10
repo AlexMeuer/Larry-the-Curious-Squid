@@ -13,6 +13,10 @@ public:
 	Force(Vector2f position, float power) : m_position(position), m_power(power) {}
 	~Force() {}
 	
+#ifdef _DEBUG
+	void Apply(GameEntity * e, RenderWindow &w) const;
+#else
 	void Apply(GameEntity * e) const;
+#endif
 };
 #endif

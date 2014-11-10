@@ -55,7 +55,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 
 	//create an instance of force
-	Force force(Vector2f(200, 400), 100);
+	Force force(Vector2f(250, 400), 100);
 	
 	 // Start game loop
 	while (window.isOpen()){
@@ -72,13 +72,13 @@ int _tmain(int argc, _TCHAR* argv[])
 
 		elapsedTime = clock.getElapsedTime();
 
-<<<<<<< HEAD
 		ball.Update(elapsedTime, Vector2f(0,9.81));
-=======
-		ball.Update(elapsedTime, Vector2f(0,9));
->>>>>>> dde47a0ff7984b514f0ee53cc2921d4cb477e296
 
+#ifdef _DEBUG
+		force.Apply(&ball, window);
+#else
 		force.Apply(&ball);
+#endif
 
 		//prepare frame
 		window.clear();
