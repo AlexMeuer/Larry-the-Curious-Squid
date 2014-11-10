@@ -1,5 +1,6 @@
 #include "../include/Level.h"
 #include "../include/tinyxml2.h"
+#include "../include/Ball.h"
 
 using namespace tinyxml2;
 
@@ -31,6 +32,13 @@ void Level::Draw(RenderWindow &w) {
 	}
 }
 
+void Level::LoadTexture(String name) {
+	if ( textures.find(name) == textures.end() ) {
+		//load the texture and add it to the map
+		textures[name].loadFromFile("../res/img/" + name);
+		}
+}
+
 
 Level Level::LoadFromXML(const char *path) {
 	XMLDocument doc;
@@ -56,8 +64,16 @@ Level Level::LoadFromXML(const char *path) {
 			if (string == "BLOCK") {
 				//make a block
 			}
-			else if (string == "BAll") {
-				//make a ball
+			else if (string == "BALL") {
+				//load the ball's texture
+				String textureName( node->FirstChildElement( "TEXTURE" )->ToText()->Value() );
+				LoadTexture( textureName );
+				
+				XMLNode* positionNode = node->FirstChildElement( "POSITION" );
+				float x = atof( positionNode->FirstChildElement( "X" )->ToText()->Value() );
+				float y = atof( positionNode->FirstChildElement( "Y" )->ToText()->Value() );
+
+				tmp_lvl.m_entities.push_back( Ball( &textures.find(textureName)->second, Vector2f(x,y) ) );
 			}
 			else if (string == "BLACKHOLE") {
 				//make a black hole
