@@ -28,16 +28,72 @@
 //#pragma comment(lib,"glu32.lib")
 #include "SFML/Graphics.hpp"
 #include "SFML/OpenGL.hpp"
-//#include <iostream>
+#include <iostream>
 //#define _USE_MATH_DEFINES
 //#include <math.h> 
+
+//FMOD includes
+#pragma comment(lib,"fmodex_vc.lib")
+#include "fmod.hpp"
+#include "fmod_errors.h"
 
 #include <windows.h>
 
 
-
 int _tmain(int argc, _TCHAR* argv[])
 {
+	//setup FMOD
+	FMOD::System *FMODsys; //will point to the FMOD system
+	FMOD_RESULT result;
+	result = FMOD::System_Create(&FMODsys);         // Create the main system object.
+	if (result != FMOD_OK)
+	{
+		std::cout << "FMOD error!" <<result << FMOD_ErrorString(result);
+		exit(-1);
+	}
+
+ 
+
+	result = FMODsys->init(100, FMOD_INIT_NORMAL, 0);   // Initialize FMOD.
+
+     
+
+	if (result != FMOD_OK)
+
+	{
+
+		std::cout << "FMOD error!" << result << FMOD_ErrorString(result);
+
+		exit(-1);
+
+	}
+
+	//create a sound with FMOD
+	FMOD::Sound *sound;
+
+	result = FMODsys->createSound(
+		"../res/sfx/wave.mp3",
+		FMOD_DEFAULT,
+		0,
+		&sound);
+
+	if (result != FMOD_OK)
+	{
+		std::cout << "FMOD error! (%d) %s\n" << result;
+		exit(-1);
+	}
+
+	//play a sound with a channel (updateable, looping, etc)
+	FMOD::Channel *channel;
+	FMODsys->playSound(FMOD_CHANNEL_FREE, sound, false, &channel);
+	channel->set3DMinMaxDistance(10, 500);	//below min, sound wont get any louder. after max, sound is not audible.
+
+	//play a sound without a channel (not updateable, one-shot, etc)
+	FMODsys->playSound(
+    FMOD_CHANNEL_FREE, //find a free channel
+    sound,                  // sound to play
+    true,              //start playing/paused
+    0);                 //channel reference
 	
 	 // Create the main window
 	sf::RenderWindow window(sf::VideoMode(800, 600, 32), "Test Scenario"); 
@@ -50,7 +106,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	ballTex.loadFromFile("res/img/ball.png");
 	
 	//create an instance of ball
-	Ball ball(&ballTex, Vector2f(0, 1), Vector2f(300, 0), Vector2f(0,0.01), Vector2f(0.1,0.1));
+	Ball ball(&ballTex, Vector2f(300, 0), Vector2f(0,0.01), Vector2f(0.1,0.1));
 
 	//create an instance of force
 	Force force(Vector2f(250, 250), 1);
@@ -68,9 +124,12 @@ int _tmain(int argc, _TCHAR* argv[])
 			window.close();
 		}
 
+		//FMODsys->set3DListenerAttributes(0, player->getFMOD_POS(), player->getFMOD_VEL(), 0, 0);
+		FMODsys->update();	//run this once per frame ONLY
+
 		elapsedTime = clock.getElapsedTime();
 
-		ball.Update(elapsedTime);
+		ball.Update(elapsedTime, Vector2f(0,9));
 
 		force.Apply(&ball);
 

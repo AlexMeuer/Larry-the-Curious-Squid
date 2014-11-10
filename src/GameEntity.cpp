@@ -60,6 +60,23 @@ float GameEntity::getMass() const {
 }
 
 
+FMOD_VECTOR GameEntity::getFMOD_POS() const {
+	FMOD_VECTOR pos;
+	pos.x = m_position.x;
+	pos.y = m_position.y;
+	pos.z = 0;
+	return pos;
+}
+
+FMOD_VECTOR GameEntity::getFMOD_VEL() const {
+	FMOD_VECTOR vel;
+	vel.x = m_velocity.x;
+	vel.y = m_velocity.y;
+	vel.z = 0;
+	return vel;
+}
+
+
 //Setters ----------------------------
 
 void GameEntity::setPosition(Vector2f const &newPos) {

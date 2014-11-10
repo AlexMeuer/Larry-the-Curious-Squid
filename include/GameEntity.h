@@ -2,6 +2,7 @@
 #define _GAME_ENTITY_
 
 #include "SFML\Graphics.hpp"
+#include "fmod.hpp"
 
 using namespace sf;
 
@@ -30,6 +31,9 @@ public:
 	float getVelocityAngular() const;	//angular velocity
 	float getRotation() const;	//degrees
 	float getMass() const;
+
+	FMOD_VECTOR getFMOD_POS() const;
+	FMOD_VECTOR getFMOD_VEL() const;
 	
 	//-- SET -------------------------
 	void setPosition(Vector2f const &newPos);
