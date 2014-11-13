@@ -10,17 +10,25 @@ class Menu {
 private:
 
 	std::vector<Text> items;
-	const unsigned int itemSpacing;
+	const int itemSpacing;
+	std::vector<Text>::iterator selected;
 
 public:
 
-	//creates an empty menu
-	Menu(unsigned int item_Spacing = 10);
+	//creates a menu with one item
+	Menu(Text item, int item_Spacing = 10);
 
 	//adds a text item to a menu
 	void addItem(Text const &item);
 
 	Text getItemAtIndex(unsigned int const index) const;
 
+	Text moveUp();
+
+	Text moveDown();
+
+	Text getSelected() const;
+
+	void Draw(RenderWindow &w) const;
 };
 #endif

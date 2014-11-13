@@ -6,6 +6,7 @@
 #include "include\Force.h"
 #include "include\Level.h"
 #include "include\Ball.h"
+#include "include\Menu.h"
 
 
 
@@ -38,25 +39,21 @@
 
 int _tmain(int argc, _TCHAR* argv[])
 {
+	Font menuFont = Font();
+	menuFont.loadFromFile("res/font/kenvector_future.ttf");
+
+	Menu mainMenu = Menu( Text("Start", menuFont) );
+	mainMenu.addItem( Text("Load", menuFont) );
+	mainMenu.addItem( Text("Options", menuFont) );
+	mainMenu.addItem( Text("Leeroy", menuFont) );
+	mainMenu.addItem( Text("Jenkins", menuFont) );
+	mainMenu.addItem( Text("Exit", menuFont) );
 	
 	 // Create the main window
 	sf::RenderWindow window(sf::VideoMode(800, 600, 32), "Test Scenario"); 
 	sf::Clock clock = Clock();
 	sf::Time elapsedTime;
 
-
-	//load textures
-	sf::Texture ballTex;
-	ballTex.loadFromFile("res/img/ball.png");
-	
-	//create an instance of ball
-
-	Ball ball(&ballTex, Vector2f(300, 0), Vector2f(0,0), Vector2f(0.1,0.1));
-
-
-	//create an instance of force
-	Force force(Vector2f(250, 400), 200);
-	
 	 // Start game loop
 	while (window.isOpen()){
 		// Process events
@@ -72,30 +69,10 @@ int _tmain(int argc, _TCHAR* argv[])
 
 		elapsedTime = clock.getElapsedTime();
 
-		ball.Update(elapsedTime, Vector2f(0,9.81));
-
-		if ( Mouse::isButtonPressed(Mouse::Button::Left) ) {
-			force.setPower( 200 );
-			force.setPosition( Vector2f(Mouse::getPosition().x - window.getPosition().x, Mouse::getPosition().y  - window.getPosition().y) );
-		}
-		else {
-			force.setPower( 10 );
-		}
-
-		force.Apply(&ball, elapsedTime);
-
 		//prepare frame
 		window.clear();
 
-		//draw the area affected by the test force
-		CircleShape shape = CircleShape(force.getPower());
-		shape.setPosition(force.getPosition().x - force.getPower(), force.getPosition().y - force.getPower());
-		shape.setFillColor(Color::Red);
-		window.draw(shape);
-
-		
-		ball.Draw(window);
-
+		mainMenu.Draw( window );
 		
 		// Finally, display rendered frame on screen
 		window.display();

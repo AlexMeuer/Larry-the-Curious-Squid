@@ -32,4 +32,7 @@
   <ItemGroup>
     <Image Include="res\img\ball.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Font Include="res\font\kenvector_future.ttf" />
+  </ItemGroup>
 </Project>
