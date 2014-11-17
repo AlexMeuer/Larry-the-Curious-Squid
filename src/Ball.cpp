@@ -44,7 +44,9 @@ void Ball::Colision(RenderWindow &w){
 
 void Ball::Death_Reset(){
 	m_position = Vector2f(20,50);
+	m_velocity = Vector2f(0,0);
 	m_sprite.setPosition(m_position);
 	time = 0;
+
 }
 

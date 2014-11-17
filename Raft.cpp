@@ -49,12 +49,13 @@ int _tmain(int argc, _TCHAR* argv[])
 	sf::Texture ballTex;
 	ballTex.loadFromFile("res/img/ball.png");
 	sf::Texture blockTex;
-	blockTex.loadFromFile("res/img/block/png");
+	blockTex.loadFromFile("res/img/Block.png");
 	//create an instance of ball
 
 	Ball ball(&ballTex, Vector2f(300, 0), Vector2f(0,0), Vector2f(0.1,0.1));
 	//std::vector<Block*> crystalChandelier;
-	Block block1(&blockTex, Vector2f(0,0));	
+	Block block1(&blockTex, Vector2f(100, 500));
+
 
 	//create an instance of force
 	Force force(Vector2f(250, 400), 200);
