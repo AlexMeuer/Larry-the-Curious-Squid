@@ -1,6 +1,6 @@
 #include "../include/Menu.h"
 
-Menu::Menu(String const &text, Font const &font, void (*function)(void), Vector2f position, Color mainColor, Color hiliteColor, int item_spacing)
+Menu::Menu(String const &text, Font const &font, void (*function)(String), Vector2f position, Color mainColor, Color hiliteColor, int item_spacing)
 	: m_itemSpacing( item_spacing ), m_font( font ), m_mainColor( mainColor ), m_hiliteColor( hiliteColor ) {
 
 	//push first item onto list with its associated function (pointer) and initialise selected iterator
@@ -11,7 +11,7 @@ Menu::Menu(String const &text, Font const &font, void (*function)(void), Vector2
 	m_selected->first.setColor( hiliteColor );
 }
 
-void Menu::addItem(String const &text, void (*function)(void) ) {
+void Menu::addItem(String const &text, void (*function)(String) ) {
 	m_items.push_back( std::make_pair( Text( text, m_font ), function ) );
 
 	Text* thisItem = &m_items.rbegin()->first;
@@ -27,7 +27,7 @@ void Menu::addItem(String const &text, void (*function)(void) ) {
 //	return m_items.at(index);
 //}
 
-std::pair<Text, void (*)(void)> Menu::moveDown() {
+void Menu::moveDown() {
 	m_selected->first.setColor( m_mainColor );
 
 	//move to top of list if trying to move past bottom
@@ -35,11 +35,9 @@ std::pair<Text, void (*)(void)> Menu::moveDown() {
 		m_selected = m_items.begin();
 
 	m_selected->first.setColor( m_hiliteColor );
-
-	return *m_selected;
 }
 
-std::pair<Text, void (*)(void)> Menu::moveUp() {
+void Menu::moveUp() {
 	m_selected->first.setColor( m_mainColor );
 
 	//move to bottom of list if trying to move past top
@@ -49,18 +47,16 @@ std::pair<Text, void (*)(void)> Menu::moveUp() {
 	m_selected--;
 
 	m_selected->first.setColor( m_hiliteColor );
-
-	return *m_selected;
 }
 
 //invokes the function pointer of the currently selected item
 void Menu::select() {
-	m_selected->second();
+	m_selected->second( m_selected->first.getString() );
 }
 
-std::pair<Text, void (*)(void)> Menu::getSelected() const {
-	return *m_selected;
-}
+//std::pair<Text, void (*)(String)> Menu::getSelected() const {
+//	return *m_selected;
+//}
 
 void Menu::draw( RenderWindow &w ) const {
 	for( auto itr = m_items.begin();

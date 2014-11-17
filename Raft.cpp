@@ -35,9 +35,8 @@
 
 #include <windows.h>
 
-void testFunc() {
-	static int count;
-	std::cout << "testFunc called " << ++count << " times!" << std::endl;
+void testFunc(sf::String string) {
+	std::cout << string.toAnsiString() << " activated!" << std::endl;
 }
 
 

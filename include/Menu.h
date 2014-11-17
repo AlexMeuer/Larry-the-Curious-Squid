@@ -11,11 +11,11 @@ using namespace sf;
 class Menu {
 private:
 
-	std::vector< std::pair<Text, void (*)(void)> > m_items;
+	std::vector< std::pair<Text, void (*)(String)> > m_items;
 
 	const int m_itemSpacing;
 
-	std::vector< std::pair<Text, void (*)(void)> >::iterator m_selected;
+	std::vector< std::pair<Text, void (*)(String)> >::iterator m_selected;
 
 	const Font m_font;
 
@@ -26,23 +26,22 @@ private:
 public:
 
 	//creates a menu with one item
-	Menu(String const &text, Font const &font, void (*function)(void), Vector2f position, Color mainColor = Color::White, Color hiliteColor = Color::Yellow, int item_Spacing = 10);
+	Menu(String const &text, Font const &font, void (*function)(String), Vector2f position, Color mainColor = Color::White, Color hiliteColor = Color::Yellow, int item_Spacing = 10);
 
 	//adds a text item to a menu.
-	void addItem(String const &text, void (*function)(void));
+	void addItem(String const &text, void (*function)(String));
 
 	//std::pair<Text, void (*)(void)> getItemAtIndex(unsigned int const index) const;
 
-	std::pair<Text, void (*)(void)> moveUp();
-
-	std::pair<Text, void (*)(void)> moveDown();
+	void moveUp();
+	void moveDown();
 
 	//invokes the function pointer of the currently selected item
 	void select();
 
 	void draw(RenderWindow &w) const;
 
-	std::pair< Text, void(*)(void) > getSelected() const;
+	//std::pair< Text, void(*)(String) > getSelected() const;
 	//Vector2i getPosition() const;
 	Color getMainColor() const;
 	Color getHiliteColor() const;
