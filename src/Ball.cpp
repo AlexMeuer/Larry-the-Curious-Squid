@@ -36,7 +36,7 @@ void Ball::Update(const Time &elapsedTime, const Vector2f gravity) {
 void Ball::Colision(RenderWindow &w){
 	//gose off edges
 	//****Needs to add in the change of the sprite pos being centred not top left coner.******
-	if((m_position.x < 0)||(m_position.x > 800)||(m_position.y < 0)||(m_position.y > 600)){
+	if((m_position.x < 0)||(m_position.x > w.getSize().x)||(m_position.y < 0)||(m_position.y > w.getSize().y)){
 		Death_Reset();
 	}
 	//hit gameEntity
