@@ -72,7 +72,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	FMOD::Sound *sound;
 
 	result = FMODsys->createSound(
-		"../res/sfx/wave.mp3",
+		"res/mus/Ove - Earth Is All We Have 1.ogg",
 		FMOD_DEFAULT,
 		0,
 		&sound);
@@ -87,13 +87,14 @@ int _tmain(int argc, _TCHAR* argv[])
 	FMOD::Channel *channel;
 	FMODsys->playSound(FMOD_CHANNEL_FREE, sound, false, &channel);
 	channel->set3DMinMaxDistance(10, 500);	//below min, sound wont get any louder. after max, sound is not audible.
+	channel->setMode(FMOD_LOOP_NORMAL);
 
 	//play a sound without a channel (not updateable, one-shot, etc)
-	FMODsys->playSound(
-    FMOD_CHANNEL_FREE, //find a free channel
-    sound,                  // sound to play
-    true,              //start playing/paused
-    0);                 //channel reference
+	//FMODsys->playSound(
+ //   FMOD_CHANNEL_FREE, //find a free channel
+ //   sound,                  // sound to play
+ //   true,              //start playing/paused
+ //   0);                 //channel reference
 	
 	 // Create the main window
 	sf::RenderWindow window(sf::VideoMode(800, 600, 32), "Test Scenario"); 
@@ -124,12 +125,12 @@ int _tmain(int argc, _TCHAR* argv[])
 			window.close();
 		}
 
-		//FMODsys->set3DListenerAttributes(0, player->getFMOD_POS(), player->getFMOD_VEL(), 0, 0);
+		FMODsys->set3DListenerAttributes(0, ball.getFMOD_POS(), ball.getFMOD_VEL(), 0, 0);
 		FMODsys->update();	//run this once per frame ONLY
 
 		elapsedTime = clock.getElapsedTime();
 
-		ball.Update(elapsedTime, Vector2f(0,9));
+		ball.Update(elapsedTime, Vector2f(0,-9));
 
 		force.Apply(&ball);
 

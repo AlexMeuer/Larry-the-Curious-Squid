@@ -10,6 +10,8 @@ class GameEntity {
 protected:
 	Vector2f m_position, m_velocity, m_scale;
 
+	FMOD_VECTOR fmod_pos, fmod_vel;
+
 	float m_angular_velocity, m_rotation_degrees, m_mass;
 
 	Sprite m_sprite;
@@ -32,8 +34,8 @@ public:
 	float getRotation() const;	//degrees
 	float getMass() const;
 
-	FMOD_VECTOR getFMOD_POS() const;
-	FMOD_VECTOR getFMOD_VEL() const;
+	const FMOD_VECTOR* getFMOD_POS() const;
+	const FMOD_VECTOR* getFMOD_VEL() const;
 	
 	//-- SET -------------------------
 	void setPosition(Vector2f const &newPos);

@@ -10,6 +10,16 @@ GameEntity::GameEntity(Texture* texture, Vector2f position, Vector2f velocity, V
 {
 	m_sprite = Sprite(*texture);
 	m_sprite.setScale(m_scale.x, m_scale.y);
+
+	fmod_pos = FMOD_VECTOR();
+	fmod_pos.x = position.x;
+	fmod_pos.y = position.y;
+	fmod_pos.z = 0;
+
+	fmod_vel = FMOD_VECTOR();
+	fmod_vel.x = velocity.x;
+	fmod_vel.y = velocity.y;
+	fmod_vel.z = 0;
 }
 
 GameEntity::~GameEntity(){
@@ -22,6 +32,12 @@ void GameEntity::Update(const Time elapsedTime, const Vector2f &gravity) {
 
 	m_position += m_velocity;
 	m_rotation_degrees += m_angular_velocity;
+
+	fmod_pos.x = m_position.x;
+	fmod_pos.y = m_position.y;
+
+	fmod_vel.x = m_velocity.x;
+	fmod_vel.y = m_velocity.y;
 
 	m_sprite.setPosition(m_position);
 	m_sprite.setRotation(m_rotation_degrees);
@@ -60,20 +76,12 @@ float GameEntity::getMass() const {
 }
 
 
-FMOD_VECTOR GameEntity::getFMOD_POS() const {
-	FMOD_VECTOR pos;
-	pos.x = m_position.x;
-	pos.y = m_position.y;
-	pos.z = 0;
-	return pos;
+const FMOD_VECTOR* GameEntity::getFMOD_POS() const {
+	return &fmod_pos;
 }
 
-FMOD_VECTOR GameEntity::getFMOD_VEL() const {
-	FMOD_VECTOR vel;
-	vel.x = m_velocity.x;
-	vel.y = m_velocity.y;
-	vel.z = 0;
-	return vel;
+const FMOD_VECTOR* GameEntity::getFMOD_VEL() const {
+	return &fmod_vel;
 }
 
 
