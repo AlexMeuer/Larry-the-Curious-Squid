@@ -8,6 +8,7 @@
 #include "include\Ball.h"
 #include "include\Block.h"
 #include "include\BlackHole.h"
+#include "include\CollisionManager.h"
 
 //Ken's Includes
 //#include "stdafx.h"
@@ -43,6 +44,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	sf::RenderWindow window(sf::VideoMode(800, 600, 32), "Test Scenario"); 
 	sf::Clock clock = Clock();
 	sf::Time elapsedTime;
+	CollisionManager collisionManager;
 
 
 	//load textures
@@ -84,7 +86,12 @@ int _tmain(int argc, _TCHAR* argv[])
 
 		ball.Update(elapsedTime, Vector2f(0,9.81));
 
-		ball.Colision(window);
+		if(collisionManager.OffScreen(window, &ball))
+			ball.Death_Reset();
+		for (int i = 0; i < 10; i++)
+		{
+			collisionManager.SquareCircle(&crystalChandelier[i]->getSprite(),&ball);
+		}
 
 		blackHole.Update();
 

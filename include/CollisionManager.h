@@ -1,12 +1,13 @@
 #ifndef _COLLISIONMANAGER_
 #define _COLLISIONMANAGER_
 
-#include "GameEntity.h"
+#include "Ball.h"
 
 class CollisionManager{
 public:
 	
-	bool SquareCircle(Sprite* square, GameEntity* circle);
+	void SquareCircle(Sprite* square, Ball* circle);
 	bool SquareSquare(Sprite* squareOne, Sprite* squareTwo);
+	bool OffScreen(RenderWindow &w, Ball* circle);
 };
 #endif

@@ -33,15 +33,6 @@ void Ball::Update(const Time &elapsedTime, const Vector2f gravity) {
 	m_sprite.setRotation(m_rotation_degrees);
 }
 
-void Ball::Colision(RenderWindow &w){
-	//gose off edges
-	//****Needs to add in the change of the sprite pos being centred not top left coner.******
-	if((m_position.x < 0)||(m_position.x > 800)||(m_position.y < 0)||(m_position.y > 600)){
-		Death_Reset();
-	}
-	//hit gameEntity
-
-}
 
 void Ball::Death_Reset(){
 	m_position = Vector2f(200,50);
@@ -51,14 +42,3 @@ void Ball::Death_Reset(){
 
 }
 
-struct aRect{
-	float top;
-	float left;
-	float bottom;
-	float right;
-};
-
-bool rectCollision(aRect a, aRect b)
-{
-	return ! ( b.left > a.right || b.right < a.left || b.top < a.bottom || b.bottom > a.top);
-}

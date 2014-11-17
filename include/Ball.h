@@ -15,7 +15,6 @@ public:
 
 	~Ball();
 	void Update(const Time &elapsedTime, const Vector2f gravity);
-	void Colision(RenderWindow &w);
 	void Death_Reset();
 	//void Draw(sf::RenderWindow &w);
 };
