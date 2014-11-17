@@ -49,13 +49,16 @@ int _tmain(int argc, _TCHAR* argv[])
 	sf::Texture ballTex;
 	ballTex.loadFromFile("res/img/ball.png");
 	sf::Texture blockTex;
-	blockTex.loadFromFile("res/img/block/png");
+	blockTex.loadFromFile("res/img/Block.png");
 	//create an instance of ball
 
 	Ball ball(&ballTex, Vector2f(300, 0), Vector2f(0,0), Vector2f(0.1,0.1));
-	//std::vector<Block*> crystalChandelier;
-	Block block1(&blockTex, Vector2f(0,0));	
+	std::vector<Block*> crystalChandelier;
 
+	for (int i = 0; i < 10; i ++ ) {
+		crystalChandelier.push_back(new Block(&blockTex, Vector2f(i * 50,567), Vector2f(0,0), Vector2f(1,1)));
+	}
+	//Block block1(&blockTex, Vector2f(0,567), Vector2f(0,0), Vector2f(1,1));	
 	//create an instance of force
 	Force force(Vector2f(250, 400), 200);
 	
@@ -97,8 +100,9 @@ int _tmain(int argc, _TCHAR* argv[])
 
 		
 		ball.Draw(window);
-
-		block1.Draw(window);
+		for ( int i = 0; i < 10; i ++ ) {
+			crystalChandelier[i]->Draw(window);
+		}
 		
 		// Finally, display rendered frame on screen
 		window.display();
