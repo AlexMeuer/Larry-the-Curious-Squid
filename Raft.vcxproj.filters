@@ -9,6 +9,7 @@
     <ClCompile Include="src\Force.cpp" />
     <ClCompile Include="src\PowerUp.cpp" />
     <ClCompile Include="src\Block.cpp" />
+    <ClCompile Include="src\BlackHole.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Ball.h" />
@@ -31,5 +32,6 @@
   <ItemGroup>
     <Image Include="res\img\ball.png" />
     <Image Include="res\img\Block.png" />
+    <Image Include="res\img\Blackhole.png" />
   </ItemGroup>
 </Project>
