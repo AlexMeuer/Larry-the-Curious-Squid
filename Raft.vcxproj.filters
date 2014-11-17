@@ -9,7 +9,11 @@
     <ClCompile Include="src\Force.cpp" />
     <ClCompile Include="src\PowerUp.cpp" />
     <ClCompile Include="src\Block.cpp" />
+<<<<<<< HEAD
     <ClCompile Include="src\CollisionManager.cpp" />
+=======
+    <ClCompile Include="src\BlackHole.cpp" />
+>>>>>>> 9c2e445f9fab2e7124ffb0fe506fe038d74d06f6
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Ball.h" />
@@ -33,5 +37,6 @@
   <ItemGroup>
     <Image Include="res\img\ball.png" />
     <Image Include="res\img\Block.png" />
+    <Image Include="res\img\Blackhole.png" />
   </ItemGroup>
 </Project>
