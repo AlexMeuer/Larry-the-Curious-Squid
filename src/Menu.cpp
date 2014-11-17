@@ -1,56 +1,91 @@
 #include "../include/Menu.h"
 
-Menu::Menu(Text item, int item_spacing) : itemSpacing( item_spacing ) {
-	items.push_back( item );
-	selected = items.begin();
+Menu::Menu(String const &text, Font const &font, Vector2f position, Color mainColor, Color hiliteColor, int item_spacing)
+	: m_itemSpacing( item_spacing ), m_font( font ), m_mainColor( mainColor ), m_hiliteColor( hiliteColor ) {
+
+	//push first item onto list and initialise selected iterator
+	m_items.push_back( Text( text, font ) );
+	m_selected = m_items.begin();
+
+	m_selected->setPosition( position );
+	m_selected->setColor( hiliteColor );
 }
 
-void Menu::addItem(Text const &item) {
-	items.push_back(item);
+void Menu::addItem(String const &text) {
+	m_items.push_back( Text( text, m_font ) );
 
-	int thisItem, lastItem;
-	thisItem = items.size() - 1;
-	lastItem = thisItem - 1;
+	auto thisItem = m_items.rbegin();
+	auto lastItem = thisItem + 1;
 	
-	//TODO: account for text/font scale
-	items[thisItem].setPosition( items[lastItem].getPosition().x, items[lastItem].getPosition().y + itemSpacing);
+	//place this item below the last item
+	thisItem->setPosition( lastItem->getPosition().x, lastItem->getPosition().y + lastItem->getCharacterSize() + m_itemSpacing);
+
+	m_selected = m_items.begin();
 }
 
 Text Menu::getItemAtIndex(unsigned int const index) const {
-	return items.at(index);
+	return m_items.at(index);
 }
 
 Text Menu::moveDown() {
-	selected->setStyle( Text::Regular );
+	m_selected->setColor( m_mainColor );
 
-	if( ++selected == items.end() )
-		selected = items.begin();
+	//move to top of list if trying to move past bottom
+	if( ++m_selected == m_items.end() )
+		m_selected = m_items.begin();
 
-	selected->setStyle( Text::Bold );
+	m_selected->setColor( m_hiliteColor );
 
-	return *selected;
+	return *m_selected;
 }
 
 Text Menu::moveUp() {
-	selected->setStyle( Text::Regular );
+	m_selected->setColor( m_mainColor );
 
-	if ( selected == items.begin() )
-		selected-- = items.end();
+	//move to bottom of list if trying to move past top
+	if ( m_selected == m_items.begin() )
+		m_selected = m_items.end();
 
-	selected->setStyle( Text::Bold );
+	m_selected--;
 
-	return *selected;
+	m_selected->setColor( m_hiliteColor );
+
+	return *m_selected;
 }
 
 Text Menu::getSelected() const {
-	return *selected;
+	return *m_selected;
 }
 
 void Menu::Draw( RenderWindow &w ) const {
-	for( auto itr = items.begin();
-		itr != items.end();
+	for( auto itr = m_items.begin();
+		itr != m_items.end();
 		itr++ )
 	{
 		w.draw( *itr );
 	}
+}
+
+//Vector2i Menu::getPosition() const {
+//	return m_position;
+//}
+
+Color Menu::getMainColor() const {
+	return m_mainColor;
+}
+
+Color Menu::getHiliteColor() const {
+	return m_hiliteColor;
+}
+
+//void Menu::setPosition( Vector2i const &newPos ) {
+//	m_position = newPos;
+//}
+
+void Menu::setMainColor( Color const &color ) {
+	m_mainColor = color;
+}
+
+void Menu::setHiliteColor( Color const &color) {
+	m_hiliteColor = color;
 }

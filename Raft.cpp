@@ -42,12 +42,12 @@ int _tmain(int argc, _TCHAR* argv[])
 	Font menuFont = Font();
 	menuFont.loadFromFile("res/font/kenvector_future.ttf");
 
-	Menu mainMenu = Menu( Text("Start", menuFont) );
-	mainMenu.addItem( Text("Load", menuFont) );
-	mainMenu.addItem( Text("Options", menuFont) );
-	mainMenu.addItem( Text("Leeroy", menuFont) );
-	mainMenu.addItem( Text("Jenkins", menuFont) );
-	mainMenu.addItem( Text("Exit", menuFont) );
+	Menu mainMenu = Menu( "Start", menuFont, sf::Vector2f(100, 200) );
+	mainMenu.addItem( "Load" );
+	mainMenu.addItem( "Options" );
+	mainMenu.addItem( "Leeroy" );
+	mainMenu.addItem( "Jenkins" );
+	mainMenu.addItem( "Exit" );
 	
 	 // Create the main window
 	sf::RenderWindow window(sf::VideoMode(800, 600, 32), "Test Scenario"); 
@@ -56,16 +56,38 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	 // Start game loop
 	while (window.isOpen()){
+
 		// Process events
 		sf::Event Event;
 		while (window.pollEvent(Event)){
+
+			switch ( Event.type ) {
+
 			// Close window : exit
-			if (Event.type == sf::Event::Closed)
-			window.close();
-			// Escape key : exit
-			if ((Event.type == sf::Event::KeyPressed) && (Event.key.code == sf::Keyboard::Escape))
-			window.close();
-		}
+			case sf::Event::Closed:
+				window.close();
+				break;
+
+			//process key press event
+			case sf::Event::KeyPressed:
+
+				switch ( Event.key.code ) {
+				case sf::Keyboard::Down:
+					mainMenu.moveDown();
+					break;
+
+				case sf::Keyboard::Up:
+					mainMenu.moveUp();
+					break;
+
+				default:
+					break;
+				}//end switch
+
+			default:
+				break;
+			}//end switch
+		}//end while
 
 		elapsedTime = clock.getElapsedTime();
 
