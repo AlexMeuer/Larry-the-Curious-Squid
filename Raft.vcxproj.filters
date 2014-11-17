@@ -22,6 +22,8 @@
     <ClInclude Include="include\Block.h" />
     <ClInclude Include="include\Player.h" />
     <ClInclude Include="include\Menu.h" />
+    <ClInclude Include="include\Scene.h" />
+    <ClInclude Include="include\SceneManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />

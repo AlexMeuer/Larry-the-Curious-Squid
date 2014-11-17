@@ -3,10 +3,11 @@
 
 #include "stdafx.h"
 
-#include "include\Force.h"
-#include "include\Level.h"
-#include "include\Ball.h"
+//#include "include\Force.h"
+//#include "include\Level.h"
+//#include "include\Ball.h"
 #include "include\Menu.h"
+#include "include\SceneManager.h"
 
 
 
@@ -42,6 +43,9 @@ void testFunc(sf::String string) {
 
 int _tmain(int argc, _TCHAR* argv[])
 {
+	SceneManager::instance()->createScene( "Test Scene", new Level() );
+
+
 	 // Create the main window
 	sf::RenderWindow window(sf::VideoMode(800, 600, 32), "Test Scenario"); 
 	sf::Clock clock = Clock();
