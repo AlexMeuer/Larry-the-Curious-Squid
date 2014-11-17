@@ -6,7 +6,7 @@
 #include "include\Force.h"
 #include "include\Level.h"
 #include "include\Ball.h"
-
+#include "include\Block.h"
 
 
 //Ken's Includes
@@ -48,11 +48,13 @@ int _tmain(int argc, _TCHAR* argv[])
 	//load textures
 	sf::Texture ballTex;
 	ballTex.loadFromFile("res/img/ball.png");
-	
+	sf::Texture blockTex;
+	blockTex.loadFromFile("res/img/block/png");
 	//create an instance of ball
 
 	Ball ball(&ballTex, Vector2f(300, 0), Vector2f(0,0), Vector2f(0.1,0.1));
-
+	//std::vector<Block*> crystalChandelier;
+	Block block1(&blockTex, Vector2f(0,0));	
 
 	//create an instance of force
 	Force force(Vector2f(250, 400), 200);
@@ -96,6 +98,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		
 		ball.Draw(window);
 
+		block1.Draw(window);
 		
 		// Finally, display rendered frame on screen
 		window.display();
