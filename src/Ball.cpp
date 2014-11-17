@@ -17,7 +17,7 @@ Ball::~Ball(){
 
 void Ball::Update(const Time &elapsedTime, const Vector2f gravity) {
 	if(time != 0){
-		time -= elapsedTime.asSeconds();
+		time += elapsedTime.asSeconds();
 	}
 	else{
 		time = elapsedTime.asSeconds();

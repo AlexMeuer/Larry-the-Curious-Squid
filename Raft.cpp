@@ -85,7 +85,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 		if ( Mouse::isButtonPressed(Mouse::Button::Left) ) {
 			force.setPower( 200 );
-			force.setPosition( Vector2f(Mouse::getPosition().x - window.getPosition().x, Mouse::getPosition().y  - window.getPosition().y) );
+			force.setPosition( Vector2f(Mouse::getPosition(window).x, Mouse::getPosition(window).y) );
 		}
 		else {
 			force.setPower( 10 );
