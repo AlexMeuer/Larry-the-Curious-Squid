@@ -18,10 +18,7 @@ void CollisionManager::SquareCircle(Sprite* square, Ball* circle){
 bool CollisionManager::SquareSquare(Sprite* squareOne, Sprite* squareTwo){
 	sf::Rect<float> RectOne = squareOne->getLocalBounds();
 	sf::Rect<float> RectTwo = squareTwo->getLocalBounds();
-	return ! ( RectTwo.left > RectOne.width + RectOne.left 
-		|| RectTwo.width + RectTwo.left < RectOne.left 
-		|| RectTwo.top < RectOne.height + RectOne.top
-		|| RectTwo.height + RectTwo.top > RectOne.top);
+	return RectOne.intersects( RectTwo );
 }
 
 

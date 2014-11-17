@@ -33,6 +33,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
+    <None Include="res\mus\Ove - Earth Is All We Have 1.ogg" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\img\ball.png" />
