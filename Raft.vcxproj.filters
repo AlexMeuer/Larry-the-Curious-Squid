@@ -9,6 +9,7 @@
     <ClCompile Include="src\Force.cpp" />
     <ClCompile Include="src\PowerUp.cpp" />
     <ClCompile Include="src\Block.cpp" />
+    <ClCompile Include="src\CollisionManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Ball.h" />
@@ -21,6 +22,7 @@
     <ClInclude Include="include\BlackHole.h" />
     <ClInclude Include="include\Block.h" />
     <ClInclude Include="include\Player.h" />
+    <ClInclude Include="include\CollisionManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />

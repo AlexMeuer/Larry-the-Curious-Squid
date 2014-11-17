@@ -9,6 +9,7 @@ Ball::Ball(Texture* texture, Vector2f position, Vector2f velocity, Vector2f scal
 	circle.setPosition(position);
 	circle.setFillColor(sf::Color::White);*/
 		time = 0;
+		
 }
 
 Ball::~Ball(){
@@ -17,7 +18,7 @@ Ball::~Ball(){
 
 void Ball::Update(const Time &elapsedTime, const Vector2f gravity) {
 	if(time != 0){
-		time -= elapsedTime.asSeconds();
+		time += elapsedTime.asSeconds();
 	}
 	else{
 		time = elapsedTime.asSeconds();
@@ -43,10 +44,21 @@ void Ball::Colision(RenderWindow &w){
 }
 
 void Ball::Death_Reset(){
-	m_position = Vector2f(20,50);
+	m_position = Vector2f(200,50);
 	m_velocity = Vector2f(0,0);
 	m_sprite.setPosition(m_position);
 	time = 0;
 
 }
 
+struct aRect{
+	float top;
+	float left;
+	float bottom;
+	float right;
+};
+
+bool rectCollision(aRect a, aRect b)
+{
+	return ! ( b.left > a.right || b.right < a.left || b.top < a.bottom || b.bottom > a.top);
+}
