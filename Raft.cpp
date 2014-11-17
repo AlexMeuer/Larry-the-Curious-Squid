@@ -53,7 +53,9 @@ int _tmain(int argc, _TCHAR* argv[])
 	//create an instance of ball
 
 	Ball ball(&ballTex, Vector2f(300, 0), Vector2f(0,0), Vector2f(0.1,0.1));
+
 	std::vector<Block*> crystalChandelier;
+
 
 	for (int i = 0; i < 10; i ++ ) {
 		crystalChandelier.push_back(new Block(&blockTex, Vector2f(i * 50,567), Vector2f(0,0), Vector2f(1,1)));
@@ -78,6 +80,8 @@ int _tmain(int argc, _TCHAR* argv[])
 		elapsedTime = clock.getElapsedTime();
 
 		ball.Update(elapsedTime, Vector2f(0,9.81));
+
+		ball.Colision(window);
 
 		if ( Mouse::isButtonPressed(Mouse::Button::Left) ) {
 			force.setPower( 200 );
