@@ -25,6 +25,7 @@ public:
 	~GameEntity();
 	
 	//-- GET -------------------------
+	Sprite getSprite() const;
 	Vector2f getPosition() const;
 	Vector2f getVelocity() const;	//linear velocity
 	Vector2f getScale() const;

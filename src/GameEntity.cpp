@@ -26,6 +26,10 @@ void GameEntity::Draw(RenderWindow &w) {
 
 
 //Getters ------------------------------
+Sprite GameEntity::getSprite() const {
+	return m_sprite;
+}
+
 
 Vector2f GameEntity::getPosition() const {
 	return m_position;

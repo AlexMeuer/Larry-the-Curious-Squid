@@ -91,6 +91,7 @@
     <ClInclude Include="include\Ball.h" />
     <ClInclude Include="include\BlackHole.h" />
     <ClInclude Include="include\Block.h" />
+    <ClInclude Include="include\CollisionManager.h" />
     <ClInclude Include="include\Force.h" />
     <ClInclude Include="include\GameEntity.h" />
     <ClInclude Include="include\Level.h" />
@@ -104,7 +105,13 @@
     <ClCompile Include="src\Ball.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="src\BlackHole.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="src\Block.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="src\CollisionManager.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="src\Force.cpp">
@@ -129,6 +136,7 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\img\ball.png" />
+    <Image Include="res\img\Blackhole.png" />
     <Image Include="res\img\Block.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
