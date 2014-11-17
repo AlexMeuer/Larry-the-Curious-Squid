@@ -29,30 +29,34 @@
 //#pragma comment(lib,"glu32.lib")
 #include "SFML/Graphics.hpp"
 #include "SFML/OpenGL.hpp"
-//#include <iostream>
+#include <iostream>
 //#define _USE_MATH_DEFINES
 //#include <math.h> 
 
 #include <windows.h>
 
+void testFunc() {
+	static int count;
+	std::cout << "testFunc called " << ++count << " times!" << std::endl;
+}
 
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	Font menuFont = Font();
-	menuFont.loadFromFile("res/font/kenvector_future.ttf");
-
-	Menu mainMenu = Menu( "Start", menuFont, sf::Vector2f(100, 200) );
-	mainMenu.addItem( "Load" );
-	mainMenu.addItem( "Options" );
-	mainMenu.addItem( "Leeroy" );
-	mainMenu.addItem( "Jenkins" );
-	mainMenu.addItem( "Exit" );
-	
 	 // Create the main window
 	sf::RenderWindow window(sf::VideoMode(800, 600, 32), "Test Scenario"); 
 	sf::Clock clock = Clock();
 	sf::Time elapsedTime;
+
+		Font menuFont = Font();
+	menuFont.loadFromFile("res/font/kenvector_future.ttf");
+
+	Menu mainMenu = Menu( "Start", menuFont, testFunc, sf::Vector2f(100, 200) );
+	mainMenu.addItem( "Load", testFunc);
+	mainMenu.addItem( "Options", testFunc );
+	mainMenu.addItem( "Leeroy", testFunc );
+	mainMenu.addItem( "Jenkins", testFunc );
+	mainMenu.addItem( "Exit", testFunc );
 
 	 // Start game loop
 	while (window.isOpen()){
@@ -80,6 +84,10 @@ int _tmain(int argc, _TCHAR* argv[])
 					mainMenu.moveUp();
 					break;
 
+				case sf::Keyboard::Return:
+					mainMenu.select();
+					break;
+
 				default:
 					break;
 				}//end switch
@@ -94,7 +102,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		//prepare frame
 		window.clear();
 
-		mainMenu.Draw( window );
+		mainMenu.draw( window );
 		
 		// Finally, display rendered frame on screen
 		window.display();

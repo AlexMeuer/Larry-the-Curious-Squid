@@ -1,6 +1,7 @@
 #ifndef _MENU_H
 #define _MENU_H
 
+
 #include "SFML\Graphics.hpp"
 #include <vector>
 
@@ -10,11 +11,11 @@ using namespace sf;
 class Menu {
 private:
 
-	std::vector<Text> m_items;
+	std::vector< std::pair<Text, void (*)(void)> > m_items;
 
 	const int m_itemSpacing;
 
-	std::vector<Text>::iterator m_selected;
+	std::vector< std::pair<Text, void (*)(void)> >::iterator m_selected;
 
 	const Font m_font;
 
@@ -25,20 +26,23 @@ private:
 public:
 
 	//creates a menu with one item
-	Menu(String const &text, Font const &font, Vector2f position, Color mainColor = Color::White, Color hiliteColor = Color::Yellow, int item_Spacing = 10);
+	Menu(String const &text, Font const &font, void (*function)(void), Vector2f position, Color mainColor = Color::White, Color hiliteColor = Color::Yellow, int item_Spacing = 10);
 
 	//adds a text item to a menu.
-	void addItem(String const &text);
+	void addItem(String const &text, void (*function)(void));
 
-	Text getItemAtIndex(unsigned int const index) const;
+	//std::pair<Text, void (*)(void)> getItemAtIndex(unsigned int const index) const;
 
-	Text moveUp();
+	std::pair<Text, void (*)(void)> moveUp();
 
-	Text moveDown();
+	std::pair<Text, void (*)(void)> moveDown();
 
-	void Draw(RenderWindow &w) const;
+	//invokes the function pointer of the currently selected item
+	void select();
 
-	Text getSelected() const;
+	void draw(RenderWindow &w) const;
+
+	std::pair< Text, void(*)(void) > getSelected() const;
 	//Vector2i getPosition() const;
 	Color getMainColor() const;
 	Color getHiliteColor() const;

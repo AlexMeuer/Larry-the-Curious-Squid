@@ -1,21 +1,21 @@
 #include "../include/Menu.h"
 
-Menu::Menu(String const &text, Font const &font, Vector2f position, Color mainColor, Color hiliteColor, int item_spacing)
+Menu::Menu(String const &text, Font const &font, void (*function)(void), Vector2f position, Color mainColor, Color hiliteColor, int item_spacing)
 	: m_itemSpacing( item_spacing ), m_font( font ), m_mainColor( mainColor ), m_hiliteColor( hiliteColor ) {
 
-	//push first item onto list and initialise selected iterator
-	m_items.push_back( Text( text, font ) );
+	//push first item onto list with its associated function (pointer) and initialise selected iterator
+	m_items.push_back( std::make_pair( Text( text, font ), function) );
 	m_selected = m_items.begin();
 
-	m_selected->setPosition( position );
-	m_selected->setColor( hiliteColor );
+	m_selected->first.setPosition( position );
+	m_selected->first.setColor( hiliteColor );
 }
 
-void Menu::addItem(String const &text) {
-	m_items.push_back( Text( text, m_font ) );
+void Menu::addItem(String const &text, void (*function)(void) ) {
+	m_items.push_back( std::make_pair( Text( text, m_font ), function ) );
 
-	auto thisItem = m_items.rbegin();
-	auto lastItem = thisItem + 1;
+	Text* thisItem = &m_items.rbegin()->first;
+	Text* lastItem = &( ++m_items.rbegin() )->first;
 	
 	//place this item below the last item
 	thisItem->setPosition( lastItem->getPosition().x, lastItem->getPosition().y + lastItem->getCharacterSize() + m_itemSpacing);
@@ -23,24 +23,24 @@ void Menu::addItem(String const &text) {
 	m_selected = m_items.begin();
 }
 
-Text Menu::getItemAtIndex(unsigned int const index) const {
-	return m_items.at(index);
-}
+//std::pair<Text, void (*)(void)> Menu::getItemAtIndex(unsigned int const index) const {
+//	return m_items.at(index);
+//}
 
-Text Menu::moveDown() {
-	m_selected->setColor( m_mainColor );
+std::pair<Text, void (*)(void)> Menu::moveDown() {
+	m_selected->first.setColor( m_mainColor );
 
 	//move to top of list if trying to move past bottom
 	if( ++m_selected == m_items.end() )
 		m_selected = m_items.begin();
 
-	m_selected->setColor( m_hiliteColor );
+	m_selected->first.setColor( m_hiliteColor );
 
 	return *m_selected;
 }
 
-Text Menu::moveUp() {
-	m_selected->setColor( m_mainColor );
+std::pair<Text, void (*)(void)> Menu::moveUp() {
+	m_selected->first.setColor( m_mainColor );
 
 	//move to bottom of list if trying to move past top
 	if ( m_selected == m_items.begin() )
@@ -48,21 +48,26 @@ Text Menu::moveUp() {
 
 	m_selected--;
 
-	m_selected->setColor( m_hiliteColor );
+	m_selected->first.setColor( m_hiliteColor );
 
 	return *m_selected;
 }
 
-Text Menu::getSelected() const {
+//invokes the function pointer of the currently selected item
+void Menu::select() {
+	m_selected->second();
+}
+
+std::pair<Text, void (*)(void)> Menu::getSelected() const {
 	return *m_selected;
 }
 
-void Menu::Draw( RenderWindow &w ) const {
+void Menu::draw( RenderWindow &w ) const {
 	for( auto itr = m_items.begin();
 		itr != m_items.end();
 		itr++ )
 	{
-		w.draw( *itr );
+		w.draw( itr->first );
 	}
 }
 
