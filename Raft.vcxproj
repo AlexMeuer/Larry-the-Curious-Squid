@@ -97,6 +97,7 @@ xcopy /d /y "$(FMOD_SDK)\fmodex.dll" "$(OutDir)"</Command>
     <ClInclude Include="include\Ball.h" />
     <ClInclude Include="include\BlackHole.h" />
     <ClInclude Include="include\Block.h" />
+    <ClInclude Include="include\CollisionManager.h" />
     <ClInclude Include="include\Force.h" />
     <ClInclude Include="include\GameEntity.h" />
     <ClInclude Include="include\Level.h" />
@@ -108,6 +109,15 @@ xcopy /d /y "$(FMOD_SDK)\fmodex.dll" "$(OutDir)"</Command>
   <ItemGroup>
     <ClCompile Include="Raft.cpp" />
     <ClCompile Include="src\Ball.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="src\BlackHole.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="src\Block.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="src\CollisionManager.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="src\Force.cpp">
@@ -133,6 +143,8 @@ xcopy /d /y "$(FMOD_SDK)\fmodex.dll" "$(OutDir)"</Command>
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\img\ball.png" />
+    <Image Include="res\img\Blackhole.png" />
+    <Image Include="res\img\Block.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

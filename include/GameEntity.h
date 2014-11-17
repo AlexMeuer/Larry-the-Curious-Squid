@@ -18,6 +18,7 @@ protected:
 
 	sf::ConvexShape shape;
 
+
 public:
 
 	GameEntity(); //**
@@ -27,6 +28,7 @@ public:
 	~GameEntity();
 	
 	//-- GET -------------------------
+	Sprite getSprite() const;
 	Vector2f getPosition() const;
 	Vector2f getVelocity() const;	//linear velocity
 	Vector2f getScale() const;
@@ -46,7 +48,7 @@ public:
 	void setMass(float const newMass);
 	
 
-	virtual void Update( const Time elapsedTime, const Vector2f &gravity );
+	virtual void Update( const Time &elapsedTime, const Vector2f gravity );
 	virtual void Draw( sf::RenderWindow &w );
 
 }; //end GameEntity class

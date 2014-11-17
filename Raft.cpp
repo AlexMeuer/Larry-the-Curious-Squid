@@ -6,8 +6,8 @@
 #include "include\Force.h"
 #include "include\Level.h"
 #include "include\Ball.h"
-
-
+#include "include\Block.h"
+#include "include\BlackHole.h"
 
 //Ken's Includes
 //#include "stdafx.h"
@@ -105,12 +105,24 @@ int _tmain(int argc, _TCHAR* argv[])
 	//load textures
 	sf::Texture ballTex;
 	ballTex.loadFromFile("res/img/ball.png");
+	sf::Texture blockTex;
+	blockTex.loadFromFile("res/img/Block.png");
+	sf::Texture blackholeTex;
+	blackholeTex.loadFromFile("res/img/Blackhole.png");
 	
 	//create an instance of ball
-	Ball ball(&ballTex, Vector2f(300, 0), Vector2f(0,0.01), Vector2f(0.1,0.1));
+	Ball ball(&ballTex, Vector2f(300, 0), Vector2f(0,0), Vector2f(0.1,0.1));
 
+	std::vector<Block*> crystalChandelier;
+
+	BlackHole blackHole(&blackholeTex, Vector2f(500, 400));
+
+	for (int i = 0; i < 10; i ++ ) {
+		crystalChandelier.push_back(new Block(&blockTex, Vector2f(i * 50,567), Vector2f(0,0), Vector2f(1,1)));
+	}
+	
 	//create an instance of force
-	Force force(Vector2f(250, 250), 1);
+	Force force(Vector2f(250, 400), 200);
 	
 	 // Start game loop
 	while (window.isOpen()){
@@ -130,16 +142,38 @@ int _tmain(int argc, _TCHAR* argv[])
 
 		elapsedTime = clock.getElapsedTime();
 
-		ball.Update(elapsedTime, Vector2f(0,-9));
+		ball.Update(elapsedTime, Vector2f(0,9.81));
 
-		force.Apply(&ball);
+		ball.Colision(window);
+
+		blackHole.Update();
+
+		if ( Mouse::isButtonPressed(Mouse::Button::Left) ) {
+			force.setPower( 200 );
+			force.setPosition( Vector2f(Mouse::getPosition(window).x, Mouse::getPosition(window).y) );
+		}
+		else {
+			force.setPower( 10 );
+		}
+
+		force.Apply(&ball, elapsedTime);
 
 		//prepare frame
 		window.clear();
-		
-		ball.Draw(window);
+
+		//draw the area affected by the test force
+		CircleShape shape = CircleShape(force.getPower());
+		shape.setPosition(force.getPosition().x - force.getPower(), force.getPosition().y - force.getPower());
+		shape.setFillColor(Color::Red);
+		window.draw(shape);
 
 		
+		ball.Draw(window);
+		for ( int i = 0; i < 10; i ++ ) {
+			crystalChandelier[i]->Draw(window);
+		}
+		blackHole.Draw(window);
+
 		// Finally, display rendered frame on screen
 		window.display();
 		clock.restart();
