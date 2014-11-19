@@ -21,28 +21,33 @@ private:
 public:
 	~SceneManager() {}
 
-	static SceneManager* instance() {
-		if ( m_instance == NULL ) {
-			m_instance = new SceneManager();
-		}
+	static SceneManager* instance();
 
-		return m_instance;
-	}
+	// Gets the name of the current scene.
+	// Does not return a scene object as scene handling should be done by this class alone.
+	const string getCurrentScene() const;
 
-	const string getCurrentScene() const {
-		return currentScene;
-	}
-
+	// Template function must be defined here or we'll get linker errors.
+	// (template function not instantiated until used)
 	template<typename T>
-	void createScene( string name, T* derivedSceneObject ) {
-		/*if ( typeid T* != typeid I_Scene* )
-			return false;*/
+	void createScene( const string name, T* derivedSceneObject ) {
+	/*if ( typeid T* != typeid I_Scene* )
+		return false;*/
 
-		m_scenes[name] = derivedSceneObject;
-		//m_scenes[name]->name = name;
-		//m_scenes[name]->dispose = &SceneManager::deleteScene;
+	m_scenes[name] = derivedSceneObject;
+	//m_scenes[name]->name = name;
+	//m_scenes[name]->dispose = &SceneManager::deleteScene;
 
-		//return true;
+	//return true;
 	}
+
+	// Calls the current scene's update method
+	void updateCurrentScene( sf::Time const &elapsedTime );
+
+	// Calls the current scene's draw method
+	void drawCurrentScene( sf::RenderWindow &w );
+
+	// Returns true if no further processing should be done for the event (i.e. the event has been used up )
+	bool passEventToCurrentScene( sf::Event &theEvent );
 };
 #endif

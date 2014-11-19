@@ -43,7 +43,7 @@ void testFunc(sf::String string) {
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	SceneManager::instance()->createScene( "Test Scene", new Level() );
+	SceneManager::instance()->createScene( "TEST_SCENE", new Level() );
 
 
 	 // Create the main window

@@ -9,6 +9,7 @@
     <ClCompile Include="src\Force.cpp" />
     <ClCompile Include="src\PowerUp.cpp" />
     <ClCompile Include="src\Menu.cpp" />
+    <ClCompile Include="src\SceneManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Ball.h" />
