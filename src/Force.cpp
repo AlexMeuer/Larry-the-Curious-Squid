@@ -1,4 +1,4 @@
-#include "../include//Force.h"
+#include "Force.h"
 
 // Returns a vector that represents the euclidean distance from one vector to another
 //Vector2f getVectorDistance(Vector2f const &A, Vector2f const &B) {

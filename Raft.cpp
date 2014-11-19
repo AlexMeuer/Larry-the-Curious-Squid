@@ -27,18 +27,11 @@
 //#endif
 //#pragma comment(lib,"opengl32.lib")
 //#pragma comment(lib,"glu32.lib")
-#include "SFML/Graphics.hpp"
-#include "SFML/OpenGL.hpp"
-#include <iostream>
-//#define _USE_MATH_DEFINES
-//#include <math.h> 
 
 //FMOD includes
 #pragma comment(lib,"fmodex_vc.lib")
 #include "fmod.hpp"
 #include "fmod_errors.h"
-
-#include <windows.h>
 
 
 int _tmain(int argc, _TCHAR* argv[])

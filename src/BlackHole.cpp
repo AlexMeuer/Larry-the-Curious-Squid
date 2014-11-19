@@ -1,4 +1,4 @@
-#include "..\include\BlackHole.h"
+#include "BlackHole.h"
 
 BlackHole::BlackHole(Texture* texture, Vector2f position, Vector2f velocity, Vector2f scale, float angularVel, float rotation_degrees, float mass) 
 	: GameEntity( texture,  position, velocity, scale,  angularVel,  rotation_degrees,  mass) , m_force(Vector2f(571.5, 471.5), 500){

@@ -1,4 +1,4 @@
-#include "..\include\CollisionManager.h"
+#include "CollisionManager.h"
 
 void CollisionManager::SquareCircle(Sprite* square, Ball* circle){
 	sf::Rect<float> Rect = square->getLocalBounds();
