@@ -49,5 +49,7 @@ public:
 
 	// Returns true if no further processing should be done for the event (i.e. the event has been used up )
 	bool passEventToCurrentScene( sf::Event &theEvent );
+
+	void navigateToScene( string path );
 };
 #endif
