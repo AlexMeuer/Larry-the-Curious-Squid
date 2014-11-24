@@ -1,6 +1,9 @@
 #include "../include/Level.h"
 #include "../include/tinyxml2.h"
 #include "../include/Ball.h"
+#include "../include/Block.h"
+#include "../include/BlackHole.h"
+#include "../include/PowerUp.h"
 
 using namespace tinyxml2;
 
@@ -9,26 +12,22 @@ int Level::getID() const {
 }
 
 void Level::Update() {
-	std::vector<GameEntity*>::iterator itr;
-
 	//update all entities in vector
-	for(itr = m_entities.begin();
+	for(auto itr = m_entities.begin();
 		itr != m_entities.end();
 		itr++)
 	{
-		(*itr)->Update();
+		itr->Update();
 	}
 }
 
 void Level::Draw(RenderWindow &w) {
-	std::vector<GameEntity*>::iterator itr;
-
 	//draw all entities in vector
-	for(itr = m_entities.begin();
+	for(auto itr = m_entities.begin();
 		itr != m_entities.end();
 		itr++)
 	{
-		(*itr)->Draw(w);
+		itr->Draw(w);
 	}
 }
 
@@ -62,13 +61,23 @@ Level Level::LoadFromXML(const char *path) {
 			const char * string = node->Value();
 
 			if (string == "BLOCK") {
-				//make a block
+				//load the block's texture
+				String textureName(node->FirstChildElement("TEXTURE")->ToText()->Value());
+				LoadTexture(textureName);
+
+				//get the position of the block
+				XMLNode* positionNode = node->FirstChildElement("POSITION");
+				float x = atof(positionNode->FirstChildElement("X")->ToText()->Value());
+				float y = atof(positionNode->FirstChildElement("Y")->ToText()->Value());
+
+				tmp_lvl.m_entities.push_back( Block() );
 			}
 			else if (string == "BALL") {
 				//load the ball's texture
 				String textureName( node->FirstChildElement( "TEXTURE" )->ToText()->Value() );
 				LoadTexture( textureName );
 				
+				//get the position of the ball
 				XMLNode* positionNode = node->FirstChildElement( "POSITION" );
 				float x = atof( positionNode->FirstChildElement( "X" )->ToText()->Value() );
 				float y = atof( positionNode->FirstChildElement( "Y" )->ToText()->Value() );
@@ -76,10 +85,37 @@ Level Level::LoadFromXML(const char *path) {
 				tmp_lvl.m_entities.push_back( Ball( &textures.find(textureName)->second, Vector2f(x,y) ) );
 			}
 			else if (string == "BLACKHOLE") {
-				//make a black hole
+				//get the black hole's texture
+				String textureName(node->FirstChildElement("TEXTURE")->ToText()->Value());
+				LoadTexture(textureName);
+
+				//get the position of the black hole
+				XMLNode* positionNode = node->FirstChildElement("POSITION");
+				float x = atof(positionNode->FirstChildElement("X")->ToText()->Value());
+				float y = atof(positionNode->FirstChildElement("Y")->ToText()->Value());
+
+				//get the angular velocity of the black hole
+				float angVel = atof( node->FirstChildElement("ANGULAR_VELOCITY")->ToText()->Value() );
+
+				//get the force of the black hole
+				Force f = Force(Vector2f(x, y), atof(node->FirstChildElement("POWER")->ToText()->Value()));
+
+				tmp_lvl.m_entities.push_back( BlackHole() );
 			}
 			else if (string == "POWERUP") {
-				//make a power up
+				//get the black hole's texture
+				String textureName(node->FirstChildElement("TEXTURE")->ToText()->Value());
+				LoadTexture(textureName);
+
+				//get the position of the black hole
+				XMLNode* positionNode = node->FirstChildElement("POSITION");
+				float x = atof(positionNode->FirstChildElement("X")->ToText()->Value());
+				float y = atof(positionNode->FirstChildElement("Y")->ToText()->Value());
+
+				//get the angular velocity of the powerup
+				float angVel = atof( node->FirstChildElement("ANGULAR_VELOCITY")->ToText()->Value() );
+
+				tmp_lvl.m_entities.push_back( PowerUp() );
 			}
 	}//end for loop
 
