@@ -37,29 +37,42 @@
 #include <windows.h>
 
 void testFunc(sf::String string) {
-	std::cout << string.toAnsiString() << " activated!" << std::endl;
+	//std::cout << string.toAnsiString() << " activated!" << std::endl;
+	if (SceneManager::instance()->getCurrentScene() == "MAIN_MENU") {
+		SceneManager::instance()->navigateToScene("OPTIONS_MENU");
+	}
+	else if (SceneManager::instance()->getCurrentScene() == "OPTIONS_MENU") {
+		SceneManager::instance()->navigateToScene("MAIN_MENU");
+	}
 }
 
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	SceneManager::instance()->createScene( "TEST_SCENE", new Level() );
+	Font menuFont = Font();
+	menuFont.loadFromFile("res/font/kenvector_future.ttf");
+
+	SceneManager::instance()->createScene("MAIN_MENU", new Menu("Start", menuFont, testFunc, sf::Vector2f(100, 200)));
+
+	Menu* menu = dynamic_cast<Menu*>(SceneManager::instance()->getEditableScene());
+	menu->addItem("Load", testFunc);
+	menu->addItem("Options", testFunc);
+	menu->addItem("Exit", testFunc);
+
+	SceneManager::instance()->createScene("OPTIONS_MENU", new Menu("Graphics", menuFont, testFunc, sf::Vector2f(100, 200)));
+
+	menu = dynamic_cast<Menu*>(SceneManager::instance()->getEditableScene());
+	menu->addItem("Audio", testFunc);
+	menu->addItem("Controls", testFunc);
+	menu->addItem("Back", testFunc);
+
+	SceneManager::instance()->navigateToScene("MAIN_MENU");
 
 
 	 // Create the main window
 	sf::RenderWindow window(sf::VideoMode(800, 600, 32), "Test Scenario"); 
 	sf::Clock clock = Clock();
 	sf::Time elapsedTime;
-
-		Font menuFont = Font();
-	menuFont.loadFromFile("res/font/kenvector_future.ttf");
-
-	Menu mainMenu = Menu( "Start", menuFont, testFunc, sf::Vector2f(100, 200) );
-	mainMenu.addItem( "Load", testFunc);
-	mainMenu.addItem( "Options", testFunc );
-	mainMenu.addItem( "Leeroy", testFunc );
-	mainMenu.addItem( "Jenkins", testFunc );
-	mainMenu.addItem( "Exit", testFunc );
 
 	 // Start game loop
 	while (window.isOpen()){
@@ -68,6 +81,8 @@ int _tmain(int argc, _TCHAR* argv[])
 		sf::Event Event;
 		while (window.pollEvent(Event)){
 
+			SceneManager::instance()->passEventToCurrentScene(Event);
+
 			switch ( Event.type ) {
 
 			// Close window : exit
@@ -75,37 +90,19 @@ int _tmain(int argc, _TCHAR* argv[])
 				window.close();
 				break;
 
-			//process key press event
-			case sf::Event::KeyPressed:
-
-				switch ( Event.key.code ) {
-				case sf::Keyboard::Down:
-					mainMenu.moveDown();
-					break;
-
-				case sf::Keyboard::Up:
-					mainMenu.moveUp();
-					break;
-
-				case sf::Keyboard::Return:
-					mainMenu.select();
-					break;
-
-				default:
-					break;
-				}//end switch
-
 			default:
 				break;
 			}//end switch
 		}//end while
 
+
 		elapsedTime = clock.getElapsedTime();
+		SceneManager::instance()->updateCurrentScene( elapsedTime );
 
 		//prepare frame
 		window.clear();
 
-		mainMenu.draw( window );
+		SceneManager::instance()->drawCurrentScene( window );
 		
 		// Finally, display rendered frame on screen
 		window.display();

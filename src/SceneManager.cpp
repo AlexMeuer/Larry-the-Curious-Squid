@@ -14,6 +14,10 @@ const string SceneManager::getCurrentScene() const {
 	return currentScene;
 }
 
+I_Scene * SceneManager::getEditableScene() const {
+	return m_scenes.at(currentScene);
+}
+
 //calls the current scene's update method
 void SceneManager::updateCurrentScene( sf::Time const &elapsedTime ) {
 	m_scenes[ currentScene ]->update( elapsedTime );
@@ -30,17 +34,22 @@ bool SceneManager::passEventToCurrentScene( sf::Event &theEvent ) {
 }
 
 void SceneManager::navigateToScene( string name ) {
-	auto end = m_scenes.end();
-	//if name is a key in m_scenes...
-	for (auto itr = m_scenes.begin(); itr != end; ++itr) {
-		//if name is a key in m_scenes...
-		if (itr->first == name) {
-			//...switch to that scene
-			currentScene = name;
-			return;
-		}
+	//auto end = m_scenes.end();
+	////if name is a key in m_scenes...
+	//for (auto itr = m_scenes.begin(); itr != end; ++itr) {
+	//	//if name is a key in m_scenes...
+	//	if (itr->first == name) {
+	//		//...switch to that scene
+	//		currentScene = name;
+	//		return;
+	//	}
+	//}
+
+	if ( m_scenes.find(name) != m_scenes.end() ) {
+		currentScene = name;
+		return;
 	}
 
 	//if we get here something went wrong (no scene for you bro)
-	throw "Unable to navigate to scene!\nNo scene with name %d exists", name;
+	throw;
 }

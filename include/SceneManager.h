@@ -24,8 +24,10 @@ public:
 	static SceneManager* instance();
 
 	// Gets the name of the current scene.
-	// Does not return a scene object as scene handling should be done by this class alone.
 	const string getCurrentScene() const;
+
+	//get a pointer the the current scene (which allows it to be edited)
+	I_Scene * getEditableScene() const;
 
 	// Template function must be defined here or we'll get linker errors.
 	// (template function not instantiated until used)
@@ -35,6 +37,7 @@ public:
 		return false;*/
 
 	m_scenes[name] = derivedSceneObject;
+	currentScene = name;
 	//m_scenes[name]->name = name;
 	//m_scenes[name]->dispose = &SceneManager::deleteScene;
 
