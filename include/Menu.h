@@ -3,7 +3,7 @@
 
 
 #include "SFML\Graphics.hpp"
-#include "Scene.h"
+#include "SceneManager.h"
 #include <vector>
 
 using namespace sf;
@@ -29,7 +29,7 @@ public:
 	//creates a menu with one item
 	Menu(String const &text, Font const &font, void (*function)(String), Vector2f position, Color mainColor = Color::White, Color hiliteColor = Color::Yellow, int item_Spacing = 10);
 
-	//adds a text item to a menu.
+	//adds an item to the menu with a custom function which is called when the item is selected
 	void addItem(String const &text, void (*function)(String));
 
 	//std::pair<Text, void (*)(void)> getItemAtIndex(unsigned int const index) const;

@@ -11,7 +11,7 @@ public:
 	~CollisionManager() {}
 
 	//get the instance of the manager (creates a new one if none exists)
-	static CollisionManager* instance() {	return instance == NULL ? new CollisionManager() : m_instance;	}
+	static CollisionManager* instance() {	return instance == NULL ? m_instance = new CollisionManager() : m_instance;	}
 
 	void SquareCircle(Sprite* square, Ball* circle);
 	bool SquareSquare(Sprite* squareOne, Sprite* squareTwo);

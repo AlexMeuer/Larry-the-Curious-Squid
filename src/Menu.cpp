@@ -23,6 +23,7 @@ void Menu::addItem(String const &text, void (*function)(String) ) {
 	m_selected = m_items.begin();
 }
 
+
 //std::pair<Text, void (*)(void)> Menu::getItemAtIndex(unsigned int const index) const {
 //	return m_items.at(index);
 //}
