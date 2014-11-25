@@ -30,13 +30,13 @@
 //#pragma comment(lib,"opengl32.lib")
 //#pragma comment(lib,"glu32.lib")
 
-#include "SFML/Graphics.hpp"
-#include "SFML/OpenGL.hpp"
+//#include "SFML/Graphics.hpp"
+//#include "SFML/OpenGL.hpp"
 #include <iostream>
 //#define _USE_MATH_DEFINES
 //#include <math.h> 
 
-#include <windows.h>
+//#include <windows.h>
 
 //FMOD includes
 #pragma comment(lib,"fmodex_vc.lib")
@@ -55,6 +55,7 @@ void testFunc(sf::String string) {
 
 int _tmain(int argc, _TCHAR* argv[])
 {
+#pragma region Setup_Scenes
 	Font menuFont = Font();
 	menuFont.loadFromFile("res/font/kenvector_future.ttf");
 
@@ -72,8 +73,11 @@ int _tmain(int argc, _TCHAR* argv[])
 	menu->addItem("Controls", testFunc);
 	menu->addItem("Back", testFunc);
 
-	SceneManager::instance()->navigateToScene("MAIN_MENU");
+	SceneManager::instance()->navigateToScene("MAIN_MENU");  
+#pragma endregion
 
+
+#pragma region Setup_FMOD
 	//setup FMOD
 	FMOD::System *FMODsys; //will point to the FMOD system
 	FMOD_RESULT result;
@@ -84,11 +88,11 @@ int _tmain(int argc, _TCHAR* argv[])
 		exit(-1);
 	}
 
- 
+
 
 	result = FMODsys->init(100, FMOD_INIT_NORMAL, 0);   // Initialize FMOD.
 
-     
+
 
 	if (result != FMOD_OK)
 
@@ -98,7 +102,9 @@ int _tmain(int argc, _TCHAR* argv[])
 
 		exit(-1);
 
-	}
+	}  
+#pragma endregion
+
 
 	//create a sound with FMOD
 	FMOD::Sound *sound;
@@ -132,7 +138,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	sf::RenderWindow window(sf::VideoMode(800, 600, 32), "Test Scenario"); 
 	sf::Clock clock = Clock();
 	sf::Time elapsedTime;
-	CollisionManager collisionManager;
+	//CollisionManager collisionManager;
 
 	//load textures
 	sf::Texture ballTex;
@@ -172,25 +178,6 @@ int _tmain(int argc, _TCHAR* argv[])
 				window.close();
 				break;
 
-			//process key press event
-			case sf::Event::KeyPressed:
-				switch ( Event.key.code ) {
-				case sf::Keyboard::Down:
-					mainMenu.moveDown();
-					break;
-
-				case sf::Keyboard::Up:
-					mainMenu.moveUp();
-					break;
-					
-				case sf::Keyboard::Return:
-					mainMenu.select();
-					break;
-
-				default:
-					break;
-				}//end switch
-
 			default:
 				break;
 			}//end switch
@@ -204,12 +191,12 @@ int _tmain(int argc, _TCHAR* argv[])
 		
 		SceneManager::instance()->updateCurrentScene( elapsedTime );
 		
-		if(collisionManager.OffScreen(window, &ball))
+		if(CollisionManager::instance()->OffScreen(window, &ball))
 			ball.Death_Reset();
 			
 		for (int i = 0; i < 10; i++)
 		{
-			collisionManager.SquareCircle(&crystalChandelier[i]->getSprite(),&ball);
+			CollisionManager::instance()->SquareCircle(&crystalChandelier[i]->getSprite(),&ball);
 		}
 
 		blackHole.Update();
