@@ -49,6 +49,30 @@ void Menu::moveUp() {
 	m_selected->first.setColor( m_hiliteColor );
 }
 
+bool Menu::handleEvent(Event &Event) {
+
+	bool handled = false;
+	if (Event.type == Event::EventType::KeyPressed) {
+		switch (Event.key.code) {
+		case Keyboard::Down:
+			moveDown();
+			handled = true;
+			break;
+		case Keyboard::Up:
+			moveUp();
+			handled = true;
+			break;
+		case Keyboard::Return:
+		case Keyboard::Space:
+			select();
+			handled = true;
+			break;
+		}
+	}
+	return handled;
+}
+
+
 //invokes the function pointer of the currently selected item
 void Menu::select() {
 	m_selected->second( m_selected->first.getString() );
@@ -58,7 +82,7 @@ void Menu::select() {
 //	return *m_selected;
 //}
 
-void Menu::draw( RenderWindow &w ) const {
+void Menu::draw( RenderWindow &w ) {
 	for( auto itr = m_items.begin();
 		itr != m_items.end();
 		itr++ )

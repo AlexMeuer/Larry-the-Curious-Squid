@@ -3,10 +3,11 @@
 
 #include "stdafx.h"
 
-#include "include\Force.h"
-#include "include\Level.h"
-#include "include\Ball.h"
+//#include "include\Force.h"
+//#include "include\Level.h"
+//#include "include\Ball.h"
 #include "include\Menu.h"
+#include "include\SceneManager.h"
 #include "include\Block.h"
 #include "include\BlackHole.h"
 #include "include\CollisionManager.h"
@@ -43,11 +44,36 @@
 #include "fmod_errors.h"
 
 void testFunc(sf::String string) {
-	std::cout << string.toAnsiString() << " activated!" << std::endl;
+	//std::cout << string.toAnsiString() << " activated!" << std::endl;
+	if (SceneManager::instance()->getCurrentScene() == "MAIN_MENU") {
+		SceneManager::instance()->navigateToScene("OPTIONS_MENU");
+	}
+	else if (SceneManager::instance()->getCurrentScene() == "OPTIONS_MENU") {
+		SceneManager::instance()->navigateToScene("MAIN_MENU");
+	}
 }
 
 int _tmain(int argc, _TCHAR* argv[])
 {
+	Font menuFont = Font();
+	menuFont.loadFromFile("res/font/kenvector_future.ttf");
+
+	SceneManager::instance()->createScene("MAIN_MENU", new Menu("Start", menuFont, testFunc, sf::Vector2f(100, 200)));
+
+	Menu* menu = dynamic_cast<Menu*>(SceneManager::instance()->getEditableScene());
+	menu->addItem("Load", testFunc);
+	menu->addItem("Options", testFunc);
+	menu->addItem("Exit", testFunc);
+
+	SceneManager::instance()->createScene("OPTIONS_MENU", new Menu("Graphics", menuFont, testFunc, sf::Vector2f(100, 200)));
+
+	menu = dynamic_cast<Menu*>(SceneManager::instance()->getEditableScene());
+	menu->addItem("Audio", testFunc);
+	menu->addItem("Controls", testFunc);
+	menu->addItem("Back", testFunc);
+
+	SceneManager::instance()->navigateToScene("MAIN_MENU");
+
 	//setup FMOD
 	FMOD::System *FMODsys; //will point to the FMOD system
 	FMOD_RESULT result;
@@ -108,16 +134,6 @@ int _tmain(int argc, _TCHAR* argv[])
 	sf::Time elapsedTime;
 	CollisionManager collisionManager;
 
-		Font menuFont = Font();
-	menuFont.loadFromFile("res/font/kenvector_future.ttf");
-
-	Menu mainMenu = Menu( "Start", menuFont, testFunc, sf::Vector2f(100, 200) );
-	mainMenu.addItem( "Load", testFunc);
-	mainMenu.addItem( "Options", testFunc );
-	mainMenu.addItem( "Leeroy", testFunc );
-	mainMenu.addItem( "Jenkins", testFunc );
-	mainMenu.addItem( "Exit", testFunc );
-
 	//load textures
 	sf::Texture ballTex;
 	ballTex.loadFromFile("res/img/ball.png");
@@ -146,6 +162,8 @@ int _tmain(int argc, _TCHAR* argv[])
 		// Process events
 		sf::Event Event;
 		while (window.pollEvent(Event)){
+
+			SceneManager::instance()->passEventToCurrentScene(Event);
 
 			switch ( Event.type ) {
 
@@ -181,7 +199,10 @@ int _tmain(int argc, _TCHAR* argv[])
 		FMODsys->set3DListenerAttributes(0, ball.getFMOD_POS(), ball.getFMOD_VEL(), 0, 0);
 		FMODsys->update();	//run this once per frame ONLY
 
+
 		elapsedTime = clock.getElapsedTime();
+		
+		SceneManager::instance()->updateCurrentScene( elapsedTime );
 		
 		if(collisionManager.OffScreen(window, &ball))
 			ball.Death_Reset();
@@ -204,7 +225,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		//prepare frame
 		window.clear();
 
-		mainMenu.draw( window );
+		SceneManager::instance()->drawCurrentScene( window );
 		
 		ball.Draw(window);
 		

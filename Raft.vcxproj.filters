@@ -11,6 +11,7 @@
     <ClCompile Include="src\Level.cpp" />
     <ClCompile Include="src\PowerUp.cpp" />
     <ClCompile Include="src\Menu.cpp" />
+    <ClCompile Include="src\SceneManager.cpp" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -26,6 +27,8 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="include\Menu.h" />
+    <ClInclude Include="include\Scene.h" />
+    <ClInclude Include="include\SceneManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\img\ball.png" />

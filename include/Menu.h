@@ -3,21 +3,22 @@
 
 
 #include "SFML\Graphics.hpp"
+#include "Scene.h"
 #include <vector>
 
 using namespace sf;
 
 //Vertical menu class. Does not currently support horizontal arbitrary layouts.
-class Menu {
+class Menu : public I_Scene{
 private:
 
 	std::vector< std::pair<Text, void (*)(String)> > m_items;
 
-	const int m_itemSpacing;
+	int m_itemSpacing;
 
 	std::vector< std::pair<Text, void (*)(String)> >::iterator m_selected;
 
-	const Font m_font;
+	Font m_font;
 
 	//Vector2i m_position;
 
@@ -39,7 +40,10 @@ public:
 	//invokes the function pointer of the currently selected item
 	void select();
 
-	void draw(RenderWindow &w) const;
+	void I_Scene::draw(RenderWindow &w);
+	void I_Scene::update(Time const &elapsedTime) { /* do nothing */ }
+	bool I_Scene::handleEvent(Event &Event);
+
 
 	//std::pair< Text, void(*)(String) > getSelected() const;
 	//Vector2i getPosition() const;
