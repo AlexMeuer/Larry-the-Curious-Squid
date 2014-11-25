@@ -2,38 +2,45 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="Raft.cpp" />
-    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="src\Ball.cpp" />
+    <ClCompile Include="src\BlackHole.cpp" />
+    <ClCompile Include="src\Block.cpp" />
+    <ClCompile Include="src\CollisionManager.cpp" />
+    <ClCompile Include="src\Force.cpp" />
     <ClCompile Include="src\GameEntity.cpp" />
     <ClCompile Include="src\Level.cpp" />
-    <ClCompile Include="src\Ball.cpp" />
-    <ClCompile Include="src\Force.cpp" />
     <ClCompile Include="src\PowerUp.cpp" />
     <ClCompile Include="src\Menu.cpp" />
     <ClCompile Include="src\SceneManager.cpp" />
+    <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Ball.h" />
+    <ClInclude Include="include\BlackHole.h" />
+    <ClInclude Include="include\Block.h" />
+    <ClInclude Include="include\CollisionManager.h" />
     <ClInclude Include="include\Force.h" />
     <ClInclude Include="include\GameEntity.h" />
     <ClInclude Include="include\Level.h" />
+    <ClInclude Include="include\Player.h" />
     <ClInclude Include="include\PowerUp.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="include\BlackHole.h" />
-    <ClInclude Include="include\Block.h" />
-    <ClInclude Include="include\Player.h" />
     <ClInclude Include="include\Menu.h" />
     <ClInclude Include="include\Scene.h" />
     <ClInclude Include="include\SceneManager.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="ReadMe.txt" />
+    <Image Include="res\img\ball.png" />
+    <Image Include="res\img\Blackhole.png" />
+    <Image Include="res\img\Block.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
+    <None Include="res\mus\Ove - Earth Is All We Have 1.ogg" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="res\img\ball.png" />
+    <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="res\font\kenvector_future.ttf" />

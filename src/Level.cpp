@@ -1,4 +1,4 @@
-#include "..\include\Level.h"
+#include "Level.h"
 
 int Level::getID() const {
 	return id;
