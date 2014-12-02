@@ -9,6 +9,7 @@
 
 #include <stdio.h>
 #include <tchar.h>
+#include <cmath>
 
 //#include <Windows.h>
 
