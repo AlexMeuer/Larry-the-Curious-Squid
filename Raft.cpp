@@ -44,13 +44,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	sf::Clock clock = Clock();
 	sf::Time elapsedTime;
 
-
-	//load textures
-	sf::Texture ballTex;
-	ballTex.loadFromFile("res/img/ball.png");
-	
-	//create an instance of ball
-	Ball ball(&ballTex, Vector2f(300, 0), Vector2f(0.1f,0.1f)); 
+	Level myLevel = Level::LoadFromXML("res/xml/test.xml");
 	
 	 // Start game loop
 	while (window.isOpen()){
@@ -67,13 +61,13 @@ int _tmain(int argc, _TCHAR* argv[])
 
 		elapsedTime = clock.getElapsedTime();
 
-		ball.Update();
-
+		myLevel.Update();
 
 		//prepare frame
 		window.clear();
-		
-		ball.Draw(window);
+	
+
+		myLevel.Draw( window );
 
 		
 		// Finally, display rendered frame on screen

@@ -29,6 +29,6 @@ public:
 	void Draw(RenderWindow &w);
 
 	static Level LoadFromXML(const char *path);
-	static Level LoadFromXML(const char *path, std::map<String, Texture> loadedTextures);
+	//static Level LoadFromXML(const char *path, std::map<String, Texture> loadedTextures);
 };
 #endif
