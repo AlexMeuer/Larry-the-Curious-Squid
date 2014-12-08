@@ -1,0 +1,12 @@
+<LEVEL>
+	<ID>-5</ID>
+	<GRAVITY>2</GRAVITY>
+	<ENTITY>
+    <BLOCK/>
+		<TEXTURE>block.png</TEXTURE>
+		<POSITION>
+			<X>100</X>
+			<Y>150</Y>
+		</POSITION>
+	</ENTITY>
+</LEVEL>

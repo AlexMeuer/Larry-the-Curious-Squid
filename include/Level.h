@@ -10,7 +10,10 @@
 class Level : public I_Scene{
 private:
 
-	std::vector<GameEntity*> m_entities;
+	std::vector<GameEntity> m_entities;
+
+	static std::map<String, Texture> textures;
+	static void LoadTexture(String name);
 
 	Vector2f m_gravity;
 
@@ -32,6 +35,7 @@ public:
 	void I_Scene::update(Time const &elapsedTime);
 	void I_Scene::draw(RenderWindow &w);
 
-	static Level LoadFromXML(String path);
+	static Level LoadFromXML(const char *path);
+	//static Level LoadFromXML(const char *path, std::map<String, Texture> loadedTextures);
 };
 #endif

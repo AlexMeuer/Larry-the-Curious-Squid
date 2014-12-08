@@ -10,6 +10,7 @@
     <ClCompile Include="src\GameEntity.cpp" />
     <ClCompile Include="src\Level.cpp" />
     <ClCompile Include="src\PowerUp.cpp" />
+    <ClCompile Include="src\tinyxml2.cpp" />
     <ClCompile Include="src\Menu.cpp" />
     <ClCompile Include="src\SceneManager.cpp" />
     <ClCompile Include="stdafx.cpp" />
@@ -27,6 +28,7 @@
     <ClInclude Include="include\PowerUp.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="include\tinyxml2.h" />
     <ClInclude Include="include\Menu.h" />
     <ClInclude Include="include\Scene.h" />
     <ClInclude Include="include\SceneManager.h" />
@@ -46,5 +48,8 @@
   </ItemGroup>
   <ItemGroup>
     <Font Include="res\font\kenvector_future.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="res\xml\test.xml" />
   </ItemGroup>
 </Project>

@@ -138,6 +138,8 @@ int _tmain(int argc, _TCHAR* argv[])
 	sf::RenderWindow window(sf::VideoMode(800, 600, 32), "Test Scenario"); 
 	sf::Clock clock = Clock();
 	sf::Time elapsedTime;
+
+	Level myLevel = Level::LoadFromXML("res/xml/test.xml");
 	//CollisionManager collisionManager;
 
 	//load textures
@@ -198,6 +200,14 @@ int _tmain(int argc, _TCHAR* argv[])
 		{
 			CollisionManager::instance()->SquareCircle(&crystalChandelier[i]->getSprite(),&ball);
 		}
+
+		myLevel.Update();
+
+		//prepare frame
+		window.clear();
+	
+
+		myLevel.Draw( window );
 
 		blackHole.Update();
 
