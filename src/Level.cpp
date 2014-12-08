@@ -13,17 +13,29 @@ int Level::getID() const {
 	return id;
 }
 
-void Level::Update() {
+bool Level::handleEvent( Event &event ) {
+	if ( event.type == Event::KeyPressed )
+		if ( event.key.code == Keyboard::Escape )
+			return true;
+
+	return false;
+}
+
+void Level::update(Time const &elapsedTime) {
+	std::vector<GameEntity*>::iterator itr;
+
 	//update all entities in vector
 	for(auto itr = m_entities.begin();
 		itr != m_entities.end();
 		itr++)
 	{
-		itr->Update();
+		(*itr)->Update(elapsedTime, m_gravity);
 	}
 }
 
-void Level::Draw(RenderWindow &w) {
+void Level::draw(RenderWindow &w) {
+	std::vector<GameEntity*>::iterator itr;
+
 	//draw all entities in vector
 	for(auto itr = m_entities.begin();
 		itr != m_entities.end();

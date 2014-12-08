@@ -10,7 +10,12 @@
 #include <stdio.h>
 #include <tchar.h>
 
-//#include "include\Force.h"
-//#include "include\PowerUp.h"
+//#include <Windows.h>
 
-// TODO: reference additional headers your program requires here
+//#include <cmath>
+//#define _USE_MATH_DEFINES
+
+#include "SFML/Graphics.hpp"
+#include "SFML/OpenGL.hpp"
+
+#include <iostream>
