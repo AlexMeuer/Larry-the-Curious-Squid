@@ -14,7 +14,8 @@ private:
 	Font m_font;
 	Color m_colour;
 
-	Texture m_gravityArrow;
+	Texture m_lifeSprite;	// image to represent lives lost
+	Texture m_gravityArrow; // an arrow sprite pointing in the direction of the gravity for that level
 	Vector2f m_arrowPosition;
 
 	int m_lives;
@@ -26,7 +27,7 @@ public:
 	// if an instance of HeadsUpDisplay already exists, return a refernce to it
 	static HeadsUpDisplay* instance() { return instance == NULL ? m_instance = new HeadsUpDisplay() : m_instance; }
 
-
+	void 
 
 	void Update();
 	void Draw( sf::RenderWindow &w );
