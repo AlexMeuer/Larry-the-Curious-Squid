@@ -54,7 +54,7 @@ void Level::LoadTexture(String name) {
 
 
 Level Level::LoadFromXML(const char *path) {
-	XMLDocument doc;	//empty xml document
+	tinyxml2::XMLDocument doc;	//empty xml document
 
 	XMLError result = doc.LoadFile(path);	//try to load the xml from file
 	if ( result != XML_NO_ERROR )
