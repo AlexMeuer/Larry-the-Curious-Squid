@@ -27,7 +27,7 @@ public:
 	// if an instance of HeadsUpDisplay already exists, return a refernce to it
 	static HeadsUpDisplay* instance() { return instance == NULL ? m_instance = new HeadsUpDisplay() : m_instance; }
 
-	void 
+	
 
 	void Update();
 	void Draw( sf::RenderWindow &w );
