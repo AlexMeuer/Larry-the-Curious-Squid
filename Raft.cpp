@@ -201,13 +201,13 @@ int _tmain(int argc, _TCHAR* argv[])
 			CollisionManager::instance()->SquareCircle(&crystalChandelier[i]->getSprite(),&ball);
 		}
 
-		myLevel.Update();
+		myLevel.update();
 
 		//prepare frame
 		window.clear();
 	
 
-		myLevel.Draw( window );
+		myLevel.draw( window );
 
 		blackHole.Update();
 
