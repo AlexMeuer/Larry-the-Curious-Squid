@@ -29,7 +29,7 @@ void Level::update(Time const &elapsedTime) {
 		itr != m_entities.end();
 		itr++)
 	{
-		(*itr)->Update(elapsedTime, m_gravity);
+		itr->Update(elapsedTime, m_gravity);
 	}
 }
 
@@ -48,12 +48,12 @@ void Level::draw(RenderWindow &w) {
 void Level::LoadTexture(String name) {
 	if ( textures.find(name) == textures.end() ) {
 		//load the texture and add it to the map
-		textures[name].loadFromFile("../res/img/" + name);
+		textures[name].loadFromFile("./res/img/" + name);
 		}
 }
 
 
-Level Level::LoadFromXML(const char *path) {
+Level* Level::LoadFromXML(const char *path) {
 	tinyxml2::XMLDocument doc;	//empty xml document
 
 	XMLError result = doc.LoadFile(path);	//try to load the xml from file
@@ -68,8 +68,9 @@ Level Level::LoadFromXML(const char *path) {
 
 	//query the gravity force and assign it to the temporary level
 	node = doc.FirstChildElement( "LEVEL" )->FirstChildElement( "GRAVITY" );
-	Force f = Force( Vector2f(0,0), atof(node->GetText()) );	//atof converts c string to float
-	tmp_lvl.m_gravity = Force(f);
+	//Force f = Force( Vector2f(0,0), atof(node->GetText()) );	//atof converts c string to float
+	//tmp_lvl.m_gravity = Force(f);
+	tmp_lvl.m_gravity = Vector2f( 0, atof(node->GetText()) );
 
 	//iterate through all ENTITY elements, creating and adding objects as necessary
 	for(XMLElement* node = doc.FirstChildElement( "LEVEL" )->FirstChildElement("ENTITY");
@@ -88,11 +89,11 @@ Level Level::LoadFromXML(const char *path) {
 				float x = atof(positionNode->FirstChildElement("X")->GetText());
 				float y = atof(positionNode->FirstChildElement("Y")->GetText());
 
-				//tmp_lvl.m_entities.push_back( Block() );
+				tmp_lvl.m_entities.push_back( Block( &textures.find(textureName)->second, Vector2f(x,y) ) );
 			}
 			else if (value == std::string("BALL").c_str()) {
 				//load the ball's texture
-				String textureName( node->FirstChildElement( "TEXTURE" )->Value() );
+				String textureName(node->FirstChildElement("TEXTURE")->GetText());
 				LoadTexture( textureName );
 				
 				//get the position of the ball
@@ -100,11 +101,13 @@ Level Level::LoadFromXML(const char *path) {
 				float x = atof( positionNode->FirstChildElement( "X" )->GetText() );
 				float y = atof( positionNode->FirstChildElement( "Y" )->GetText() );
 
-				//tmp_lvl.m_entities.push_back( Ball( &textures.find(textureName)->second, Vector2f(x,y) ) );
+				float scale = atof( node->FirstChildElement("SCALE")->GetText());
+
+				tmp_lvl.m_entities.push_back( Ball( &textures.find(textureName)->second, Vector2f(x,y), Vector2f(0,0), Vector2f(scale, scale) ) );
 			}
 			else if (value == std::string("BLACKHOLE").c_str()) {
 				//get the black hole's texture
-				String textureName(node->FirstChildElement("TEXTURE")->Value());
+				String textureName(node->FirstChildElement("TEXTURE")->GetText());
 				LoadTexture(textureName);
 
 				//get the position of the black hole
@@ -118,7 +121,7 @@ Level Level::LoadFromXML(const char *path) {
 				//get the force of the black hole
 				Force f = Force(Vector2f(x, y), atof(node->FirstChildElement("POWER")->GetText()));
 
-				//tmp_lvl.m_entities.push_back( BlackHole() );
+				tmp_lvl.m_entities.push_back( BlackHole( &textures.find(textureName)->second, Vector2f(x,y), Vector2f(0,0), Vector2f(1,1), angVel ));
 			}
 			else if (value == std::string("POWERUP").c_str()) {
 				//get the black hole's texture
@@ -137,5 +140,5 @@ Level Level::LoadFromXML(const char *path) {
 			}
 	}//end for loop
 
-	return Level(tmp_lvl);	//return a copy of tmp_lvl (tmp_lvl goes out of scope after this)
+	return new Level(tmp_lvl);	//return a copy of tmp_lvl (tmp_lvl goes out of scope after this)
 }

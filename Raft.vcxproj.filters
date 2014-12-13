@@ -33,6 +33,7 @@
     <ClInclude Include="include\Scene.h" />
     <ClInclude Include="include\SceneManager.h" />
     <ClInclude Include="include\HeadsUpDisplay.h" />
+    <ClInclude Include="include\MenuFunctions.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\img\ball.png" />
