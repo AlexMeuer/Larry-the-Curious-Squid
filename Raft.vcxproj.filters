@@ -43,6 +43,7 @@
     <Image Include="res\img\Block.png" />
     <Image Include="res\img\life.png" />
     <Image Include="res\img\listener.png" />
+    <Image Include="res\img\speaker.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />

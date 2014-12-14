@@ -169,6 +169,7 @@ xcopy /d /y "$(FMOD_SDK)\fmodex.dll" "$(OutDir)"</Command>
     <Image Include="res\img\Block.png" />
     <Image Include="res\img\life.png" />
     <Image Include="res\img\listener.png" />
+    <Image Include="res\img\speaker.png" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="res\font\kenvector_future.ttf" />

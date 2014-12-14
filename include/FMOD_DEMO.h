@@ -16,12 +16,21 @@ using namespace sf;
 class FMOD_DEMO : public I_Scene {
 private:
 	Texture listenerTex;
+	Texture emitterTex;
+
 	Sprite listener;
+	Sprite emitter;
+
+	FMOD::Sound *sound;
+
 	FMOD_VECTOR *listenerPos, *listenerVel;
+
 	CircleShape reverbArea;
+
 	FMOD::System* fmod_sys;
+
 public:
-	FMOD_DEMO( Vector2f reverbCentre, FMOD::System* sys );
+	FMOD_DEMO( Vector2f reverbCentre, Vector2f emmiterCentre, FMOD::System* sys );
 	~FMOD_DEMO();
 
 	bool I_Scene::handleEvent( Event &Event );

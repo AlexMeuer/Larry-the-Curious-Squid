@@ -165,7 +165,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 
 
-	SceneManager::instance()->createScene("FMOD_DEMO", new FMOD_DEMO( Vector2f(400, 400), FMODsys ));
+	SceneManager::instance()->createScene("FMOD_DEMO", new FMOD_DEMO( Vector2f(400, 400), Vector2f(600, 300), FMODsys ));
 	SceneManager::instance()->navigateToScene("MAIN_MENU");
 
 
