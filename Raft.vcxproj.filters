@@ -15,6 +15,7 @@
     <ClCompile Include="src\SceneManager.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="src\HeadsUpDisplay.cpp" />
+    <ClCompile Include="src\FMOD_DEMO.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Ball.h" />
@@ -34,12 +35,14 @@
     <ClInclude Include="include\SceneManager.h" />
     <ClInclude Include="include\HeadsUpDisplay.h" />
     <ClInclude Include="include\MenuFunctions.h" />
+    <ClInclude Include="include\FMOD_DEMO.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\img\ball.png" />
     <Image Include="res\img\Blackhole.png" />
     <Image Include="res\img\Block.png" />
     <Image Include="res\img\life.png" />
+    <Image Include="res\img\listener.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />

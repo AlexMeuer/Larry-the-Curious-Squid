@@ -100,6 +100,7 @@ xcopy /d /y "$(FMOD_SDK)\fmodex.dll" "$(OutDir)"</Command>
     <ClInclude Include="include\BlackHole.h" />
     <ClInclude Include="include\Block.h" />
     <ClInclude Include="include\CollisionManager.h" />
+    <ClInclude Include="include\FMOD_DEMO.h" />
     <ClInclude Include="include\Force.h" />
     <ClInclude Include="include\GameEntity.h" />
     <ClInclude Include="include\HeadsUpDisplay.h" />
@@ -130,6 +131,7 @@ xcopy /d /y "$(FMOD_SDK)\fmodex.dll" "$(OutDir)"</Command>
     <ClCompile Include="src\CollisionManager.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="src\FMOD_DEMO.cpp" />
     <ClCompile Include="src\Force.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
     </ClCompile>
@@ -166,6 +168,7 @@ xcopy /d /y "$(FMOD_SDK)\fmodex.dll" "$(OutDir)"</Command>
     <Image Include="res\img\Blackhole.png" />
     <Image Include="res\img\Block.png" />
     <Image Include="res\img\life.png" />
+    <Image Include="res\img\listener.png" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="res\font\kenvector_future.ttf" />

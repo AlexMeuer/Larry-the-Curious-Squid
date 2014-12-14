@@ -20,6 +20,9 @@ public:
 		if(string == "Start")
 			SceneManager::instance()->navigateToScene("LEVEL_1");
 
+		else if(string == "Start FMOD DEMO")
+			SceneManager::instance()->navigateToScene("FMOD_DEMO");
+
 		else if(string == "Options")
 			SceneManager::instance()->navigateToScene("OPTIONS_MENU");
 

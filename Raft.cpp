@@ -39,6 +39,7 @@
 //#include <windows.h>
 
 #include "include\MenuFunctions.h"
+#include "include\FMOD_DEMO.h"
 
 //FMOD includes
 #pragma comment(lib,"fmodex_vc.lib")
@@ -55,6 +56,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	SceneManager::instance()->createScene("MAIN_MENU", new Menu("Start", menuFont, MenuFunctions::changeScene, sf::Vector2f(100, 200)));
 
 	Menu* menu = dynamic_cast<Menu*>(SceneManager::instance()->getEditableScene());
+	menu->addItem("Start FMOD DEMO",  MenuFunctions::changeScene);
 	menu->addItem("Load",  MenuFunctions::changeScene);
 	menu->addItem("Options",  MenuFunctions::changeScene);
 	menu->addItem("Exit", MenuFunctions::output);
@@ -160,6 +162,14 @@ int _tmain(int argc, _TCHAR* argv[])
 	
 	//create an instance of force
 	//Force force(Vector2f(250, 400), 200);
+
+
+
+	SceneManager::instance()->createScene("FMOD_DEMO", new FMOD_DEMO( Vector2f(400, 400), FMODsys ));
+	SceneManager::instance()->navigateToScene("MAIN_MENU");
+
+
+
 	
 	 // Start game loop
 	while (window.isOpen()){

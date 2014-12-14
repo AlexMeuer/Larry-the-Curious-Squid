@@ -1,4 +1,4 @@
-#include "../include/Menu.h"
+#include "Menu.h"
 
 Menu::Menu(String const &text, Font const &font, void (*function)(String), Vector2f position, Color mainColor, Color hiliteColor, int item_spacing)
 	: m_itemSpacing( item_spacing ), m_font( font ), m_mainColor( mainColor ), m_hiliteColor( hiliteColor ) {
