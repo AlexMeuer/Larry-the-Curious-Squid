@@ -29,6 +29,13 @@ public:
 		else
 			cout << "No suitable scene to change to!\nDid you set one up in MenuFunctions.h?"<< endl;
 	}
+
+	static void exitProgram(sf::String string) {
+		output(string);
+		cout << "Program terminated with string: " << string.toAnsiString() << endl;
+		exit(EXIT_SUCCESS);	//not ideal but alternative will have to wait until sprint 3
+							// (ideally we want to return from main, not call exit(0))
+	}
 };
 #endif
 

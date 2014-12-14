@@ -47,6 +47,7 @@
 
 int _tmain(int argc, _TCHAR* argv[])
 {
+
 #pragma region Setup_Scenes
 	Font menuFont = Font();
 	menuFont.loadFromFile("res/font/kenvector_future.ttf");
@@ -57,7 +58,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	Menu* menu = dynamic_cast<Menu*>(SceneManager::instance()->getEditableScene());
 	menu->addItem("Load",  MenuFunctions::changeScene);
 	menu->addItem("Options",  MenuFunctions::changeScene);
-	menu->addItem("Exit", MenuFunctions::output);
+	menu->addItem("Exit", MenuFunctions::exitProgram);
 
 	//Create our options menu scene and populate it.
 	SceneManager::instance()->createScene("OPTIONS_MENU", new Menu("Graphics", menuFont, MenuFunctions::output, sf::Vector2f(100, 200)));
