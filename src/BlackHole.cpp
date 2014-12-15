@@ -10,11 +10,8 @@ BlackHole::~BlackHole() {
 
 }
 
-void BlackHole::Update() {
+void BlackHole::Update(Time &elapsedTime, GameEntity entity ) {
 	m_rotation_degrees += 0.05f;
 	m_sprite.setRotation(m_rotation_degrees);
-}
-
-void BlackHole::ApplyForce( Time &elapsedTime ) {
-	m_force.Apply(this, elapsedTime);
+	m_force.Apply(&entity, elapsedTime);
 }

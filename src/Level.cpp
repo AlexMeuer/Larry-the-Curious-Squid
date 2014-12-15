@@ -32,9 +32,9 @@ void Level::update(Time const &elapsedTime)/*, RenderWindow &w)*/ {
 	{
 		itr->Update(elapsedTime, m_gravity);
 		
-		if(dynamic_cast<Ball*>(*itr) != NULL)
-			if(CollisionManager::instance()->OffScreen(dynamic_cast<Ball*>(*itr)))
-				itr->Death_Reset();
+		//if(dynamic_cast<Ball*>(*itr) != NULL)
+		//	if(CollisionManager::instance()->OffScreen(dynamic_cast<Ball*>(*itr)))
+		//		itr->Death_Reset();
 		
 	}
 	/*if(CollisionManager::instance()->OffScreen(w, ball))*******************************************************************
