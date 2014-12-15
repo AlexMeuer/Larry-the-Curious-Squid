@@ -102,10 +102,13 @@ xcopy /d /y "$(FMOD_SDK)\fmodex.dll" "$(OutDir)"</Command>
     <ClInclude Include="include\CollisionManager.h" />
     <ClInclude Include="include\Force.h" />
     <ClInclude Include="include\GameEntity.h" />
+    <ClInclude Include="include\HeadsUpDisplay.h" />
     <ClInclude Include="include\Level.h" />
     <ClInclude Include="include\Menu.h" />
     <ClInclude Include="include\Player.h" />
     <ClInclude Include="include\PowerUp.h" />
+    <ClInclude Include="include\Scene.h" />
+    <ClInclude Include="include\SceneManager.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
@@ -131,6 +134,7 @@ xcopy /d /y "$(FMOD_SDK)\fmodex.dll" "$(OutDir)"</Command>
     <ClCompile Include="src\GameEntity.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="src\HeadsUpDisplay.cpp" />
     <ClCompile Include="src\Level.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
     </ClCompile>
@@ -139,6 +143,9 @@ xcopy /d /y "$(FMOD_SDK)\fmodex.dll" "$(OutDir)"</Command>
     </ClCompile>
     <ClCompile Include="src\PowerUp.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="src\SceneManager.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

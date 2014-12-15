@@ -5,8 +5,10 @@
 #include "SFML\Graphics.hpp"
 #include "GameEntity.h"
 #include "Force.h"
+#include "Ball.h"
+#include "Scene.h"
 
-class Level {
+class Level : public I_Scene{
 private:
 
 	std::vector<GameEntity*> m_entities;
@@ -17,13 +19,19 @@ private:
 	
 public:
 
-	Level() : id(-1), m_gravity(Vector2f(0,0)) {}
-	~Level() {}
+	Level(Texture ballTex);
+	~Level() {
+		//delete the vector of pointers and avoid a memory leak
+		while ( !m_entities.empty() ) { delete m_entities.back(); m_entities.pop_back(); }
+
+		I_Scene::~I_Scene();
+	}
 
 	int getID() const;
 	
-	void Update(Time elapsedTime);
-	void Draw(RenderWindow &w);
+	bool I_Scene::handleEvent( Event &Event );
+	void I_Scene::update(Time const &elapsedTime);
+	void I_Scene::draw(RenderWindow &w);
 
 	static Level LoadFromXML(String path);
 };

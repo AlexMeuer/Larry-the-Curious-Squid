@@ -4,7 +4,15 @@ int Level::getID() const {
 	return id;
 }
 
-void Level::Update(Time elapsedTime) {
+bool Level::handleEvent( Event &event ) {
+	if ( event.type == Event::KeyPressed )
+		if ( event.key.code == Keyboard::Escape )
+			return true;
+
+	return false;
+}
+
+void Level::update(Time const &elapsedTime) {
 	std::vector<GameEntity*>::iterator itr;
 
 	//update all entities in vector
@@ -16,7 +24,7 @@ void Level::Update(Time elapsedTime) {
 	}
 }
 
-void Level::Draw(RenderWindow &w) {
+void Level::draw(RenderWindow &w) {
 	std::vector<GameEntity*>::iterator itr;
 
 	//draw all entities in vector
@@ -31,4 +39,13 @@ void Level::Draw(RenderWindow &w) {
 Level Level::LoadFromXML(String path) {
 	//TODO: Tiny-XML-2
 	return Level();
+}
+
+
+
+
+
+
+Level::Level(Texture ballTex) {
+	m_entities.push_back(Ball(&ballTex, Vector2f(300, 0), Vector2f(0,0), Vector2f(0.1,0.1)));
 }

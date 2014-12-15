@@ -1,7 +1,8 @@
 #include "CollisionManager.h"
 
-Vector2f CollisionManager::SquareCircle(Sprite* square, Ball* circle){
+CollisionManager* CollisionManager::m_instance = NULL;
 
+Vector2f CollisionManager::SquareCircle(Sprite* square, Ball* circle){
 	sf::Rect<float> Rect = square->getLocalBounds();
 	float circleRadius = circle->getSprite().getLocalBounds().width/2;
 
