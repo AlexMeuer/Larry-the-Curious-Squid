@@ -11,6 +11,7 @@
 #include "include\Block.h"
 #include "include\BlackHole.h"
 #include "include\CollisionManager.h"
+#include "include\HeadsUpDisplay.h"
 
 //Ken's Includes
 //#include "stdafx.h"
@@ -166,7 +167,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	//Ball ball(&ballTex, Vector2f(300, 0), Vector2f(0,0), Vector2f(0.1,0.1));
 
 	std::vector<Block*> crystalChandelier;
-
+	
 	//BlackHole blackHole(&blackholeTex, Vector2f(500, 400));
 
 	/*for (int i = 0; i < 10; i ++ ) {
