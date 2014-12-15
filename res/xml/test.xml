@@ -1,6 +1,6 @@
 <LEVEL>
 	<ID>-5</ID>
-	<GRAVITY>2</GRAVITY>
+	<GRAVITY>-9.81</GRAVITY>
 
   <!-- balls in the level -->
   <ENTITY>

@@ -221,7 +221,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		//{
 		//	CollisionManager::instance()->SquareCircle(&crystalChandelier[i]->getSprite(),&ball);
 		//}
-
+		
 		//myLevel.update(elapsedTime);
 
 		//prepare frame
@@ -244,7 +244,6 @@ int _tmain(int argc, _TCHAR* argv[])
 		window.clear();
 
 		SceneManager::instance()->drawCurrentScene( window );
-		
 		//ball.Draw(window);
 		
 		/*for ( int i = 0; i < 10; i ++ ) {
