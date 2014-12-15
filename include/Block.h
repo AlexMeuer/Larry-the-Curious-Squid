@@ -2,6 +2,7 @@
 #define _BLOCK_
 
 #include "GameEntity.h"
+#include "include\Force.h"
 
 class Block: public GameEntity {
 public:
@@ -9,5 +10,11 @@ public:
 
 	~Block();
 	void Update();
+	void KeepOnOriginalPosForce(Time elapsedTime);
+
+protected:
+	//vairbles
+	Force m_force;
+
 };
 #endif

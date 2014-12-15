@@ -10,18 +10,30 @@ float getLength(Vector2f const &V) {
 }
 
 //Applies the force to a GameEntity
-void Force::Apply(GameEntity * e, Time elapsedTime) const {
+//bool Push = if the object should be pushed away or pulled in
+void Force::Apply(GameEntity * e, Time elapsedTime, bool push) const {
 
 	Vector2f displacement =  e->getPosition() - m_position;
 	float distance = getLength( displacement );
 
-	//if the distance between the two vectors is less than the force... (force is made positive to allow for black holes/pulling forces with negative power)
+	//if the distance between the two vectors is less than the force...
+	//(force is made positive to allow for black holes/pulling forces with negative power)
 	if ( distance < sqrtf(m_power * m_power) ) {
 		Vector2f direction = displacement / distance;
 
-		//...apply velocity to the entity in the appropriate direction
-		float powerApplied = (m_power - distance) * elapsedTime.asSeconds();
-		e->setVelocity( e->getVelocity() + (direction * powerApplied) );
+		//checks if the force is to push or pull Eg -10N or 10N
+		//by multiplying the m_power by -1 it will make the force a negative
+		//thus pulling instead of pushing
+		if(push){
+			//...apply velocity to the entity in the appropriate direction
+			float powerApplied = (m_power - distance) * elapsedTime.asSeconds();
+			e->setVelocity( e->getVelocity() + (direction * powerApplied) );
+		}
+		else{
+			//...apply velocity to the entity in the appropriate direction
+			float powerApplied = ((-1 * m_power) - distance) * elapsedTime.asSeconds();
+			e->setVelocity( e->getVelocity() + (direction * powerApplied) );
+		}
 	}
 
 }

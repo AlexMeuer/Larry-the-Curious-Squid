@@ -45,7 +45,7 @@ public:
 	}
 
 	// Calls the current scene's update method
-	void updateCurrentScene( sf::Time const &elapsedTime );
+	void updateCurrentScene( sf::Time const &elapsedTime);
 
 	// Calls the current scene's draw method
 	void drawCurrentScene( sf::RenderWindow &w );

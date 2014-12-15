@@ -38,6 +38,8 @@
 
 //#include <windows.h>
 
+#include "include\MenuFunctions.h"
+
 //FMOD includes
 #pragma comment(lib,"fmodex_vc.lib")
 #include "fmod.hpp"
@@ -58,27 +60,32 @@ void testFunc(sf::String string) {
 
 int _tmain(int argc, _TCHAR* argv[])
 {
+
 #pragma region Setup_Scenes
 	Font menuFont = Font();
 	menuFont.loadFromFile("res/font/kenvector_future.ttf");
 
-	SceneManager::instance()->createScene("MAIN_MENU", new Menu("Start", menuFont, testFunc, sf::Vector2f(100, 200)));
+	//Create our main menu scene and add items to that scene. Each item takes a function pointer that will be called when the item is selected.
+	SceneManager::instance()->createScene("MAIN_MENU", new Menu("Start", menuFont, MenuFunctions::changeScene, sf::Vector2f(100, 200)));
 
 	Menu* menu = dynamic_cast<Menu*>(SceneManager::instance()->getEditableScene());
-	menu->addItem("Load", testFunc);
-	menu->addItem("Options", testFunc);
-	menu->addItem("Exit", testFunc);
+	menu->addItem("Load",  MenuFunctions::changeScene);
+	menu->addItem("Options",  MenuFunctions::changeScene);
+	menu->addItem("Exit", MenuFunctions::exitProgram);
 
-	SceneManager::instance()->createScene("OPTIONS_MENU", new Menu("Graphics", menuFont, testFunc, sf::Vector2f(100, 200)));
+	//Create our options menu scene and populate it.
+	SceneManager::instance()->createScene("OPTIONS_MENU", new Menu("Graphics", menuFont, MenuFunctions::output, sf::Vector2f(100, 200)));
 
 	menu = dynamic_cast<Menu*>(SceneManager::instance()->getEditableScene());
-	menu->addItem("Audio", testFunc);
-	menu->addItem("Controls", testFunc);
-	menu->addItem("Back", testFunc);
+	menu->addItem("Audio", MenuFunctions::output);
+	menu->addItem("Controls", MenuFunctions::output);
+	menu->addItem("Back", MenuFunctions::changeScene);
 
-	SceneManager::instance()->createScene("LEVEL_01", new Level());
 
-	SceneManager::instance()->navigateToScene("MAIN_MENU");  
+	//Create our first level scene from an xml file
+	SceneManager::instance()->createScene("LEVEL_1", Level::LoadFromXML("res/xml/test.xml"));
+
+	SceneManager::instance()->navigateToScene("MAIN_MENU");
 #pragma endregion
 
 
@@ -143,6 +150,8 @@ int _tmain(int argc, _TCHAR* argv[])
 	sf::RenderWindow window(sf::VideoMode(800, 600, 32), "Test Scenario"); 
 	sf::Clock clock = Clock();
 	sf::Time elapsedTime;
+
+	//Level myLevel = Level::LoadFromXML("res/xml/test.xml");
 	//CollisionManager collisionManager;
 
 	//load textures
@@ -154,18 +163,18 @@ int _tmain(int argc, _TCHAR* argv[])
 	blackholeTex.loadFromFile("res/img/Blackhole.png");
 	
 	//create an instance of ball
-	Ball ball(&ballTex, Vector2f(300, 0), Vector2f(0,0), Vector2f(0.1,0.1));
+	//Ball ball(&ballTex, Vector2f(300, 0), Vector2f(0,0), Vector2f(0.1,0.1));
 
 	std::vector<Block*> crystalChandelier;
 
-	BlackHole blackHole(&blackholeTex, Vector2f(500, 400));
+	//BlackHole blackHole(&blackholeTex, Vector2f(500, 400));
 
-	for (int i = 0; i < 10; i ++ ) {
+	/*for (int i = 0; i < 10; i ++ ) {
 		crystalChandelier.push_back(new Block(&blockTex, Vector2f(i * 50,567), Vector2f(0,0), Vector2f(1,1)));
-	}
+	}*/
 	
 	//create an instance of force
-	Force force(Vector2f(250, 400), 200);
+	//Force force(Vector2f(250, 400), 200);
 	
 	 // Start game loop
 	while (window.isOpen()){
@@ -174,8 +183,6 @@ int _tmain(int argc, _TCHAR* argv[])
 		sf::Event Event;
 		while (window.pollEvent(Event)){
 
-			SceneManager::instance()->passEventToCurrentScene(Event);
-
 			switch ( Event.type ) {
 
 			// Close window : exit
@@ -183,49 +190,61 @@ int _tmain(int argc, _TCHAR* argv[])
 				window.close();
 				break;
 
+			case sf::Event::KeyPressed:
+				SceneManager::instance()->passEventToCurrentScene(Event);
+				break;
+
 			default:
 				break;
 			}//end switch
 		}//end while
 					
-		FMODsys->set3DListenerAttributes(0, ball.getFMOD_POS(), ball.getFMOD_VEL(), 0, 0);
+		//FMODsys->set3DListenerAttributes(0, ball.getFMOD_POS(), ball.getFMOD_VEL(), 0, 0);
 		FMODsys->update();	//run this once per frame ONLY
 
 
 		elapsedTime = clock.getElapsedTime();
 		
-		SceneManager::instance()->updateCurrentScene( elapsedTime );
+		SceneManager::instance()->updateCurrentScene( elapsedTime);
 		
-		if(CollisionManager::instance()->OffScreen(window, &ball))
-			ball.Death_Reset();
+		//if(CollisionManager::instance()->OffScreen(window, &ball))
+		//	ball.Death_Reset();
 			
-		for (int i = 0; i < 10; i++)
-		{
-			CollisionManager::instance()->SquareCircle(&crystalChandelier[i]->getSprite(),&ball);
-		}
+		//for (int i = 0; i < 10; i++)
+		//{
+		//	CollisionManager::instance()->SquareCircle(&crystalChandelier[i]->getSprite(),&ball);
+		//}
 
-		blackHole.Update();
+		//myLevel.update(elapsedTime);
 
-		if ( Mouse::isButtonPressed(Mouse::Button::Left) ) {
+		//prepare frame
+		window.clear();
+	
+
+		//myLevel.draw( window );
+
+		//blackHole.Update();
+
+		/*if ( Mouse::isButtonPressed(Mouse::Button::Left) ) {
 			force.setPower( 200 );
 			force.setPosition( Vector2f(Mouse::getPosition(window).x, Mouse::getPosition(window).y) );
 		}
 		else {
 			force.setPower( 10 );
-		}
+		}*/
 
 		//prepare frame
 		window.clear();
 
 		SceneManager::instance()->drawCurrentScene( window );
 		
-		ball.Draw(window);
+		//ball.Draw(window);
 		
-		for ( int i = 0; i < 10; i ++ ) {
+		/*for ( int i = 0; i < 10; i ++ ) {
 			crystalChandelier[i]->Draw(window);
-		}
+		}*/
 		
-		blackHole.Draw(window);
+		//blackHole.Draw(window);
 
 		// Finally, display rendered frame on screen
 		window.display();

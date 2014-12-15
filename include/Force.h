@@ -13,7 +13,7 @@ public:
 	Force(Vector2f position, float power) : m_position(position), m_power(power) {}
 	~Force() {}
 
-	void Apply(GameEntity * e, Time elapsedTime) const;
+	void Apply(GameEntity * e, Time elapsedTime, bool push) const;
 
 	float getPower() const;
 	Vector2f getPosition() const;

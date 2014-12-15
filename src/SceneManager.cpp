@@ -19,8 +19,8 @@ I_Scene * SceneManager::getEditableScene() const {
 }
 
 //calls the current scene's update method
-void SceneManager::updateCurrentScene( sf::Time const &elapsedTime ) {
-	m_scenes[ currentScene ]->update( elapsedTime );
+void SceneManager::updateCurrentScene( sf::Time const &elapsedTime) {
+	m_scenes[ currentScene ]->update( elapsedTime);
 }
 
 //calls the current scene's draw method
