@@ -12,6 +12,7 @@ public:
 
 	~BlackHole();
 	void Update();
+	void ApplyForce( Time &elapsedTime );
 };
 
 #endif
