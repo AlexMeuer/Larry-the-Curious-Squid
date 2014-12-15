@@ -21,9 +21,12 @@ private:
 	Sprite listener;
 	Sprite emitter;
 
-	FMOD::Sound *sound;
+	FMOD::Sound *sound, *drone;
+	FMOD::Channel *emitterChannel, *droneChannel;
 
-	FMOD_VECTOR *listenerPos, *listenerVel;
+	FMOD_VECTOR *listenerPos, *listenerVel, *emitterPos, *emitterVel, *dronePos, *droneVel;
+
+	FMOD_REVERB_PROPERTIES prop1;
 
 	CircleShape reverbArea;
 

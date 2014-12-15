@@ -106,25 +106,25 @@ int _tmain(int argc, _TCHAR* argv[])
 
 
 	//create a sound with FMOD
-	FMOD::Sound *sound;
+	//FMOD::Sound *sound;
 
-	result = FMODsys->createSound(
-		"res/mus/Ove - Earth Is All We Have 1.ogg",
-		FMOD_DEFAULT,
-		0,
-		&sound);
+	//result = FMODsys->createSound(
+	//	"res/mus/Ove - Earth Is All We Have 1.ogg",
+	//	FMOD_DEFAULT,
+	//	0,
+	//	&sound);
 
-	if (result != FMOD_OK)
-	{
-		std::cout << "FMOD error! (%d) %s\n" << result;
-		exit(-1);
-	}
+	//if (result != FMOD_OK)
+	//{
+	//	std::cout << "FMOD error! (%d) %s\n" << result;
+	//	exit(-1);
+	//}
 
-	//play a sound with a channel (updateable, looping, etc)
-	FMOD::Channel *channel;
-	FMODsys->playSound(FMOD_CHANNEL_FREE, sound, false, &channel);
-	channel->set3DMinMaxDistance(10, 500);	//below min, sound wont get any louder. after max, sound is not audible.
-	channel->setMode(FMOD_LOOP_NORMAL);
+	////play a sound with a channel (updateable, looping, etc)
+	//FMOD::Channel *channel;
+	//FMODsys->playSound(FMOD_CHANNEL_FREE, sound, false, &channel);
+	//channel->set3DMinMaxDistance(10, 500);	//below min, sound wont get any louder. after max, sound is not audible.
+	//channel->setMode(FMOD_LOOP_NORMAL);
 
 	//play a sound without a channel (not updateable, one-shot, etc)
 	//FMODsys->playSound(
@@ -186,21 +186,26 @@ int _tmain(int argc, _TCHAR* argv[])
 				break;
 
 			case sf::Event::KeyPressed:
-				SceneManager::instance()->passEventToCurrentScene(Event);
+				//SceneManager::instance()->passEventToCurrentScene(Event);
 				break;
 
 			default:
 				break;
 			}//end switch
+
+			SceneManager::instance()->passEventToCurrentScene(Event);
+
 		}//end while
 					
 		//FMODsys->set3DListenerAttributes(0, ball.getFMOD_POS(), ball.getFMOD_VEL(), 0, 0);
-		FMODsys->update();	//run this once per frame ONLY
+		
 
 
 		elapsedTime = clock.getElapsedTime();
 		
 		SceneManager::instance()->updateCurrentScene( elapsedTime );
+
+
 		
 		//if(CollisionManager::instance()->OffScreen(window, &ball))
 		//	ball.Death_Reset();
@@ -243,6 +248,9 @@ int _tmain(int argc, _TCHAR* argv[])
 
 		// Finally, display rendered frame on screen
 		window.display();
+
+		FMODsys->update();	//run this once per frame ONLY
+
 		clock.restart();
 	} //loop back for next frame
 

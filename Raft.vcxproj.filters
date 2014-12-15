@@ -58,4 +58,7 @@
   <ItemGroup>
     <Xml Include="res\xml\test.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <Media Include="res\sfx\laser1.wav" />
+  </ItemGroup>
 </Project>
