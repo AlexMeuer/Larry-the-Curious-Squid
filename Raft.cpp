@@ -11,7 +11,6 @@
 #include "include\Block.h"
 #include "include\BlackHole.h"
 #include "include\CollisionManager.h"
-#include "include\HeadsUpDisplay.h"
 
 //Ken's Includes
 //#include "stdafx.h"

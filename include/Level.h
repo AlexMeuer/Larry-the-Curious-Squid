@@ -7,6 +7,7 @@
 #include "Force.h"
 #include "Ball.h"
 #include "Scene.h"
+#include "HeadsUpDisplay.h"
 
 class Level : public I_Scene{
 private:
