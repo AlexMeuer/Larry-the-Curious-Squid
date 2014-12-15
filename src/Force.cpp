@@ -11,7 +11,7 @@ float getLength(Vector2f const &V) {
 
 //Applies the force to a GameEntity
 //bool Push = if the object should be pushed away or pulled in
-void Force::Apply(GameEntity * e, Time elapsedTime, bool push) const {
+void Force::Apply(GameEntity * e, Time elapsedTime) const {
 
 	Vector2f displacement =  e->getPosition() - m_position;
 	float distance = getLength( displacement );
@@ -21,19 +21,10 @@ void Force::Apply(GameEntity * e, Time elapsedTime, bool push) const {
 	if ( distance < sqrtf(m_power * m_power) ) {
 		Vector2f direction = displacement / distance;
 
-		//checks if the force is to push or pull Eg -10N or 10N
-		//by multiplying the m_power by -1 it will make the force a negative
-		//thus pulling instead of pushing
-		if(push){
 			//...apply velocity to the entity in the appropriate direction
-			float powerApplied = (m_power - distance) * elapsedTime.asSeconds();
-			e->setVelocity( e->getVelocity() + (direction * powerApplied) );
-		}
-		else{
-			//...apply velocity to the entity in the appropriate direction
-			float powerApplied = ((-1 * m_power) - distance) * elapsedTime.asSeconds();
-			e->setVelocity( e->getVelocity() + (direction * powerApplied) );
-		}
+		float powerApplied = (m_power - distance) * elapsedTime.asSeconds();
+		e->setVelocity( e->getVelocity() + (direction * powerApplied) );
+		
 	}
 
 }
