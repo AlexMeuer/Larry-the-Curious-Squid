@@ -15,9 +15,15 @@ int Level::getID() const {
 }
 
 bool Level::handleEvent( Event &event ) {
-	if ( event.type == Event::KeyPressed )
-		if ( event.key.code == Keyboard::Escape )
-			return true;
+	if ( event.type == Event::MouseButtonPressed ) {
+		//get the current mouse position relative to the screen. (we can get the window by asking the collision manager what window its checking again for offscreen stuff, etc)
+		Vector2i mousePos = Mouse::getPosition( *(CollisionManager::instance()->getContext()) );
+
+		playerForce.setPosition( Vector2f(mousePos.x, mousePos.y));
+	}
+	else if ( event.type == Event::MouseButtonReleased ) {
+		playerForce.setPosition( Vector2f(FLT_MAX, FLT_MAX) );
+	}
 
 	return false;
 }
@@ -31,6 +37,8 @@ void Level::update(Time const &elapsedTime)/*, RenderWindow &w)*/ {
 		itr++)
 	{
 		itr->Update(elapsedTime, m_gravity);
+
+		playerForce.Apply(&*itr, elapsedTime);
 		
 		//if(dynamic_cast<Ball*>(*itr) != NULL)
 		//	if(CollisionManager::instance()->OffScreen(dynamic_cast<Ball*>(*itr)))

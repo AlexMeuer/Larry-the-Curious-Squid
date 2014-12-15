@@ -19,11 +19,13 @@ private:
 
 	Vector2f m_gravity;
 
+	Force playerForce;
+
 	int id;
 
 	//HeadsUpDisplay::instance();
 
-	Level() : id(-1), m_gravity(Vector2f(0,0)) {}
+	Level() : id(-1), m_gravity(Vector2f(0,0)), playerForce(Vector2f(FLT_MAX, FLT_MAX), 100) {}
 	
 public:
 	~Level() {}

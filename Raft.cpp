@@ -148,6 +148,8 @@ int _tmain(int argc, _TCHAR* argv[])
 	
 	 // Create the main window
 	sf::RenderWindow window(sf::VideoMode(800, 600, 32), "Test Scenario"); 
+	CollisionManager::instance()->setContext( &window );
+
 	sf::Clock clock = Clock();
 	sf::Time elapsedTime;
 
@@ -183,6 +185,11 @@ int _tmain(int argc, _TCHAR* argv[])
 		sf::Event Event;
 		while (window.pollEvent(Event)){
 
+			//returns true if event was handled
+			if( SceneManager::instance()->passEventToCurrentScene(Event) ) {
+				continue;
+			}
+
 			switch ( Event.type ) {
 
 			// Close window : exit
@@ -190,9 +197,9 @@ int _tmain(int argc, _TCHAR* argv[])
 				window.close();
 				break;
 
-			case sf::Event::KeyPressed:
+			/*case sf::Event::KeyPressed:
 				SceneManager::instance()->passEventToCurrentScene(Event);
-				break;
+				break;*/
 
 			default:
 				break;

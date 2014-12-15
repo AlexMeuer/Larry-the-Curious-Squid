@@ -31,9 +31,9 @@ bool CollisionManager::SquareSquare(Sprite* squareOne, Sprite* squareTwo){
 }
 
 
-bool CollisionManager::OffScreen(RenderWindow &w, Ball* circle){
-	//gose off edges
-	return ((circle->getPosition().x < 0)||(circle->getPosition().x > 800)||(circle->getPosition().y < 0)||(circle->getPosition().y > 600));
+bool CollisionManager::OffScreen(Ball* circle){
+	//goes off edges
+	return ((circle->getPosition().x < 0)||(circle->getPosition().x > contextWindow->getSize().x)||(circle->getPosition().y < 0)||(circle->getPosition().y > contextWindow->getSize().y));
 }
 
 
@@ -50,4 +50,12 @@ float CollisionManager::clamp(float value, const float min, const float max) con
 	value = std::max(value, min);
 
     return value;
+}
+
+void CollisionManager::setContext( RenderWindow * window) {
+	contextWindow = window;
+}
+
+const RenderWindow* CollisionManager::getContext() const {
+	return contextWindow;
 }
