@@ -2,7 +2,7 @@
 
 CollisionManager* CollisionManager::m_instance = NULL;
 
-void CollisionManager::SquareCircle(GameEntity* square, GameEntity* circle){
+void CollisionManager::SquareCircle(GameEntity* square, Ball* circle){
 	sf::Rect<float> Rect = square->getSprite().getLocalBounds();
 	float circleRadius = circle->getSprite().getLocalBounds().width/2;
 
@@ -42,7 +42,7 @@ bool CollisionManager::SquareSquare(GameEntity* squareOne, GameEntity* squareTwo
 }
 
 
-bool CollisionManager::OffScreen(Ball* circle){
+bool CollisionManager::OffScreen(GameEntity* circle){
 	//goes off edges
 	return ((circle->getPosition().x < 0)||(circle->getPosition().x > contextWindow->getSize().x)||(circle->getPosition().y < 0)||(circle->getPosition().y > contextWindow->getSize().y));
 }
@@ -62,7 +62,7 @@ float CollisionManager::clamp(float value, const float min, const float max) con
 
     return value;
 }
-<<<<<<< HEAD
+
 
 void CollisionManager::setContext( RenderWindow * window) {
 	contextWindow = window;
@@ -71,5 +71,4 @@ void CollisionManager::setContext( RenderWindow * window) {
 const RenderWindow* CollisionManager::getContext() const {
 	return contextWindow;
 }
-=======
->>>>>>> origin/master
+

@@ -15,7 +15,7 @@ void Block::Update() {
 
 }
 
-void Block::KeepOnOriginalPosForce(Time elapsedTime){
+void Block::ResistanceForce(Time elapsedTime){
 	//apply a force that sucks in like the Black whole,
 	//to the point on the map the block is assigined.
 	//Eg when the body is effected by a force it will move

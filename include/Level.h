@@ -5,9 +5,14 @@
 #include "SFML\Graphics.hpp"
 #include "GameEntity.h"
 #include "Force.h"
-#include "Ball.h"
 #include "Scene.h"
 #include "HeadsUpDisplay.h"
+#include "../include/tinyxml2.h"
+#include "../include/Ball.h"
+#include "../include/Block.h"
+#include "../include/BlackHole.h"
+#include "../include/PowerUp.h"
+#include "include\CollisionManager.h"
 
 class Level : public I_Scene{
 private:

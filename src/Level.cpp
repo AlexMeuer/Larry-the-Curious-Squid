@@ -1,10 +1,5 @@
 #include "../include/Level.h"
-#include "../include/tinyxml2.h"
-#include "../include/Ball.h"
-#include "../include/Block.h"
-#include "../include/BlackHole.h"
-#include "../include/PowerUp.h"
-#include "include\CollisionManager.h"
+
 
 using namespace tinyxml2;
 

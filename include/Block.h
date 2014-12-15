@@ -10,7 +10,7 @@ public:
 
 	~Block();
 	void Update();
-	void KeepOnOriginalPosForce(Time elapsedTime);
+	void ResistanceForce(Time elapsedTime);
 
 protected:
 	//vairbles

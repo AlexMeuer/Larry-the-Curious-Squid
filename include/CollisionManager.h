@@ -21,9 +21,9 @@ public:
 	//get the instance of the manager (creates a new one if none exists)
 	static CollisionManager* instance() {	return m_instance == NULL ? m_instance = new CollisionManager() : m_instance;	}
 
-	Vector2f SquareCircle(Sprite* square, Ball* circle);
-	bool SquareSquare(Sprite* squareOne, Sprite* squareTwo);
-	bool OffScreen(Ball* circle);
+	void SquareCircle(GameEntity* square, Ball* circle);
+	bool SquareSquare(GameEntity* squareOne, GameEntity* squareTwo);
+	bool OffScreen(GameEntity* circle);
 
 	void setContext( RenderWindow * window);
 	const RenderWindow* getContext() const;
