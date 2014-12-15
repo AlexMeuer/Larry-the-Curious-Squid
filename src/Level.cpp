@@ -43,7 +43,7 @@ void Level::update(Time const &elapsedTime)/*, RenderWindow &w)*/ {
 			}
 		}
 
-				
+
 	}
 	/*if(CollisionManager::instance()->OffScreen(w, ball))*******************************************************************
 		ball.Death_Reset();*/

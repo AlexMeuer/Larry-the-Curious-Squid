@@ -21,7 +21,7 @@ private:
 
 	int id;
 
-	//HeadsUpDisplay m_headsUpDisplay;
+	//HeadsUpDisplay::instance();
 
 	Level() : id(-1), m_gravity(Vector2f(0,0)) {}
 	
