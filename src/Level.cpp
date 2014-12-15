@@ -23,19 +23,27 @@ bool Level::handleEvent( Event &event ) {
 }
 
 void Level::update(Time const &elapsedTime)/*, RenderWindow &w)*/ {
-	std::vector<GameEntity*>::iterator itr;
+	std::vector<GameEntity>::iterator itr;
 
 	//update all entities in vector
-	for(auto itr = m_entities.begin();
+	for(itr = m_entities.begin();
 		itr != m_entities.end();
 		itr++)
 	{
 		itr->Update(elapsedTime, m_gravity);
-		
-		if(dynamic_cast<Ball*>(*itr) != NULL)
-			if(CollisionManager::instance()->OffScreen(dynamic_cast<Ball*>(*itr)))
-				itr->Death_Reset();
-		
+		//blackhole.ApplyForce(itr)
+
+		//Child *p = dynamic_cast<Child *>(pParent)
+		Ball *p = dynamic_cast<Ball *>(&*itr);
+		if(p != NULL){
+			CollisionManager::instance()->SquareCircle(&*itr,p);
+			p->Update(elapsedTime,m_gravity);
+			if(CollisionManager::instance()->OffScreen(p)){
+				p->Death_Reset();
+			}
+		}
+
+				
 	}
 	/*if(CollisionManager::instance()->OffScreen(w, ball))*******************************************************************
 		ball.Death_Reset();*/
