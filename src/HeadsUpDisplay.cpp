@@ -2,16 +2,16 @@
 
 HeadsUpDisplay* HeadsUpDisplay::m_instance = NULL;
 
-//	void Update();
-//	void Draw( sf::RenderWindow &w );
+void HeadsUpDisplay::lifeLost() {
+	m_livesLost = m_livesLost + 1;
+	if (m_livesLost == 4)  
+		m_livesLost = 0;
+}
 
-
-
-void HeadsUpDisplay::Update() {
-
+void HeadsUpDisplay::Update( Time const &elapsedTime ) {
+	
 }
 
 void HeadsUpDisplay::Draw( RenderWindow &w ) {
-	m_lifeSprite.loadFromFile("life.png");	// want to change the colour
-
+	
 }

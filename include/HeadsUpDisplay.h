@@ -3,6 +3,8 @@
 
 #include "SFML\Graphics.hpp"
 #include "SceneManager.h"
+#include <vector>
+#include "Life.h"
 
 using namespace sf;
 
@@ -11,24 +13,18 @@ private:
 	static HeadsUpDisplay *m_instance;
 	HeadsUpDisplay() {}
 
-	Font m_font;
-	Color m_colour;
-
-	Texture m_lifeSprite;	// image to represent lives lost
 	Texture m_gravityArrow; // an arrow sprite pointing in the direction of the gravity for that level
-	Vector2f m_lifePosition;
 	Vector2f m_arrowPosition;
 
-	int m_lives;
+	int m_livesLost;
 	
-	//time on level?
-	//total time played?
 public:
 	~HeadsUpDisplay() {}
-	// if an instance of HeadsUpDisplay already exists, return a refernce to it
+	
 	static HeadsUpDisplay* instance() { return instance == NULL ? m_instance = new HeadsUpDisplay() : m_instance; }
-
-	void Update();
+	
+	void lifeLost();
+	void Update( Time const &elapsedTime );
 	void Draw( sf::RenderWindow &w );
 };
 #endif
