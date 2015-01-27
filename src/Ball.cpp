@@ -9,7 +9,7 @@ Ball::Ball(Vector2i screenBounds,Texture* texture, Vector2f position, Vector2f v
 	circle.setPosition(position);
 	circle.setFillColor(sf::Color::White);*/
 		time = 0;
-		
+		m_radius = texture->getSize().x * scale.x;
 }
 
 Ball::~Ball(){

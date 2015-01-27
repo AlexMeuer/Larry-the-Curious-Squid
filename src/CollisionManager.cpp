@@ -4,9 +4,10 @@ CollisionManager* CollisionManager::m_instance = NULL;
 
 void CollisionManager::SquareCircle(GameEntity* square, Ball* circle){
 	sf::Rect<float> Rect = square->getSprite().getLocalBounds();
-	float circleRadius = circle->getSprite().getLocalBounds().width/2;
+	float circleRadius = circle->getSprite();
 
-	// clamp(value, min, max) - limits value to the range min..max
+
+	/*// clamp(value, min, max) - limits value to the range min..max
 
 	// Find the closest point to the circle within the rectangle
 	float closestX = clamp(circle->getPosition().x, Rect.left, Rect.left + Rect.width);
@@ -31,7 +32,7 @@ void CollisionManager::SquareCircle(GameEntity* square, Ball* circle){
 	float aci = (square->getVelocity().x * normMTV.x) + (square->getVelocity().y * normMTV.y);
 	float bci = (circle->getVelocity().x * normMTV.x) + (circle->getVelocity().y * normMTV.y);
 	square->setVelocity(Vector2f(square->getVelocity().x + (bci - aci) * normMTV.x, square->getVelocity().y + (bci - aci) * normMTV.y));
-	circle->setVelocity(Vector2f(circle->getVelocity().x + (aci - bci) * normMTV.x, circle->getVelocity().y + (aci - bci) * normMTV.y));
+	circle->setVelocity(Vector2f(circle->getVelocity().x + (aci - bci) * normMTV.x, circle->getVelocity().y + (aci - bci) * normMTV.y));*/
 
 }
 

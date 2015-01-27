@@ -24,31 +24,30 @@ bool Level::handleEvent( Event &event ) {
 }
 
 void Level::update(Time const &elapsedTime)/*, RenderWindow &w)*/ {
-	std::vector<GameEntity>::iterator itr;
+	std::vector<GameEntity*>::iterator itr;
 
 	//update all entities in vector
 	for(itr = m_entities.begin();
 		itr != m_entities.end();
 		itr++)
 	{
-		itr->Update(elapsedTime, m_gravity);
+		(*itr)->Update(elapsedTime, m_gravity);
 
-		playerForce.Apply(&*itr, elapsedTime);
+		playerForce.Apply(*itr, elapsedTime);
 		
 		//blackhole.ApplyForce(itr)
 
 		//Child *p = dynamic_cast<Child *>(pParent)
-		Ball *p = dynamic_cast<Ball *>(&*itr);
+		Ball *p = dynamic_cast<Ball *>(*itr);
 		if(p != NULL){
-			CollisionManager::instance()->SquareCircle(&*itr,p);
+			CollisionManager::instance()->SquareCircle(*itr,p);
 			p->Update(elapsedTime,m_gravity);
 			if(CollisionManager::instance()->OffScreen(p)){
 				p->Death_Reset();
 			}
 		}
 	}
-	/*if(CollisionManager::instance()->OffScreen(w, ball))*******************************************************************
-		ball.Death_Reset();*/
+	
 
 }
 
@@ -60,7 +59,7 @@ void Level::draw(RenderWindow &w) {
 		itr != m_entities.end();
 		itr++)
 	{
-		itr->Draw(w);
+		(*itr)->Draw(w);
 	}
 }
 
@@ -109,7 +108,7 @@ Level* Level::LoadFromXML(const char *path) {
 				float x = atof(positionNode->FirstChildElement("X")->GetText());
 				float y = atof(positionNode->FirstChildElement("Y")->GetText());
 
-				tmp_lvl.m_entities.push_back( Block( &textures.find(textureName)->second, Vector2f(x,y) ) );
+				tmp_lvl.m_entities.push_back( new Block( &textures.find(textureName)->second, Vector2f(x,y) ) );
 			}
 			else if (value == std::string("BALL").c_str()) {
 				//load the ball's texture
@@ -123,7 +122,7 @@ Level* Level::LoadFromXML(const char *path) {
 
 				float scale = atof( node->FirstChildElement("SCALE")->GetText());
 
-				tmp_lvl.m_entities.push_back( Ball(Vector2i(0,0), &textures.find(textureName)->second, Vector2f(x,y), Vector2f(0,0), Vector2f(scale, scale) ) );
+				tmp_lvl.m_entities.push_back( new Ball(Vector2i(0,0), &textures.find(textureName)->second, Vector2f(x,y), Vector2f(0,0), Vector2f(scale, scale) ) );
 			}
 			else if (value == std::string("BLACKHOLE").c_str()) {
 				//get the black hole's texture
@@ -141,7 +140,7 @@ Level* Level::LoadFromXML(const char *path) {
 				//get the force of the black hole
 				Force f = Force(Vector2f(x, y), atof(node->FirstChildElement("POWER")->GetText()));
 
-				tmp_lvl.m_entities.push_back( BlackHole( &textures.find(textureName)->second, Vector2f(x,y), Vector2f(0,0), Vector2f(1,1), angVel ));
+				tmp_lvl.m_entities.push_back( new BlackHole( &textures.find(textureName)->second, Vector2f(x,y), Vector2f(0,0), Vector2f(1,1), angVel ));
 			}
 			else if (value == std::string("POWERUP").c_str()) {
 				//get the black hole's texture

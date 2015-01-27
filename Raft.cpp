@@ -215,7 +215,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		SceneManager::instance()->updateCurrentScene( elapsedTime);
 		
 		//if(CollisionManager::instance()->OffScreen(window, &ball))
-		//	ball.Death_Reset();
+			//ball.Death_Reset();
 			
 		//for (int i = 0; i < 10; i++)
 		//{

@@ -17,7 +17,7 @@
 class Level : public I_Scene{
 private:
 
-	std::vector<GameEntity> m_entities;
+	std::vector<GameEntity*> m_entities;
 
 	static std::map<String, Texture> textures;
 	static void LoadTexture(String name);
