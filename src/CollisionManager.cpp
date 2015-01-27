@@ -4,7 +4,7 @@ CollisionManager* CollisionManager::m_instance = NULL;
 
 void CollisionManager::SquareCircle(GameEntity* square, Ball* circle){
 	sf::Rect<float> Rect = square->getSprite().getLocalBounds();
-	float circleRadius = circle->getSprite();
+//	float circleRadius = circle->getSprite();
 
 
 	/*// clamp(value, min, max) - limits value to the range min..max

@@ -93,9 +93,6 @@ xcopy /d /y "$(FMOD_SDK)\fmodex.dll" "$(OutDir)"</Command>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Text Include="ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="include\Ball.h" />
     <ClInclude Include="include\BlackHole.h" />
     <ClInclude Include="include\Block.h" />
@@ -161,6 +158,7 @@ xcopy /d /y "$(FMOD_SDK)\fmodex.dll" "$(OutDir)"</Command>
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
+    <None Include="ReadMe.md" />
     <None Include="res\mus\Ove - Earth Is All We Have 1.ogg" />
   </ItemGroup>
   <ItemGroup>

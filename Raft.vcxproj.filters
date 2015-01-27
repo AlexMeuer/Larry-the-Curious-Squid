@@ -46,9 +46,7 @@
   <ItemGroup>
     <None Include=".gitignore" />
     <None Include="res\mus\Ove - Earth Is All We Have 1.ogg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="ReadMe.txt" />
+    <None Include="ReadMe.md" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="res\font\kenvector_future.ttf" />

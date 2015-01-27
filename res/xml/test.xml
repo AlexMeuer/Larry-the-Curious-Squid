@@ -27,8 +27,21 @@
   
   <!-- Power ups -->
   
+  <!-- Blocks -->
+  <ENTITY>
+    <BLOCK_MAP/>
+    <NUMBER_OF_BLOCK_TYPES>1</NUMBER_OF_BLOCK_TYPES>
+    <TEXTURE EXT="png">Block</TEXTURE>
+    <MAP SPACING="45">
+      111111001101;
+      100000010001;
+      100000010001;
+      010000000011;
+    </MAP>
+  </ENTITY>
+  
   <!-- Rest of file is just all the blocks in the level 
-    Should we bother loading blocks like this or just make a visual grid here and load them like that? -->
+    Should we bother loading blocks like this or just make a visual grid here and load them like that?
 	<ENTITY>
     <BLOCK/>
 		<TEXTURE>Block.png</TEXTURE>
@@ -218,9 +231,6 @@
     </POSITION>
   </ENTITY>
   
-  <!-- end column one (along left of screen)
-  starting row one (along top of screen)-->
-  
   <ENTITY>
     <BLOCK/>
     <TEXTURE>Block.png</TEXTURE>
@@ -301,5 +311,6 @@
       <Y>0</Y>
     </POSITION>
   </ENTITY>
+  -->
 
 </LEVEL>
