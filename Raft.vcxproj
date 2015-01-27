@@ -101,7 +101,6 @@ xcopy /d /y "$(FMOD_SDK)\fmodex.dll" "$(OutDir)"</Command>
     <ClInclude Include="include\GameEntity.h" />
     <ClInclude Include="include\HeadsUpDisplay.h" />
     <ClInclude Include="include\Level.h" />
-    <ClInclude Include="include\Life.h" />
     <ClInclude Include="include\Menu.h" />
     <ClInclude Include="include\Player.h" />
     <ClInclude Include="include\PowerUp.h" />
@@ -138,7 +137,6 @@ xcopy /d /y "$(FMOD_SDK)\fmodex.dll" "$(OutDir)"</Command>
     <ClCompile Include="src\Level.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="src\Life.cpp" />
     <ClCompile Include="src\Menu.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>

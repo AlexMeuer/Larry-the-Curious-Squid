@@ -15,7 +15,6 @@
     <ClCompile Include="src\SceneManager.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="src\HeadsUpDisplay.cpp" />
-    <ClCompile Include="src\Life.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Ball.h" />
@@ -35,7 +34,6 @@
     <ClInclude Include="include\SceneManager.h" />
     <ClInclude Include="include\HeadsUpDisplay.h" />
     <ClInclude Include="include\MenuFunctions.h" />
-    <ClInclude Include="include\Life.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\img\ball.png" />
