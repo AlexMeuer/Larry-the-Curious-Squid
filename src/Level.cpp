@@ -117,14 +117,15 @@ Level* Level::LoadFromXML(const char *path) {
 
 				//for each type of block, load the appropriate texture
 				for (int i = 1; i <= blockTypes; ++i) {
-					char buffer[2];	//buffer for converting int to string
+					char buffer[3];	//buffer for converting int to string
 
 					//set the finalTexName to be the base name (e.g. "block")
-					char * finalTexName = "";
-					strcpy(finalTexName, texName);
+					char finalTexName[64];
+					strcpy_s(finalTexName, sizeof(finalTexName), texName);
 
 					//add the block type to the base name (e.g. "1" so that finalTexName becomes "block1")
-					strcat(finalTexName, _itoa(i, buffer, 10));
+					_itoa_s(i, buffer, sizeof(buffer), 10);
+					strcat_s(finalTexName, sizeof(finalTexName), buffer);
 
 					//add the dot and the extension (e.g. ".png" so that finalTexName becomes "block1.png")
 					//strcat(finalTexName, ".");
@@ -132,11 +133,12 @@ Level* Level::LoadFromXML(const char *path) {
 
 
 					LoadTexture(finalTexName, ext);
-					delete[] finalTexName;
-					delete[] buffer;
+
 				}
-				//delete[] texName;
-				delete[] ext;
+				////delete[] texName;
+				//delete[] ext;
+				//delete[] finalTexName;
+				//delete[] buffer;
 #pragma endregion
 
 
@@ -156,11 +158,12 @@ Level* Level::LoadFromXML(const char *path) {
 
 #pragma region CreateBlocksFromMap
 				//Get the map from the xml file
-				char * str = "";
-				strcpy(str, node->FirstChildElement("MAP")->GetText());
+				char str[1024];
+				strcpy_s(str, sizeof(str), node->FirstChildElement("MAP")->GetText());
 
 				//get the first line of the map
-				char * line = strtok(str, " ,.\|/!:;");
+				char * context = NULL;
+				char * line = strtok_s(str, " ,.\|/!:;", &context);
 
 				for(int y = 0; line != NULL; ++y) {
 
@@ -172,12 +175,12 @@ Level* Level::LoadFromXML(const char *path) {
 
 						if(blockType > 0) {
 							//create a block
-							tmp_lvl.m_entities.push_back( new Block( &textures.find(texName + blockType)->second, Vector2f(x * spacing, y * spacing)));
+							tmp_lvl.m_entities.push_back( new Block( &(textures.find(texName + blockType)->second), Vector2f(x * spacing, y * spacing)));
 						}
 					}
 
-					//get the next line of the map
-					line = strtok(NULL, " ,.\|/!:;");
+					//get the next line of the map (using NULL instead of str just re-uses context)
+					line = strtok_s(NULL, " ,.\|/!:;", &context);
 				}
 				delete[] str;  
 #pragma endregion
