@@ -35,7 +35,7 @@ void Level::update(Time const &elapsedTime)/*, RenderWindow &w)*/ {
 
 		playerForce.Apply(*itr, elapsedTime);
 		
-		//blackhole.ApplyForce(itr)
+		//blackhole.ApplyForce(itr);
 
 		//Child *p = dynamic_cast<Child *>(pParent)
 		Ball *p = dynamic_cast<Ball *>(*itr);
@@ -49,6 +49,12 @@ void Level::update(Time const &elapsedTime)/*, RenderWindow &w)*/ {
 				if(b != NULL){
 					CollisionManager::instance()->SquareCircle(b,p);
 				}//end if (b != NULL)
+
+				BlackHole *black = dynamic_cast<BlackHole *>(*itrToCheckBlock);
+
+				if(black != NULL){
+					black->Update(elapsedTime,*itr);
+				}
 
 				p->Update(elapsedTime,m_gravity);
 
