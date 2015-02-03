@@ -22,6 +22,7 @@ public:
 	static CollisionManager* instance() {	return m_instance == NULL ? m_instance = new CollisionManager() : m_instance;	}
 
 	void SquareCircle(GameEntity* square, Ball* circle);
+	void CircleCircle(GameEntity* gE, Ball* circle);
 	bool SquareSquare(GameEntity* squareOne, GameEntity* squareTwo);
 	bool OffScreen(GameEntity* circle);
 

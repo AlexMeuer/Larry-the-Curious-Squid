@@ -15,7 +15,7 @@ public:
 
 	//Navigate to a scene (if one has been set up for the item)
 	static void changeScene(sf::String string) {
-		output(string);
+		//output(string);
 
 		if(string == "Start")
 			SceneManager::instance()->navigateToScene("LEVEL_1");
