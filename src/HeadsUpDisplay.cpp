@@ -2,20 +2,17 @@
 
 HeadsUpDisplay* HeadsUpDisplay::m_instance = NULL;
 
-void HeadsUpDisplay::lifeLost() {
-	m_livesLost = m_livesLost + 1;
-	if (m_livesLost == 4)  
-		m_livesLost = 0;
-}
-
-void HeadsUpDisplay::Update( Time const &elapsedTime ) {
-	
-}
-
-void HeadsUpDisplay::Draw( RenderWindow &w ) {
-	//these variables need to be in the header. file io should be in constructor.
-	//sf::Texture lifeTex;
-	//lifeTex.loadFromFile("res/img/life.png");
-	//Life tempLife(&lifeTex, Vector2f(20, 300));
-	//tempLife.Draw(w);
+bool HeadsUpDisplay::addElement( sf::String name, sf::Sprite sprite, float x, float y, bool visible ) {
+	Element newElement;
+	newElement.Name = name;
+	newElement.Sprite = sprite;
+	newElement.Sprite.setPosition(x,y);
+	newElement.IsVisible = visible;
+	m_elements.push_back(newElement);
+	for (int i = 0; i < m_elements.size(); i ++ ) {
+		if ( name == m_elements[i].Name)
+			return true;
+		else
+			return false;
+	}
 }

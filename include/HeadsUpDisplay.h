@@ -9,21 +9,22 @@ using namespace sf;
 
 class HeadsUpDisplay {
 private:
+	struct Element {
+		sf::String Name;
+		sf::Sprite Sprite;
+		bool IsVisible;
+		void Draw( RenderWindow &w ) {
+			if (IsVisible) 
+				w.draw(Sprite);
+		}
+	};
+
+	std::vector<Element> m_elements;
 	static HeadsUpDisplay *m_instance;
-	HeadsUpDisplay() {}
-
-	Texture m_gravityArrow; // an arrow sprite pointing in the direction of the gravity for that level
-	Vector2f m_arrowPosition;
-
-	int m_livesLost;
-	
+	//HeadsUpDisplay() {}
 public:
-	~HeadsUpDisplay() {}
-	
+	//~HeadsUpDisplay() {}
+	bool addElement( sf::String name, sf::Sprite sprite, float x, float y, bool visible = true );
 	static HeadsUpDisplay* instance() { return instance == NULL ? m_instance = new HeadsUpDisplay() : m_instance; }
-	
-	void lifeLost();
-	void Update( Time const &elapsedTime );
-	void Draw( sf::RenderWindow &w );
 };
 #endif
