@@ -171,6 +171,7 @@ xcopy /d /y "$(FMOD_SDK)\fmodex.dll" "$(OutDir)"</Command>
     <Font Include="res\font\kenvector_future.ttf" />
   </ItemGroup>
   <ItemGroup>
+    <Xml Include="res\xml\lvl2.xml" />
     <Xml Include="res\xml\test.xml">
       <SubType>Designer</SubType>
     </Xml>

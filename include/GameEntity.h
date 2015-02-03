@@ -8,7 +8,7 @@ using namespace sf;
 
 class GameEntity {
 protected:
-	Vector2f m_position, m_velocity, m_scale;
+	Vector2f m_position, m_velocity, m_scale, m_displacement;
 
 	FMOD_VECTOR fmod_pos, fmod_vel;
 
@@ -50,6 +50,7 @@ public:
 
 	virtual void Update( const Time &elapsedTime, const Vector2f &gravity );
 	virtual void Draw( sf::RenderWindow &w );
+	virtual void ResistForces(Time const &elapsedTime);
 
 }; //end GameEntity class
 #endif

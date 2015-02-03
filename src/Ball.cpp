@@ -26,14 +26,18 @@ Ball::~Ball(){
 
 void Ball::Update(const Time &elapsedTime, const Vector2f gravity) {
 	if(time != 0){
-		time += elapsedTime.asSeconds();
+		time += elapsedTime.asMilliseconds();
 	}
 	else{
-		time = elapsedTime.asSeconds();
+		time = elapsedTime.asMilliseconds();
 	}
 
- 	m_position.x += (m_velocity.x) * (time) + (0.5f) * (gravity.x) * (time * time);
-	m_position.y += (m_velocity.y) * (time) + (0.5f) * (gravity.y) * (time * time);
+	time = elapsedTime.asSeconds();
+
+	m_position += m_velocity * time;
+
+ 	//m_position.x += (m_velocity.x) * (time) + (0.5f) * (gravity.x) * (time * time);
+	//m_position.y += (m_velocity.y) * (time) + (0.5f) * (gravity.y) * (time * time);
 
 	m_rotation_degrees += m_angular_velocity;
 

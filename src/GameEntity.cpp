@@ -20,6 +20,8 @@ GameEntity::GameEntity(Texture* texture, Vector2f position, Vector2f velocity, V
 	fmod_vel.x = velocity.x;
 	fmod_vel.y = velocity.y;
 	fmod_vel.z = 0;
+
+	m_displacement = Vector2f(0,0);
 }
 
 GameEntity::~GameEntity(){
@@ -28,9 +30,10 @@ GameEntity::~GameEntity(){
 
 void GameEntity::Update(const Time &elapsedTime, const Vector2f &gravity) {
 
-	m_velocity = (m_velocity * (elapsedTime.asSeconds())) + (0.5f *  gravity * (elapsedTime.asSeconds() * elapsedTime.asSeconds()));
+	//m_displacement += (m_velocity * (elapsedTime.asSeconds())) + (0.5f *  gravity * (elapsedTime.asSeconds() * elapsedTime.asSeconds()));
+	m_displacement += m_velocity * elapsedTime.asSeconds() * 100.0f;
 
-	m_position += m_velocity;
+	//m_position += m_velocity;
 	m_rotation_degrees += m_angular_velocity;
 
 	fmod_pos.x = m_position.x;
@@ -39,12 +42,17 @@ void GameEntity::Update(const Time &elapsedTime, const Vector2f &gravity) {
 	fmod_vel.x = m_velocity.x;
 	fmod_vel.y = m_velocity.y;
 
-	m_sprite.setPosition(m_position);
+	m_sprite.setPosition(m_position + m_displacement);
 	m_sprite.setRotation(m_rotation_degrees);
 }
 
 void GameEntity::Draw(RenderWindow &w) {
 	w.draw(m_sprite);
+}
+
+void GameEntity::ResistForces(Time const &elapsedTime) {
+	m_velocity *= 0.999f;
+	m_displacement *= 0.999f;
 }
 
 
@@ -55,7 +63,7 @@ Sprite GameEntity::getSprite() const {
 
 
 Vector2f GameEntity::getPosition() const {
-	return m_position;
+	return m_position + m_displacement;
 }
 
 Vector2f GameEntity::getVelocity() const {
@@ -92,7 +100,7 @@ const FMOD_VECTOR* GameEntity::getFMOD_VEL() const {
 //Setters ----------------------------
 
 void GameEntity::setPosition(Vector2f const &newPos) {
-	m_position = newPos;
+	m_displacement = newPos - m_position;
 }
 
 void GameEntity::setVelocity(Vector2f const &newVel) {

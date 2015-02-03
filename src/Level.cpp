@@ -31,9 +31,8 @@ void Level::update(Time const &elapsedTime)/*, RenderWindow &w)*/ {
 	//update all entities in vector
 	for(itr = m_entities.begin(); itr != m_entities.end(); itr++)
 	{
-		(*itr)->Update(elapsedTime, m_gravity);
-
 		playerForce.Apply(*itr, elapsedTime);
+
 		
 		//blackhole.ApplyForce(itr);
 
@@ -47,6 +46,7 @@ void Level::update(Time const &elapsedTime)/*, RenderWindow &w)*/ {
 				Block *b = dynamic_cast<Block *>(*itrToCheckBlock);
 
 				if(b != NULL){
+					//b->ResistanceForce(elapsedTime);
 					CollisionManager::instance()->SquareCircle(b,p);
 				}//end if (b != NULL)
 
@@ -59,11 +59,15 @@ void Level::update(Time const &elapsedTime)/*, RenderWindow &w)*/ {
 				p->Update(elapsedTime,m_gravity);
 
 				if(CollisionManager::instance()->OffScreen(p)){
-					//p->Death_Reset();
+					p->Death_Reset();
 				}//end if (CollisionManager::instance()->OffScreen(p))
 
 			}//end for everything in entities
 		}//end if (p != NULL)
+		else {
+			(*itr)->Update(elapsedTime, m_gravity);
+			(*itr)->ResistForces(elapsedTime);
+		}
 	}//end for everything in entities
 }//end update
 
