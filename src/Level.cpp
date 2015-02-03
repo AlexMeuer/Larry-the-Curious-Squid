@@ -219,7 +219,7 @@ Level* Level::LoadFromXML(const char *path) {
 
 				tmp_lvl.m_entities.push_back( new Ball(Vector2i(0,0), &textures.find(texName)->second, Vector2f(x,y), Vector2f(0,0), Vector2f(scale, scale) ) );
 			}
-			else if (value == std::string("BLACKHOLE").c_str()) {
+			else if (value == std::string("LEVEL_END").c_str()) {
 				//get the black hole's texture
 				const char * texName = node->FirstChildElement("TEXTURE")->GetText();
 				const char * ext = node->FirstChildElement("TEXTURE")->Attribute("EXT");
@@ -231,12 +231,15 @@ Level* Level::LoadFromXML(const char *path) {
 				float y = atof(positionNode->FirstChildElement("Y")->GetText());
 
 				//get the angular velocity of the black hole
-				float angVel = atof( node->FirstChildElement("ANGULAR_VELOCITY")->GetText() );
+				//float angVel = atof( node->FirstChildElement("ANGULAR_VELOCITY")->GetText() );
 
 				//get the force of the black hole
-				Force f = Force(Vector2f(x, y), atof(node->FirstChildElement("POWER")->GetText()));
+				//Force f = Force(Vector2f(x, y), atof(node->FirstChildElement("POWER")->GetText()));
 
-				tmp_lvl.m_entities.push_back( new BlackHole( &textures.find(texName)->second, Vector2f(x,y), Vector2f(0,0), Vector2f(1,1), angVel ));
+				//get the scene to change to when the player reaches the end
+				String scene = String(node->FirstChildElement("TARGET_SCENE")->GetText());
+
+				tmp_lvl.m_entities.push_back( new BlackHole( scene, &textures.find(texName)->second, Vector2f(x,y)));
 			}
 			else if (value == std::string("POWERUP").c_str()) {
 				//get the black hole's texture

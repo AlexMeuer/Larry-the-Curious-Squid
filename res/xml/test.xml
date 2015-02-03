@@ -13,9 +13,9 @@
     <SCALE>1.0</SCALE>
   </ENTITY>
   
-  <!-- Black holes -->
+  <!-- Black holes :: now level end -->
   <ENTITY>
-    <BLACKHOLE/>
+    <LEVEL_END/>
     <TEXTURE EXT="png">Blackhole</TEXTURE>
     <POSITION>
       <X>600</X>
@@ -23,6 +23,7 @@
     </POSITION>
     <ANGULAR_VELOCITY>0.025</ANGULAR_VELOCITY>
     <POWER>50</POWER>
+    <TARGET_SCENE>MAIN_MENU</TARGET_SCENE>
   </ENTITY>
   
   <!-- Power ups -->
