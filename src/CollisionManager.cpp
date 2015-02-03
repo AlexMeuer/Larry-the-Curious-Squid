@@ -1,14 +1,15 @@
 #include "CollisionManager.h"
 #include <cmath>
+#include "SceneManager.h"
 
 //Cout includes
 #include <iostream>
-using std::cout;
-using std::endl;
+//using std::cout;
+//using std::endl;
 
 CollisionManager* CollisionManager::m_instance = NULL;
 
-void CollisionManager::CircleCircle(GameEntity* gE, Ball* circle){
+void CollisionManager::CircleCircle(BlackHole* gE, Ball* circle){
 	//bool colide = false;
 	float gERadius = (gE->getSprite().getTexture()->getSize().x * gE->getScale().x) / 2;
 	float circleRadius = circle->GetRadius();
@@ -19,8 +20,9 @@ void CollisionManager::CircleCircle(GameEntity* gE, Ball* circle){
 
 	//is the distance less than the radius
 	if(circleRadius + gERadius >= sqrtf(powf((distanceX),2) + powf(distanceY,2))){
-		//insert next lvl code***************************************************************************************************************************
-		cout << "collide";
+		//go to the next scene as specified in entity/xml
+		SceneManager::instance()->navigateToScene(gE->getNextScene());
+		//cout << "collide";
 	}
 }
 
