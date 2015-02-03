@@ -1,5 +1,7 @@
 #include "../include/Level.h"
-
+#ifdef _DEBUG
+#include <assert.h>
+#endif
 
 using namespace tinyxml2;
 
@@ -75,10 +77,10 @@ void Level::draw(RenderWindow &w) {
 void Level::LoadTexture(String name, String ext) {
 	if ( textures.find(name) == textures.end() ) {
 		//load the texture and add it to the map
+		std::cout << name.toAnsiString() << endl;
 		textures[name].loadFromFile("./res/img/" + name + "." + ext);
 		}
 }
-
 
 Level* Level::LoadFromXML(const char *path) {
 	tinyxml2::XMLDocument doc;	//empty xml document
@@ -171,26 +173,36 @@ Level* Level::LoadFromXML(const char *path) {
 
 				//get the first line of the map
 				char * context = NULL;
-				char * line = strtok_s(str, " ,.\|/!:;", &context);
+				char * line = strtok_s(str, " ,.\|/!:;\n\t", &context);
 
 				for(int y = 0; line != NULL; ++y) {
+
+#ifdef _DEBUG
+					assert(line != NULL);
+#endif
 
 					int len = strlen(line);	//for(length of line) { create a block }
 					for(int x = 0; x < len; ++x) {
 
 						//convert the char at x to an int, assuming it's between 0 and 9
-						int blockType = line[x] - '0';
+						//int blockType = line[x] - '0';
 
-						if(blockType > 0) {
-							//create a block
-							tmp_lvl.m_entities.push_back( new Block( &(textures.find(texName + blockType)->second), Vector2f(x * spacing, y * spacing)));
+						//if(blockType > 0) {
+						if(line[x] - '0' > 0) {
+							char buffer[128];
+							string bT_buffer = string(1, line[x]);
+							//strcpy_s(buffer, 127, reinterpret_cast<const char *>(texName));
+							strcpy_s(buffer, sizeof(buffer), texName);
+							strcat_s(buffer, sizeof(buffer), bT_buffer.c_str());
+							//cout << buffer << endl;
+							tmp_lvl.m_entities.push_back( new Block( &textures[buffer], Vector2f(x * spacing, y * spacing)));
 						}
 					}
 
 					//get the next line of the map (using NULL instead of str just re-uses context)
-					line = strtok_s(NULL, " ,.\|/!:;", &context);
+					line = strtok_s(NULL, " ,.\|/!:;\n\t", &context);
 				}
-				delete[] str;  
+				//delete[] str;  
 #pragma endregion
 			}
 			else if (value == std::string("BALL").c_str()) {

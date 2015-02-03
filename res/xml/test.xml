@@ -5,7 +5,7 @@
   <!-- balls in the level -->
   <ENTITY>
     <BALL/> <!-- type on entity we're dealing with here -->
-    <TEXTURE>ball.png</TEXTURE>
+    <TEXTURE EXT="png">ball</TEXTURE>
     <POSITION>
       <X>90</X>
       <Y>80</Y>
@@ -16,7 +16,7 @@
   <!-- Black holes -->
   <ENTITY>
     <BLACKHOLE/>
-    <TEXTURE>Blackhole.png</TEXTURE>
+    <TEXTURE EXT="png">Blackhole</TEXTURE>
     <POSITION>
       <X>600</X>
       <Y>400</Y>
@@ -32,11 +32,12 @@
     <BLOCK_MAP/>
     <NUMBER_OF_BLOCK_TYPES>1</NUMBER_OF_BLOCK_TYPES>
     <TEXTURE EXT="png">Block</TEXTURE>
-    <MAP SPACING="45">
-      111111001101;
-      100000010001;
-      100000010001;
-      010000000011;
+    <MAP SPACING="32">
+      1111111111101
+	  1000000010001
+	  1000000111001
+	  0110000001010
+	  1100000000001
     </MAP>
   </ENTITY>
   
