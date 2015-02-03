@@ -1,14 +1,14 @@
 <LEVEL>
 	<ID>-5</ID>
-	<GRAVITY>0.0000</GRAVITY>
+	<GRAVITY>0.00</GRAVITY>
 
   <!-- balls in the level -->
   <ENTITY>
     <BALL/> <!-- type on entity we're dealing with here -->
     <TEXTURE EXT="png">ball</TEXTURE>
     <POSITION>
-      <X>90</X>
-      <Y>80</Y>
+      <X>32</X>
+      <Y>510</Y>
     </POSITION>
     <SCALE>1.0</SCALE>
   </ENTITY>
@@ -16,12 +16,12 @@
   <!-- Black holes :: now level end -->
   <ENTITY>
     <LEVEL_END/>
-    <TEXTURE EXT="png">Blackhole</TEXTURE>
+    <TEXTURE EXT="png">EndGame</TEXTURE>
     <POSITION>
       <X>600</X>
       <Y>400</Y>
     </POSITION>
-    <ANGULAR_VELOCITY>0.025</ANGULAR_VELOCITY>
+    <ANGULAR_VELOCITY>0</ANGULAR_VELOCITY>
     <POWER>50</POWER>
     <TARGET_SCENE>MAIN_MENU</TARGET_SCENE>
   </ENTITY>

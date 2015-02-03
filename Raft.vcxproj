@@ -161,7 +161,7 @@ xcopy /d /y "$(FMOD_SDK)\fmodex.dll" "$(OutDir)"</Command>
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\img\ball.png" />
-    <Image Include="res\img\Blackhole.png" />
+    <Image Include="res\img\EndGame.png" />
     <Image Include="res\img\Block1.png" />
     <Image Include="res\img\Block2.png" />
     <Image Include="res\img\Block3.png" />

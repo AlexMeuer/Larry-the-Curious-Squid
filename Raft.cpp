@@ -156,13 +156,13 @@ int _tmain(int argc, _TCHAR* argv[])
 	//Level myLevel = Level::LoadFromXML("res/xml/test.xml");
 	//CollisionManager collisionManager;
 
-	//load textures
-	sf::Texture ballTex;
-	ballTex.loadFromFile("res/img/ball.png");
-	sf::Texture blockTex;
-	blockTex.loadFromFile("res/img/Block.png");
-	sf::Texture blackholeTex;
-	blackholeTex.loadFromFile("res/img/Blackhole.png");
+	////load textures
+	//sf::Texture ballTex;
+	//ballTex.loadFromFile("res/img/ball.png");
+	//sf::Texture blockTex;
+	//blockTex.loadFromFile("res/img/Block.png");
+	//sf::Texture blackholeTex;
+	//blackholeTex.loadFromFile("res/img/Blackhole.png");
 	
 	//create an instance of ball
 	//Ball ball(&ballTex, Vector2f(300, 0), Vector2f(0,0), Vector2f(0.1,0.1));
