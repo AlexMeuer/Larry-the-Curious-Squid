@@ -4,7 +4,6 @@
 #include "SFML\Graphics.hpp"
 #include "SceneManager.h"
 #include <vector>
-#include "Life.h"
 
 using namespace sf;
 

@@ -72,10 +72,10 @@ void Level::draw(RenderWindow &w) {
 }
 
 
-void Level::LoadTexture(String name) {
+void Level::LoadTexture(String name, String ext) {
 	if ( textures.find(name) == textures.end() ) {
 		//load the texture and add it to the map
-		textures[name].loadFromFile("./res/img/" + name);
+		textures[name].loadFromFile("./res/img/" + name + "." + ext);
 		}
 }
 
@@ -104,24 +104,100 @@ Level* Level::LoadFromXML(const char *path) {
 		node != NULL;
 		node=node->NextSiblingElement("ENTITY")){
 
+			//Get the type of entity to be loaded
 			std::string value = std::string( node->FirstChildElement()->Value() );
 
-			if (value == "BLOCK") {
-				//load the block's texture
-				String textureName(node->FirstChildElement("TEXTURE")->GetText());
-				LoadTexture(textureName);
+			if (value == "BLOCK_MAP") {
+#pragma region LoadBlockTextures
+				//get the number of block types/textures
+				int blockTypes = atoi(node->FirstChildElement("NUMBER_OF_BLOCK_TYPES")->GetText());
 
-				//get the position of the block
-				XMLElement* positionNode = node->FirstChildElement("POSITION");
-				float x = atof(positionNode->FirstChildElement("X")->GetText());
-				float y = atof(positionNode->FirstChildElement("Y")->GetText());
+				/*
+				//split the given texture arguement into its name and extension
+				char * baseStr;
+				strcpy(baseStr, node->FirstChildElement("TEXTURE")->GetText());
+				baseStr = strtok(baseStr, ".");
+				char * ext = strtok(NULL, ".");
+				*/
 
-				tmp_lvl.m_entities.push_back( new Block( &textures.find(textureName)->second, Vector2f(x,y) ) );
+				const char * texName = node->FirstChildElement("TEXTURE")->GetText();
+				const char * ext = node->FirstChildElement("TEXTURE")->Attribute("EXT");
+
+				//for each type of block, load the appropriate texture
+				for (int i = 1; i <= blockTypes; ++i) {
+					char buffer[3];	//buffer for converting int to string
+
+					//set the finalTexName to be the base name (e.g. "block")
+					char finalTexName[64];
+					strcpy_s(finalTexName, sizeof(finalTexName), texName);
+
+					//add the block type to the base name (e.g. "1" so that finalTexName becomes "block1")
+					_itoa_s(i, buffer, sizeof(buffer), 10);
+					strcat_s(finalTexName, sizeof(finalTexName), buffer);
+
+					//add the dot and the extension (e.g. ".png" so that finalTexName becomes "block1.png")
+					//strcat(finalTexName, ".");
+					//strcat(finalTexName, ext);
+
+
+					LoadTexture(finalTexName, ext);
+
+				}
+				////delete[] texName;
+				//delete[] ext;
+				//delete[] finalTexName;
+				//delete[] buffer;
+#pragma endregion
+
+
+				/*
+				unsigned int width = atoi(node->FirstChildElement("WIDTH")->GetText());
+				unsigned int height = atoi(node->FirstChildElement("HEIGHT")->GetText());
+
+				const char * blockMap = node->FirstChildElement("MAP")->GetText();
+
+				for(unsigned int x = 0; x < width; ++x) {
+					for(unsigned int y = 0; y < height; ++y) {
+					}
+				}*/
+
+				//get the spacing between blocks
+				float spacing = atof(node->FirstChildElement("MAP")->Attribute("SPACING"));
+
+#pragma region CreateBlocksFromMap
+				//Get the map from the xml file
+				char str[1024];
+				strcpy_s(str, sizeof(str), node->FirstChildElement("MAP")->GetText());
+
+				//get the first line of the map
+				char * context = NULL;
+				char * line = strtok_s(str, " ,.\|/!:;", &context);
+
+				for(int y = 0; line != NULL; ++y) {
+
+					int len = strlen(line);	//for(length of line) { create a block }
+					for(int x = 0; x < len; ++x) {
+
+						//convert the char at x to an int, assuming it's between 0 and 9
+						int blockType = line[x] - '0';
+
+						if(blockType > 0) {
+							//create a block
+							tmp_lvl.m_entities.push_back( new Block( &(textures.find(texName + blockType)->second), Vector2f(x * spacing, y * spacing)));
+						}
+					}
+
+					//get the next line of the map (using NULL instead of str just re-uses context)
+					line = strtok_s(NULL, " ,.\|/!:;", &context);
+				}
+				delete[] str;  
+#pragma endregion
 			}
 			else if (value == std::string("BALL").c_str()) {
 				//load the ball's texture
-				String textureName(node->FirstChildElement("TEXTURE")->GetText());
-				LoadTexture( textureName );
+				const char * texName = node->FirstChildElement("TEXTURE")->GetText();
+				const char * ext = node->FirstChildElement("TEXTURE")->Attribute("EXT");
+				LoadTexture( texName, ext );
 				
 				//get the position of the ball
 				XMLElement* positionNode = node->FirstChildElement( "POSITION" );
@@ -130,12 +206,13 @@ Level* Level::LoadFromXML(const char *path) {
 
 				float scale = atof( node->FirstChildElement("SCALE")->GetText());
 
-				tmp_lvl.m_entities.push_back( new Ball(Vector2i(0,0), &textures.find(textureName)->second, Vector2f(x,y), Vector2f(0,0), Vector2f(scale, scale) ) );
+				tmp_lvl.m_entities.push_back( new Ball(Vector2i(0,0), &textures.find(texName)->second, Vector2f(x,y), Vector2f(0,0), Vector2f(scale, scale) ) );
 			}
 			else if (value == std::string("BLACKHOLE").c_str()) {
 				//get the black hole's texture
-				String textureName(node->FirstChildElement("TEXTURE")->GetText());
-				LoadTexture(textureName);
+				const char * texName = node->FirstChildElement("TEXTURE")->GetText();
+				const char * ext = node->FirstChildElement("TEXTURE")->Attribute("EXT");
+				LoadTexture( texName, ext );
 
 				//get the position of the black hole
 				XMLElement* positionNode = node->FirstChildElement("POSITION");
@@ -148,12 +225,13 @@ Level* Level::LoadFromXML(const char *path) {
 				//get the force of the black hole
 				Force f = Force(Vector2f(x, y), atof(node->FirstChildElement("POWER")->GetText()));
 
-				tmp_lvl.m_entities.push_back( new BlackHole( &textures.find(textureName)->second, Vector2f(x,y), Vector2f(0,0), Vector2f(1,1), angVel ));
+				tmp_lvl.m_entities.push_back( new BlackHole( &textures.find(texName)->second, Vector2f(x,y), Vector2f(0,0), Vector2f(1,1), angVel ));
 			}
 			else if (value == std::string("POWERUP").c_str()) {
 				//get the black hole's texture
-				String textureName(node->FirstChildElement("TEXTURE")->GetText());
-				LoadTexture(textureName);
+				const char * texName = node->FirstChildElement("TEXTURE")->GetText();
+				const char * ext = node->FirstChildElement("TEXTURE")->Attribute("EXT");
+				LoadTexture( texName, ext );
 
 				//get the position of the black hole
 				XMLElement* positionNode = node->FirstChildElement("POSITION");

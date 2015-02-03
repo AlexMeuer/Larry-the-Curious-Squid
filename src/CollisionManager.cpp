@@ -9,9 +9,17 @@ using std::endl;
 CollisionManager* CollisionManager::m_instance = NULL;
 
 void CollisionManager::SquareCircle(GameEntity* square, Ball* circle){
+<<<<<<< HEAD
 	bool colide = false;
 	float rectLength = (square->getSprite().getTexture()->getSize().x * square->getScale().x) / 2;
 	float circleRadius = circle->GetRadius();
+=======
+	sf::Rect<float> Rect = square->getSprite().getLocalBounds();
+//	float circleRadius = circle->getSprite();
+
+
+	/*// clamp(value, min, max) - limits value to the range min..max
+>>>>>>> 01cb1217dd024ffbd61b8d9896ff606a19bfd2dd
 
 	// Find the closest point to the circle within the rectangle
 	float closestX = clamp(circle->getPosition().x, square->getPosition().x - rectLength, square->getPosition().x + rectLength);

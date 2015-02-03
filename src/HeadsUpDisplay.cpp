@@ -13,8 +13,9 @@ void HeadsUpDisplay::Update( Time const &elapsedTime ) {
 }
 
 void HeadsUpDisplay::Draw( RenderWindow &w ) {
-	sf::Texture lifeTex;
-	lifeTex.loadFromFile("res/img/life.png");
-	Life tempLife(&lifeTex, Vector2f(20, 300));
-	tempLife.Draw(w);
+	//these variables need to be in the header. file io should be in constructor.
+	//sf::Texture lifeTex;
+	//lifeTex.loadFromFile("res/img/life.png");
+	//Life tempLife(&lifeTex, Vector2f(20, 300));
+	//tempLife.Draw(w);
 }

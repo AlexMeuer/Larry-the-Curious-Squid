@@ -20,7 +20,7 @@ private:
 	std::vector<GameEntity*> m_entities;
 
 	static std::map<String, Texture> textures;
-	static void LoadTexture(String name);
+	static void LoadTexture(String name, String ext);
 
 	Vector2f m_gravity;
 
