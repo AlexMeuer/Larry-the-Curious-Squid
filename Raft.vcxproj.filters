@@ -40,6 +40,8 @@
     <Image Include="res\img\Blackhole.png" />
     <Image Include="res\img\life.png" />
     <Image Include="res\img\Block1.png" />
+    <Image Include="res\img\Block2.png" />
+    <Image Include="res\img\Block3.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />

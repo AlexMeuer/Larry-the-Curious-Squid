@@ -77,7 +77,6 @@ void Level::draw(RenderWindow &w) {
 void Level::LoadTexture(String name, String ext) {
 	if ( textures.find(name) == textures.end() ) {
 		//load the texture and add it to the map
-		std::cout << name.toAnsiString() << endl;
 		textures[name].loadFromFile("./res/img/" + name + "." + ext);
 		}
 }
