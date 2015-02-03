@@ -1,16 +1,16 @@
 <LEVEL>
 	<ID>-5</ID>
-	<GRAVITY>-9.81</GRAVITY>
+	<GRAVITY>0.000</GRAVITY>
 
   <!-- balls in the level -->
   <ENTITY>
     <BALL/> <!-- type on entity we're dealing with here -->
     <TEXTURE>ball.png</TEXTURE>
     <POSITION>
-      <X>50</X>
-      <Y>50</Y>
+      <X>90</X>
+      <Y>80</Y>
     </POSITION>
-    <SCALE>0.1</SCALE>
+    <SCALE>1.0</SCALE>
   </ENTITY>
   
   <!-- Black holes -->
@@ -33,8 +33,8 @@
     <BLOCK/>
 		<TEXTURE>Block.png</TEXTURE>
 		<POSITION>
-			<X>0</X>
-			<Y>0</Y>
+			<X>90</X>
+			<Y>320</Y>
 		</POSITION>
 	</ENTITY>
 
@@ -42,8 +42,8 @@
     <BLOCK/>
     <TEXTURE>Block.png</TEXTURE>
     <POSITION>
-      <X>0</X>
-      <Y>0</Y>
+      <X>200</X>
+      <Y>200</Y>
     </POSITION>
   </ENTITY>
 

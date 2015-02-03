@@ -11,10 +11,12 @@ public:
 	~Block();
 	void Update();
 	void ResistanceForce(Time elapsedTime);
+	float GetWidth_Height();
 
 protected:
 	//vairbles
 	Force m_force;
+	float m_Width_Height;
 
 };
 #endif

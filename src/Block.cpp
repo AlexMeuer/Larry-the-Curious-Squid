@@ -1,10 +1,16 @@
 #include "Block.h"
+#if(_DEBUG)
+#include <assert.h>
+#endif
 
 Block::Block(Texture* texture, Vector2f position, Vector2f velocity, Vector2f scale, float angularVel, float rotation_degrees, float mass) 
 	: GameEntity( texture,  position, velocity, scale,  angularVel,  rotation_degrees,  mass)
 	, m_force(position, -300){
 		m_sprite.setPosition(position.x, position.y);
-
+		m_Width_Height = texture->getSize().x * scale.x;
+#if(_DEBUG)
+		assert(texture->getSize().x * scale.x == m_sprite.getTexture()->getSize().y * m_sprite.getScale().y);
+#endif
 }
 
 Block::~Block() {
@@ -23,5 +29,9 @@ void Block::ResistanceForce(Time elapsedTime){
 	//back to its start Pos.
 
 	m_force.Apply(this, elapsedTime);
+}
+
+float Block::GetWidth_Height(){
+	return m_Width_Height;
 }
 

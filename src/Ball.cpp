@@ -1,4 +1,7 @@
 #include "Ball.h"
+#if(_DEBUG)
+#include <assert.h>
+#endif
 
 
 Ball::Ball(Vector2i screenBounds,Texture* texture, Vector2f position, Vector2f velocity, Vector2f scale, float angularVel, float rotation_degrees, float mass)
@@ -9,7 +12,12 @@ Ball::Ball(Vector2i screenBounds,Texture* texture, Vector2f position, Vector2f v
 	circle.setPosition(position);
 	circle.setFillColor(sf::Color::White);*/
 		time = 0;
-		m_radius = texture->getSize().x * scale.x;
+#if(_DEBUG)
+		float width = texture->getSize().x * scale.x;
+		float width2 = texture->getSize().y * m_sprite.getScale().y;
+		assert(width == width2);
+#endif
+		m_radius = texture->getSize().x * scale.x/2.0f;
 }
 
 Ball::~Ball(){
@@ -35,10 +43,14 @@ void Ball::Update(const Time &elapsedTime, const Vector2f gravity) {
 
 
 void Ball::Death_Reset(){
-	m_position = Vector2f(200,50);
+	m_position = Vector2f(60,80);
 	m_velocity = Vector2f(0,0);
 	m_sprite.setPosition(m_position);
 	time = 0;
 
+}
+
+float Ball::GetRadius(){
+	return m_radius;
 }
 

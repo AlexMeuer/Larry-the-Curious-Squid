@@ -25,11 +25,9 @@ bool Level::handleEvent( Event &event ) {
 
 void Level::update(Time const &elapsedTime)/*, RenderWindow &w)*/ {
 	std::vector<GameEntity*>::iterator itr;
-
+	std::vector<GameEntity*>::iterator itrToCheckBlock;
 	//update all entities in vector
-	for(itr = m_entities.begin();
-		itr != m_entities.end();
-		itr++)
+	for(itr = m_entities.begin(); itr != m_entities.end(); itr++)
 	{
 		(*itr)->Update(elapsedTime, m_gravity);
 
@@ -39,17 +37,27 @@ void Level::update(Time const &elapsedTime)/*, RenderWindow &w)*/ {
 
 		//Child *p = dynamic_cast<Child *>(pParent)
 		Ball *p = dynamic_cast<Ball *>(*itr);
-		if(p != NULL){
-			CollisionManager::instance()->SquareCircle(*itr,p);
-			p->Update(elapsedTime,m_gravity);
-			if(CollisionManager::instance()->OffScreen(p)){
-				p->Death_Reset();
-			}
-		}
-	}
-	
 
-}
+		if(p != NULL){
+
+			for(itrToCheckBlock = m_entities.begin(); itrToCheckBlock != m_entities.end(); itrToCheckBlock++) {
+
+				Block *b = dynamic_cast<Block *>(*itrToCheckBlock);
+
+				if(b != NULL){
+					CollisionManager::instance()->SquareCircle(b,p);
+				}//end if (b != NULL)
+
+				p->Update(elapsedTime,m_gravity);
+
+				if(CollisionManager::instance()->OffScreen(p)){
+					//p->Death_Reset();
+				}//end if (CollisionManager::instance()->OffScreen(p))
+
+			}//end for everything in entities
+		}//end if (p != NULL)
+	}//end for everything in entities
+}//end update
 
 void Level::draw(RenderWindow &w) {
 	std::vector<GameEntity*>::iterator itr;
