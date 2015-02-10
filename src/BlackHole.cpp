@@ -1,6 +1,6 @@
 #include "BlackHole.h"
 
-BlackHole::BlackHole(String targetScene, Texture* texture, Vector2f position, Vector2f velocity, Vector2f scale, float angularVel, float rotation_degrees, float mass) 
+BlackHole::BlackHole(std::string targetScene, Texture* texture, Vector2f position, Vector2f velocity, Vector2f scale, float angularVel, float rotation_degrees, float mass)
 	: GameEntity( texture,  position, velocity, scale,  angularVel,  rotation_degrees,  mass) {//, m_force(Vector2f(position.x + m_sprite.getOrigin().x,position.y + m_sprite.getOrigin().x), -50){
 		m_sprite.setPosition(position.x, position.y);
 		
@@ -12,7 +12,7 @@ BlackHole::~BlackHole() {
 
 }
 
-String BlackHole::getNextScene() const {
+std::string BlackHole::getNextScene() const {
 	return m_targetScene;
 }
 

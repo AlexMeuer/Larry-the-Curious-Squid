@@ -33,7 +33,7 @@ bool SceneManager::passEventToCurrentScene( sf::Event &theEvent ) {
 	return m_scenes[ currentScene ]->handleEvent( theEvent );
 }
 
-void SceneManager::navigateToScene( string name ) {
+void SceneManager::navigateToScene( string const &path ) {
 	//auto end = m_scenes.end();
 	////if name is a key in m_scenes...
 	//for (auto itr = m_scenes.begin(); itr != end; ++itr) {
@@ -45,8 +45,8 @@ void SceneManager::navigateToScene( string name ) {
 	//	}
 	//}
 
-	if ( m_scenes.find(name) != m_scenes.end() ) {
-		currentScene = name;
+	if ( m_scenes.find(path) != m_scenes.end() ) {
+		currentScene = path;
 		return;
 	}
 

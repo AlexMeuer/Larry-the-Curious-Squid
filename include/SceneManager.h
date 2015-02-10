@@ -32,7 +32,7 @@ public:
 	// Template function must be defined here or we'll get linker errors.
 	// (template function not instantiated until used)
 	template<typename T>
-	void createScene( const string name, T* derivedSceneObject ) {
+	void createScene( string const &name, T* derivedSceneObject ) {
 	/*if ( typeid T* != typeid I_Scene* )
 		return false;*/
 
@@ -53,6 +53,6 @@ public:
 	// Returns true if no further processing should be done for the event (i.e. the event has been used up )
 	bool passEventToCurrentScene( sf::Event &theEvent );
 
-	void navigateToScene( string path );
+	void navigateToScene( string const &path );
 };
 #endif
