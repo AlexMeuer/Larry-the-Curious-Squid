@@ -11,20 +11,33 @@ class HeadsUpDisplay {
 private:
 	struct Element {
 		sf::String Name;
-		sf::Sprite Sprite;
-		bool IsVisible;
-		void Draw( RenderWindow &w ) {
-			if (IsVisible) 
-				w.draw(Sprite);
-		}
-	};
+		sf::Sprite m_sprite;
+		bool m_isVisible;
+		void Draw( RenderWindow &w ){if (m_isVisible) w.draw(m_sprite);}
+		};//end of Element
 
 	std::vector<Element> m_elements;
-	static HeadsUpDisplay *m_instance;
-	//HeadsUpDisplay() {}
+
+	static HeadsUpDisplay * m_instance;
+	HeadsUpDisplay();
+
 public:
-	//~HeadsUpDisplay() {}
-	bool addElement( sf::String name, sf::Sprite sprite, float x, float y, bool visible = true );
+	void addElement(sf::String name, sf::Sprite sprite, bool visible = true) {
+		Element newElement;
+		newElement.Name = name;
+		newElement.m_sprite = sprite;
+		newElement.m_isVisible = visible;
+		m_elements.push_back(newElement);
+	}
 	static HeadsUpDisplay* instance() { return instance == NULL ? m_instance = new HeadsUpDisplay() : m_instance; }
 };
+
+//void HeadsUpDisplay::addElement(sf::String name, sf::Sprite sprite, bool visible) {
+//	Element newElement;
+//	newElement.Name = name;
+//	newElement.m_sprite = sprite;
+//	newElement.m_isVisible = visible;
+//	m_elements.push_back(newElement);
+//}
+
 #endif

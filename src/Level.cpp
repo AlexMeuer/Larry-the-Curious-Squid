@@ -199,7 +199,7 @@ Level* Level::LoadFromXML(const char *path) {
 						//if(blockType > 0) {
 						if(line[x] - '0' > 0) {
 							char buffer[128];
-							string bT_buffer = string(1, line[x]);
+							std::string bT_buffer = std::string(1, line[x]);
 							//strcpy_s(buffer, 127, reinterpret_cast<const char *>(texName));
 							strcpy_s(buffer, sizeof(buffer), texName);
 							strcat_s(buffer, sizeof(buffer), bT_buffer.c_str());

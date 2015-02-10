@@ -14,7 +14,6 @@
     <ClCompile Include="src\Menu.cpp" />
     <ClCompile Include="src\SceneManager.cpp" />
     <ClCompile Include="stdafx.cpp" />
-    <ClCompile Include="src\HeadsUpDisplay.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Ball.h" />
@@ -54,5 +53,6 @@
   <ItemGroup>
     <Xml Include="res\xml\test.xml" />
     <Xml Include="res\xml\lvl2.xml" />
+    <Xml Include="res\xml\GameOver.xml" />
   </ItemGroup>
 </Project>

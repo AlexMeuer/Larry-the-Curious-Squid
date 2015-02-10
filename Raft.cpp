@@ -88,6 +88,9 @@ int _tmain(int argc, _TCHAR* argv[])
 	//Create our scound level scene from an xml file
 	SceneManager::instance()->createScene("LEVEL_2", Level::LoadFromXML("res/xml/lvl2.xml"));
 
+	//Create our scound level scene from an xml file
+	SceneManager::instance()->createScene("GameOver", Level::LoadFromXML("res/xml/GameOver.xml"));
+
 	SceneManager::instance()->navigateToScene("MAIN_MENU");
 #pragma endregion
 
