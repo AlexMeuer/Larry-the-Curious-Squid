@@ -4,7 +4,7 @@ BlackHole::BlackHole(std::string targetScene, Texture* texture, Vector2f positio
 	: GameEntity( texture,  position, velocity, scale,  angularVel,  rotation_degrees,  mass) {//, m_force(Vector2f(position.x + m_sprite.getOrigin().x,position.y + m_sprite.getOrigin().x), -50){
 		m_sprite.setPosition(position.x, position.y);
 		
-		m_sprite.setOrigin((2/texture->getSize().x) * scale.x, (2/texture->getSize().y) * scale.y);
+		//m_sprite.setOrigin((2/texture->getSize().x) * scale.x, (2/texture->getSize().y) * scale.y);
 		m_targetScene = targetScene;
 }
 

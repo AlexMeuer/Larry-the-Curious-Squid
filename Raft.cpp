@@ -157,7 +157,8 @@ int _tmain(int argc, _TCHAR* argv[])
 	CollisionManager::instance()->setContext( &window );
 
 	sf::Clock clock = Clock();
-	sf::Time elapsedTime;
+	sf::Time timeSinceLastUpdate;
+	sf::Time timeSinceLastFrameDraw;
 
 	//Level myLevel = Level::LoadFromXML("res/xml/test.xml");
 	//CollisionManager collisionManager;
@@ -216,9 +217,9 @@ int _tmain(int argc, _TCHAR* argv[])
 		FMODsys->update();	//run this once per frame ONLY
 
 
-		elapsedTime = clock.getElapsedTime();
+		timeSinceLastUpdate = clock.getElapsedTime();
 		
-		SceneManager::instance()->updateCurrentScene( elapsedTime);
+		SceneManager::instance()->updateCurrentScene( timeSinceLastUpdate);
 		
 		//if(CollisionManager::instance()->OffScreen(window, &ball))
 			//ball.Death_Reset();
@@ -246,20 +247,28 @@ int _tmain(int argc, _TCHAR* argv[])
 			force.setPower( 10 );
 		}*/
 
-		//prepare frame
-		window.clear();
-
-		SceneManager::instance()->drawCurrentScene( window );
-		//ball.Draw(window);
+		timeSinceLastFrameDraw += clock.getElapsedTime();
 		
-		/*for ( int i = 0; i < 10; i ++ ) {
-			crystalChandelier[i]->Draw(window);
-		}*/
-		
-		//blackHole.Draw(window);
+		//60 fps
+		if (timeSinceLastFrameDraw.asMilliseconds() >= 16) {
 
-		// Finally, display rendered frame on screen
-		window.display();
+			timeSinceLastFrameDraw = Time::Zero;
+
+			//prepare frame
+			window.clear();
+
+			SceneManager::instance()->drawCurrentScene(window);
+			//ball.Draw(window);
+
+			/*for ( int i = 0; i < 10; i ++ ) {
+				crystalChandelier[i]->Draw(window);
+				}*/
+
+			//blackHole.Draw(window);
+
+			// Finally, display rendered frame on screen
+			window.display();
+		}
 		clock.restart();
 	} //loop back for next frame
 

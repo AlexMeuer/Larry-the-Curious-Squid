@@ -11,12 +11,12 @@ CollisionManager* CollisionManager::m_instance = NULL;
 
 void CollisionManager::CircleCircle(BlackHole* gE, Ball* circle){
 	//bool colide = false;
-	float gERadius = (gE->getSprite().getTexture()->getSize().x * gE->getScale().x) / 2;
+	float gERadius = (gE->getSprite().getTexture()->getSize().x * gE->getScale().x) / 2.0f;
 	float circleRadius = circle->GetRadius();
 
 	// Calculate the distance between the circle's center and this closest point
-	float distanceX = circle->getPosition().x - (gE->getPosition().x - gERadius);
-	float distanceY = circle->getPosition().y - (gE->getPosition().y - gERadius);
+	float distanceX = circle->getPosition().x - (gE->getPosition().x);
+	float distanceY = circle->getPosition().y - (gE->getPosition().y);
 
 	//is the distance less than the radius
 	if(circleRadius + gERadius >= sqrtf(powf((distanceX),2) + powf(distanceY,2))){

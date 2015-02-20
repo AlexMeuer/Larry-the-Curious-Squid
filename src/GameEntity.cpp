@@ -10,6 +10,7 @@ GameEntity::GameEntity(Texture* texture, Vector2f position, Vector2f velocity, V
 {
 	m_sprite = Sprite(*texture);
 	m_sprite.setScale(m_scale.x, m_scale.y);
+	m_sprite.setOrigin(Vector2f((texture->getSize().x * m_scale.x) / 2.0f, (texture->getSize().y * m_scale.y) / 2.0f));
 
 	fmod_pos = FMOD_VECTOR();
 	fmod_pos.x = position.x;
@@ -63,7 +64,7 @@ Sprite GameEntity::getSprite() const {
 
 
 Vector2f GameEntity::getPosition() const {
-	return m_position + m_displacement;
+	return m_position + m_displacement + m_sprite.getOrigin();
 }
 
 Vector2f GameEntity::getVelocity() const {

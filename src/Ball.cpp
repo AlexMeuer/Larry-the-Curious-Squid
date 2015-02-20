@@ -17,7 +17,7 @@ Ball::Ball(Vector2i screenBounds,Texture* texture, Vector2f position, Vector2f v
 		float width2 = texture->getSize().y * m_sprite.getScale().y;
 		assert(width == width2);
 #endif
-		m_radius = texture->getSize().x * scale.x/2.0f;
+		m_radius = (texture->getSize().x * scale.x)/2.0f;
 }
 
 Ball::~Ball(){
