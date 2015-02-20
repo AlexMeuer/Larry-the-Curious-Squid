@@ -12,14 +12,20 @@ int Level::getID() const {
 }
 
 bool Level::handleEvent( Event &event ) {
+	static bool mouseDown;
 	if ( event.type == Event::MouseButtonPressed ) {
-		//get the current mouse position relative to the screen. (we can get the window by asking the collision manager what window its checking again for offscreen stuff, etc)
-		Vector2i mousePos = Mouse::getPosition( *(CollisionManager::instance()->getContext()) );
-
-		playerForce.setPosition( Vector2f(mousePos.x, mousePos.y));
+		mouseDown = true;
 	}
 	else if ( event.type == Event::MouseButtonReleased ) {
+		mouseDown = false;
 		playerForce.setPosition( Vector2f(FLT_MAX, FLT_MAX) );
+	}
+
+	if (mouseDown) {
+		//get the current mouse position relative to the screen. (we can get the window by asking the collision manager what window its checking again for offscreen stuff, etc)
+		Vector2i mousePos = Mouse::getPosition(*(CollisionManager::instance()->getContext()));
+
+		playerForce.setPosition(Vector2f(mousePos.x, mousePos.y));
 	}
 
 	return false;
@@ -41,6 +47,8 @@ void Level::update(Time const &elapsedTime)/*, RenderWindow &w)*/ {
 
 		if(p != NULL){
 
+			p->Update(elapsedTime, m_gravity);
+
 			for(itrToCheckBlock = m_entities.begin(); itrToCheckBlock != m_entities.end(); itrToCheckBlock++) {
 
 				Block *b = dynamic_cast<Block *>(*itrToCheckBlock);
@@ -55,8 +63,6 @@ void Level::update(Time const &elapsedTime)/*, RenderWindow &w)*/ {
 				if(black != NULL){
 					CollisionManager::instance()->CircleCircle(black,p);
 				}
-
-				p->Update(elapsedTime,m_gravity);
 
 				if(CollisionManager::instance()->OffScreen(p)){
 					p->Death_Reset();

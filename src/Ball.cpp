@@ -34,7 +34,7 @@ void Ball::Update(const Time &elapsedTime, const Vector2f gravity) {
 
 	time = elapsedTime.asSeconds();
 
-	m_position += m_velocity * time;
+	m_position += m_velocity * time * 4.0f;
 
  	//m_position.x += (m_velocity.x) * (time) + (0.5f) * (gravity.x) * (time * time);
 	//m_position.y += (m_velocity.y) * (time) + (0.5f) * (gravity.y) * (time * time);
