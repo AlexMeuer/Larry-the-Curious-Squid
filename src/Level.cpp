@@ -204,7 +204,7 @@ Level* Level::LoadFromXML(const char *path) {
 							strcpy_s(buffer, sizeof(buffer), texName);
 							strcat_s(buffer, sizeof(buffer), bT_buffer.c_str());
 							//cout << buffer << endl;
-							tmp_lvl.m_entities.push_back( new Block( &textures[buffer], Vector2f(x * spacing, y * spacing)));
+							tmp_lvl.m_entities.push_back(new Block(&textures[buffer], Vector2f(x * spacing + (spacing / 2), y * spacing + (spacing / 2))));
 						}
 					}
 

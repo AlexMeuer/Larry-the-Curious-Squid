@@ -31,13 +31,4 @@ public:
 	}
 	static HeadsUpDisplay* instance() { return instance == NULL ? m_instance = new HeadsUpDisplay() : m_instance; }
 };
-
-//void HeadsUpDisplay::addElement(sf::String name, sf::Sprite sprite, bool visible) {
-//	Element newElement;
-//	newElement.Name = name;
-//	newElement.m_sprite = sprite;
-//	newElement.m_isVisible = visible;
-//	m_elements.push_back(newElement);
-//}
-
 #endif
