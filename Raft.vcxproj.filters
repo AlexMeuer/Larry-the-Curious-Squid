@@ -14,6 +14,7 @@
     <ClCompile Include="src\Menu.cpp" />
     <ClCompile Include="src\SceneManager.cpp" />
     <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="src\Editor\Editor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Ball.h" />
@@ -33,6 +34,10 @@
     <ClInclude Include="include\SceneManager.h" />
     <ClInclude Include="include\HeadsUpDisplay.h" />
     <ClInclude Include="include\MenuFunctions.h" />
+    <ClInclude Include="include\LevelEditor\Editor.h" />
+    <ClInclude Include="include\LevelEditor\GraphicalUserInterface.h" />
+    <ClInclude Include="include\LevelEditor\GUI_Factory.h" />
+    <ClInclude Include="include\tree.hh" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\img\ball.png" />

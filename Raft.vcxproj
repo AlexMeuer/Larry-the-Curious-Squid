@@ -109,6 +109,9 @@
     <ClInclude Include="include\GameEntity.h" />
     <ClInclude Include="include\HeadsUpDisplay.h" />
     <ClInclude Include="include\Level.h" />
+    <ClInclude Include="include\LevelEditor\Editor.h" />
+    <ClInclude Include="include\LevelEditor\GraphicalUserInterface.h" />
+    <ClInclude Include="include\LevelEditor\GUI_Factory.h" />
     <ClInclude Include="include\Menu.h" />
     <ClInclude Include="include\Player.h" />
     <ClInclude Include="include\PowerUp.h" />
@@ -116,6 +119,7 @@
     <ClInclude Include="include\Scene.h" />
     <ClInclude Include="include\SceneManager.h" />
     <ClInclude Include="include\MenuFunctions.h" />
+    <ClInclude Include="include\tree.hh" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
@@ -135,6 +139,7 @@
     <ClCompile Include="src\CollisionManager.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="src\Editor\Editor.cpp" />
     <ClCompile Include="src\Force.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
     </ClCompile>
