@@ -36,7 +36,6 @@
     <ClInclude Include="include\MenuFunctions.h" />
     <ClInclude Include="include\LevelEditor\Editor.h" />
     <ClInclude Include="include\LevelEditor\GraphicalUserInterface.h" />
-    <ClInclude Include="include\LevelEditor\GUI_Factory.h" />
     <ClInclude Include="include\tree.hh" />
   </ItemGroup>
   <ItemGroup>

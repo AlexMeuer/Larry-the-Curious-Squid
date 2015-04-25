@@ -20,6 +20,7 @@ available.
 #include <SFML\Graphics.hpp>
 #include <SFML\Window.hpp>
 
+#pragma region Element structs
 struct GUI_Element {
 	virtual void draw(sf::RenderWindow &w) = 0;
 };
@@ -46,12 +47,18 @@ class Frame : GUI_Element {
 	// - write the rest of this class
 	// - draw method using only edge, corner, and brainpower
 };
+#pragma endregion
+
 
 class GraphicalUserInterface {
 private:
 	GraphicalUserInterface();
 
 public:
+	static GraphicalUserInterface* createEmpty();
+	static GraphicalUserInterface* createWithQuadrants();
+	//TODO: moar constructors, these are examples
+
 	~GraphicalUserInterface();
 };
 #endif

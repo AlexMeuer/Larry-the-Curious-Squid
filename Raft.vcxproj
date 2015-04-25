@@ -111,7 +111,6 @@
     <ClInclude Include="include\Level.h" />
     <ClInclude Include="include\LevelEditor\Editor.h" />
     <ClInclude Include="include\LevelEditor\GraphicalUserInterface.h" />
-    <ClInclude Include="include\LevelEditor\GUI_Factory.h" />
     <ClInclude Include="include\Menu.h" />
     <ClInclude Include="include\Player.h" />
     <ClInclude Include="include\PowerUp.h" />
